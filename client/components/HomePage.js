@@ -17,6 +17,30 @@ const creators = [
     description: 'cool guy',
     imageUrl: '',
     urlArray: []
+  },
+  {
+    id: 2,
+    name: 'Rick Terry',
+    title: 'Engineer',
+    description: 'also cool',
+    imageUrl: '',
+    urlArray: []
+  },
+  {
+    id: 3,
+    name: 'Michael Lin',
+    title: 'Engin33r',
+    description: 'very cool',
+    imageUrl: '',
+    urlArray: []
+  },
+  {
+    id: 4,
+    name: 'Kevin Ho',
+    title: 'Engin00r',
+    description: 'coolest of all',
+    imageUrl: '',
+    urlArray: []
   }
 ]
 
