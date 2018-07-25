@@ -16,7 +16,7 @@ const creators = [
     title: 'Fullstack Software Engineer',
     description: 'cool guy',
     imageUrl: '',
-    urlArray: []
+    urlArray: [],
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const creators = [
     title: 'Engineer',
     description: 'also cool',
     imageUrl: '',
-    urlArray: []
+    urlArray: [],
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const creators = [
     title: 'Engin33r',
     description: 'very cool',
     imageUrl: '',
-    urlArray: []
+    urlArray: [],
   },
   {
     id: 4,
@@ -40,23 +40,24 @@ const creators = [
     title: 'Engin00r',
     description: 'coolest of all',
     imageUrl: '',
-    urlArray: []
-  }
-]
+    urlArray: [],
+  },
+];
 
-export const HomePage = (props) => {
+export const HomePage = props => {
   console.log('inside homepage render');
 
   return (
     <div>
       <h1>Hello!!!!</h1>
-      {
-        creators.map(creator => <div key={creator.id}><Creator creator={creator} /></div>)
-      }
-
+      {creators.map(creator => (
+        <div key={creator.id}>
+          <Creator creator={creator} />
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
 //     return (
 //       <div>
