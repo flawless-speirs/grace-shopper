@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {products} from '../store/products'
+import SingleProduct from '../components/SingleProduct'
 
 /**
  * COMPONENT
@@ -18,10 +19,13 @@ class Products extends Component {
         {this.props.products.map(product => {
           return (
             <div key={product.id}>
-              <div>Name: {product.name}</div>
-              <img src={product.imageUrl} />
-              <div>Price: ${product.price}</div>
+              <SingleProduct product={product} />
             </div>
+            // <div key={product.id}>
+            //   <div>Name: {product.name}</div>
+            //   <img src={product.imageUrl} />
+            //   <div>Price: ${product.price}</div>
+            // </div>
           )
         })}
       </div>
