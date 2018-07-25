@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import Creator from './Creator';
 
-// export default class HomePage extends Component {
-//   constructor() {
-//     super();
-//     this.state = {};
-//   }
-
-//   render() {
-
 const creators = [
   {
     id: 1,
@@ -45,7 +37,6 @@ const creators = [
 ];
 
 export const HomePage = props => {
-  console.log('inside homepage render');
 
   return (
     <div>
@@ -58,12 +49,3 @@ export const HomePage = props => {
     </div>
   );
 };
-
-//     return (
-//       <div>
-//         <h1>Hello!!!!</h1>
-//         <Creator user={{ name: 'Rick' }} />
-//       </div>
-//     );
-//   }
-// }
