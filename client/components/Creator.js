@@ -6,7 +6,6 @@ export default function Creator(props) {
   const description = props.creator.description;
   const imageUrl = props.creator.imageUrl;
   const urlArray = props.creator.urlArray;
-  console.log(props.creator)
   return (
     <div>
       <div className="profile">
