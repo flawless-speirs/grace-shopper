@@ -1,12 +1,12 @@
 import React from 'react';
 
 export default function Creator(props) {
-  const name = props.user.name;
-  const title = props.user.title;
-  const description = props.user.description;
-  const imageUrl = props.user.imageUrl;
-  const urlArray = props.user.urlArray;
-
+  const name = props.creator.name;
+  const title = props.creator.title;
+  const description = props.creator.description;
+  const imageUrl = props.creator.imageUrl;
+  const urlArray = props.creator.urlArray;
+  console.log(props.creator)
   return (
     <div>
       <div className="profile">
@@ -18,13 +18,13 @@ export default function Creator(props) {
           <div className="profileTitle">{title}</div>
           <div className="profileDescription">{description}</div>
           <div className="profileLinks">
-            {urlArray.map(url => {
+            {/* {urlArray.map(url => {
               return (
                 <div className="profileLink">
                   <img src={url.image} />
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       </div>
