@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (Creator = props => {
+export default function Creator(props) {
   const name = props.user.name;
   const title = props.user.title;
   const description = props.user.description;
@@ -30,4 +30,4 @@ export default (Creator = props => {
       </div>
     </div>
   );
-});
+}

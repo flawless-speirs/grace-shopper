@@ -1,19 +1,20 @@
-import React from 'react'
-import Creator from 'Creator'
+import React, { Component } from 'react';
+import Creator from './Creator';
 
-class HomePage {
+export default class HomePage extends Component {
   constructor() {
-    super()
-    this.state = {
-
-    }
+    super();
+    this.state = {};
   }
 
   render() {
-    return(
-      <Creator user={{name:'Rick'}} />
-    )
+    console.log('inside homepage render');
+
+    return (
+      <div>
+        <h1>Hello!!!!</h1>
+        <Creator user={{ name: 'Rick' }} />
+      </div>
+    );
   }
 }
-
-
