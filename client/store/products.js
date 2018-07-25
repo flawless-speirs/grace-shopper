@@ -3,12 +3,12 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-const GET_CHARACTERS = 'GET_CHARACTERS'
+const GET_PRODUCTS = 'GET_PRODUCTS'
 
 /**
  * INITIAL STATE
  */
-const defaultCharacters = [
+const defaultProducts = [
   {
     id: 0,
     name: 'default name',
@@ -22,15 +22,15 @@ const defaultCharacters = [
 /**
  * ACTION CREATORS
  */
-const getCharacters = characters => ({type: GET_CHARACTERS, characters})
+const getProducts = products => ({type: GET_PRODUCTS, products})
 
 /**
  * THUNK CREATORS
  */
-export const characters = () => async dispatch => {
+export const products = () => async dispatch => {
   try {
-    const res = await axios.get('/api/characters')
-    dispatch(getCharacters(res.data))
+    const res = await axios.get('/api/products')
+    dispatch(getProducts(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -39,10 +39,10 @@ export const characters = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultCharacters, action) {
+export default function(state = defaultProducts, action) {
   switch (action.type) {
-    case GET_CHARACTERS:
-      return action.characters
+    case GET_PRODUCTS:
+      return action.products
     default:
       return state
   }

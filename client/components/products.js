@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {characters} from '../store/character'
+import {products} from '../store/products'
 
 /**
  * COMPONENT
@@ -8,19 +8,19 @@ import {characters} from '../store/character'
 
 class Products extends Component {
   componentDidMount() {
-    this.props.retrieveCharacters()
+    this.props.retrieveProducts()
   }
 
   render() {
     return (
       <div>
         <h1>Products</h1>
-        {this.props.characters.map(character => {
+        {this.props.products.map(product => {
           return (
-            <div key={character.id}>
-              <div>Name: {character.name}</div>
-              <img src={character.imageUrl} />
-              <div>Price: ${character.price}</div>
+            <div key={product.id}>
+              <div>Name: {product.name}</div>
+              <img src={product.imageUrl} />
+              <div>Price: ${product.price}</div>
             </div>
           )
         })}
@@ -34,11 +34,11 @@ class Products extends Component {
  */
 
 const mapStateToProps = state => ({
-  characters: state.characters
+  products: state.products
 })
 
 const mapDispatchToProps = dispatch => ({
-  retrieveCharacters: () => dispatch(characters())
+  retrieveProducts: () => dispatch(products())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

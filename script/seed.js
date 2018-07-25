@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Character} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -26,13 +26,13 @@ async function seed() {
   ])
 
   const characters = await Promise.all([
-    Character.create({
+    Product.create({
       name: 'Rick Sanchez',
       imageUrl: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
       description: `Morty and Summer's mad scientist grandfather.`,
       price: 10000
     }),
-    Character.create({
+    Product.create({
       name: 'Morty Smith',
       imageUrl: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
       description: `A Morty.`,
