@@ -24,7 +24,6 @@ describe('UserHome', () => {
   });
 
   it("renders a product equal with an image, name, price, and description'", () => {
-    // console.log(singleProduct.find('.product-image'));
     expect(singleProduct.find('.product-image').length).to.be.equal(1);
     expect(singleProduct.find('.product-name').length).to.be.equal(1);
     expect(singleProduct.find('.product-price').length).to.be.equal(1);
