@@ -8,12 +8,16 @@ const GET_CHARACTERS = 'GET_CHARACTERS'
 /**
  * INITIAL STATE
  */
-const defaultCharacter = {
-  name: 'default name',
-  imageUrl: 'www.default.com',
-  description: 'default description',
-  price: 0
-}
+const defaultCharacters = [
+  {
+    id: 0,
+    name: 'default name',
+    imageUrl:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwqeFAYIE3hTj9Gs1j3v7o-oBadM5uDkuPBuXMPtXS85LufL7UVA',
+    description: 'default description',
+    price: 0
+  }
+]
 
 /**
  * ACTION CREATORS
@@ -25,9 +29,7 @@ const getCharacters = characters => ({type: GET_CHARACTERS, characters})
  */
 export const characters = () => async dispatch => {
   try {
-    console.log('WE MADE IT HOMIE')
-
-    const res = await axios.get('/auth/characters')
+    const res = await axios.get('/api/characters')
     dispatch(getCharacters(res.data))
   } catch (err) {
     console.error(err)
@@ -37,10 +39,10 @@ export const characters = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultCharacter, action) {
+export default function(state = defaultCharacters, action) {
   switch (action.type) {
     case GET_CHARACTERS:
-      return action.character
+      return action.characters
     default:
       return state
   }

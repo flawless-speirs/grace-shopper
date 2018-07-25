@@ -1,21 +1,32 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {characters} from '../store'
+import {characters} from '../store/character'
 
 /**
  * COMPONENT
  */
 
-export const Products = props => {
-  return (
-    <div>
-      <h1>Products</h1>
-      {console.log(props)}
-      {props.characters.map(character => {
-        return <img key={character.id} src={character.imageUrl} />
-      })}
-    </div>
-  )
+class Products extends Component {
+  componentDidMount() {
+    this.props.retrieveCharacters()
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Products</h1>
+        {this.props.characters.map(character => {
+          return (
+            <div key={character.id}>
+              <div>Name: {character.name}</div>
+              <img src={character.imageUrl} />
+              <div>Price: ${character.price}</div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 }
 
 /**
@@ -27,9 +38,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  retrieveCharacters: () => {
-    dispatch(characters())
-  }
+  retrieveCharacters: () => dispatch(characters())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
