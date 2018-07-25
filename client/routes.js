@@ -20,10 +20,11 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={HomePage} />
+        {console.log(this.props,'these are the switch props')}
+        {/* <Route exact path="/" component={HomePage} /> */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/products/:id" component={SingleProduct} />
+        <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/products" component={Products} />
         {isLoggedIn && (
           <Switch>

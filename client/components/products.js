@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {products} from '../store/products'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -19,8 +20,11 @@ class Products extends Component {
           return (
             <div key={product.id}>
               <div>Name: {product.name}</div>
+              <Link to={`/products/${product.id}`}>
               <img src={product.imageUrl} />
+              </Link>
               <div>Price: ${product.price}</div>
+              <br/>
             </div>
           )
         })}
