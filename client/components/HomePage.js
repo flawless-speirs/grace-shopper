@@ -47,5 +47,5 @@ export const HomePage = props => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
