@@ -1,6 +1,6 @@
 const User = require('./user');
 const Product = require('./product');
-const Cart = require('./Cart');
+const Cart = require('./cart');
 
 User.hasMany(Cart);
 
@@ -20,4 +20,5 @@ User.hasMany(Cart);
 module.exports = {
   User,
   Product,
+  Cart,
 };

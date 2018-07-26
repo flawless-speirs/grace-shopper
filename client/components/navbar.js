@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
-import { saveCart } from '../store/cart';
+import { sendToDB as sendCartToDB } from '../store/cart';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
@@ -41,13 +41,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    cart: state.cart,
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(saveCart());
+      dispatch(sendCartToDB());
       dispatch(logout());
     },
   };
