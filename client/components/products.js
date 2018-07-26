@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {products} from '../store/products'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { products } from '../store/products';
+import { Link } from 'react-router-dom';
 
 /**
  * COMPONENT
@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 
 class Products extends Component {
   componentDidMount() {
-    this.props.retrieveProducts()
+    this.props.retrieveProducts();
   }
 
   render() {
@@ -19,17 +19,17 @@ class Products extends Component {
         {this.props.products.map(product => {
           return (
             <div key={product.id}>
-              <div>Name: {product.name}</div>
+              <div>{product.name}</div>
               <Link to={`/products/${product.id}`}>
-              <img src={product.imageUrl} />
+                <img src={product.imageUrl} />
               </Link>
-              <div>Price: ${product.price}</div>
-              <br/>
+              <div>${product.price}</div>
+              <br />
             </div>
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 
@@ -38,11 +38,11 @@ class Products extends Component {
  */
 
 const mapStateToProps = state => ({
-  products: state.products
-})
+  products: state.products,
+});
 
 const mapDispatchToProps = dispatch => ({
-  retrieveProducts: () => dispatch(products())
-})
+  retrieveProducts: () => dispatch(products()),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
