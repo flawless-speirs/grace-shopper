@@ -63,8 +63,8 @@ export const addToCart = product => async dispatch => {
     const session = await axios.get('/api/users/logged-in')
     const userId = session.data.passport.user
     const user = await axios.get(`/api/users/${userId}`)
-    console.log(user)
-    await axios.put(`/api/users/${userId}`, { cart: [product] })
+    console.log('user:', user)
+    await axios.put(`/api/users/${userId}`, { cart: [ product.id ] })
     const updatedUser = await axios.get(`/api/users/${userId}`)
     dispatch(addProduct(updatedUser.data))
     console.log(updatedUser.data)

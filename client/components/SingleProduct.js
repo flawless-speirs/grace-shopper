@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import { product as addProduct } from '../store/product'
 import { addToCart } from '../store/user'
-=======
-import { product } from '../store/product';
->>>>>>> f9e16e0784aa4dd80eae2abce3d3efd3b6252c30
 
 class SingleProduct extends Component {
+  constructor () {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   async componentDidMount() {
     await this.props.retrieveSingleProduct();
   }
+
+  async handleClick (evt) {
+    evt.preventDefault()
+    await this.props.addToCart(this.props.product)
+  }
+
   render() {
+    console.log(this.props.product)
     return (
       <div>
         <div className="product-image">
@@ -20,7 +28,7 @@ class SingleProduct extends Component {
         <div className="product-name">{this.props.product.name}</div>
         <div className="product-price">{this.props.product.price}</div>
         <div className="product-description">{this.props.product.description}</div>
-        <button type="submit" onClick={() => this.props.addToCart(this.props.product)}>Add To Cart</button>
+        <button type="submit" onClick={this.handleClick}>Add To Cart</button>
       </div>
     );
   }
