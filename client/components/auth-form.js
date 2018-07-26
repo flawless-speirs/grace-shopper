@@ -11,7 +11,7 @@ const AuthForm = props => {
 
   return (
     <div className="text-center">
-      <form className="text-center" onSubmit={handleSubmit} name={name}>
+      <form onSubmit={handleSubmit} name={name}>
         <div className="form-group row justify-content-center">
           <div className="col-3">
             <label htmlFor="email">Email Address</label>
