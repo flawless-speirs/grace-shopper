@@ -14,20 +14,22 @@ class Products extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid text-center">
         <h1>Products</h1>
-        {this.props.products.map(product => {
-          return (
-            <div key={product.id}>
-              <div>{product.name}</div>
-              <Link to={`/products/${product.id}`}>
-                <img src={product.imageUrl} />
-              </Link>
-              <div>${product.price}</div>
-              <br />
-            </div>
-          );
-        })}
+        <div className="row">
+          {this.props.products.map(product => {
+            return (
+              <div className="col-4" key={product.id}>
+                <div>{product.name}</div>
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.imageUrl} />
+                </Link>
+                <div>${product.price}</div>
+                <br />
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }

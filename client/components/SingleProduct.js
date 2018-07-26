@@ -21,10 +21,23 @@ class SingleProduct extends Component {
   render() {
     console.log(this.props.product)
     return (
-      <div>
-        <div className="product-image">
-          <img src={this.props.product.imageUrl} />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="product-image col-4 text-center">
+            <img src={this.props.product.imageUrl} />
+          </div>
+          <div className="col-8">
+            <div className="product-name">{this.props.product.name}</div>
+            <div className="product-price">${this.props.product.price}</div>
+            <div className="product-description">
+              {this.props.product.description}
+            </div>
+            <button className="btn btn-warning" type="button">
+              Add to Cart
+            </button>
+          </div>
         </div>
+      
         <div className="product-name">{this.props.product.name}</div>
         <div className="product-price">{this.props.product.price}</div>
         <div className="product-description">{this.props.product.description}</div>
