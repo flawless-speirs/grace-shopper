@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from '../history';
+import { sendToDB as sendCartToDB } from './cart';
 
 /**
  * ACTION TYPES
@@ -48,6 +49,7 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
+    dispatch(sendCartToDB());
     await axios.post('/auth/logout');
     dispatch(removeUser());
     history.push('/login');
@@ -55,21 +57,6 @@ export const logout = () => async dispatch => {
     console.error(err);
   }
 };
-
-// export const addToCart = product => async dispatch => {
-//   try {
-//     const session = await axios.get('/api/users/logged-in')
-//     const userId = session.data.passport.user
-//     const user = await axios.get(`/api/users/${userId}`)
-//     console.log('user:', user)
-//     await axios.put(`/api/users/${userId}`, { cart: [ product.id ] })
-//     const updatedUser = await axios.get(`/api/users/${userId}`)
-//     dispatch(addProduct(updatedUser.data))
-//     console.log(updatedUser.data)
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
 
 /**
  * REDUCER
