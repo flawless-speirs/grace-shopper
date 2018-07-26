@@ -1,15 +1,12 @@
 const router = require('express').Router();
-const passport = require('passport');
+const connectEnsureLogin = require('connect-ensure-login');
 module.exports = router;
 
-router.use(
-  '/',
-  passport.authenticate('basic', { session: false }),
-  (req, res, next) => {
-    next();
-  }
-),
-  router.use('/users', require('./users'));
+router.use('/', connectEnsureLogin.ensureLoggedIn(), (req, res, next) => {
+  next();
+});
+
+router.use('/users', require('./users'));
 
 router.use('/products', require('./products'));
 
