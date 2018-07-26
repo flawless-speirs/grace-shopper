@@ -51,7 +51,6 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    console.log('starting logout...');
     await dispatch(sendCartToDB());
     await axios.post('/auth/logout');
     dispatch(removeUser());
