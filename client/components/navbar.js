@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import { saveCart } from '../store/cart';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
@@ -46,6 +47,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
+      dispatch(saveCart());
       dispatch(logout());
     },
   };
