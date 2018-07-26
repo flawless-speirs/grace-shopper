@@ -10,7 +10,7 @@ export default function Creator(props) {
     <div>
       <div className="profile">
         <div className="headshot">
-          <img src={imageUrl} />
+          <img className="profile-picture" src={imageUrl} />
         </div>
         <div className="profileRight">
           <div className="profileName">{name}</div>

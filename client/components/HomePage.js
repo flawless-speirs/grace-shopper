@@ -42,13 +42,15 @@ const creators = [
 
 export const HomePage = props => {
   return (
-    <div>
+    <div className="container-fluid text-center">
       <h1>Wubba Lubba Dub Dub!</h1>
-      {creators.map(creator => (
-        <div key={creator.id}>
-          <Creator creator={creator} />
-        </div>
-      ))}
+      <div className="row">
+        {creators.map(creator => (
+          <div className="col-6" key={creator.id}>
+            <Creator creator={creator} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
