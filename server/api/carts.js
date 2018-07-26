@@ -18,12 +18,9 @@ router.put('/', async (req, res, next) => {
   try {
     const userId = req.user.id;
     const newCart = req.body;
-    console.log('cart from state:', req.body);
     await newCart.forEach(async productData => {
-      console.log('finding:', productData);
       await Cart.findOne({ where: { userId, productId: productData[0] } }).then(
         product => {
-          console.log('updating or creating', productData);
           if (product) {
             product.update({ quantity: productData[1] });
           } else {
@@ -40,5 +37,4 @@ router.put('/', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-  console.log('DONE UPDATE/CREATE');
 });
