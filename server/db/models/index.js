@@ -1,7 +1,7 @@
 const User = require('./user')
 const Product = require('./product')
 
-User.hasMany(Product, { as: 'Cart' })
+User.hasMany(Product, { as: 'cart' })
 
 /**
  * If we had any associations to make, this would be a great place to put them!

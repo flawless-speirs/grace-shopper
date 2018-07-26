@@ -27,7 +27,7 @@ router.get('/logged-in', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findOne({where: { id: req.params.id }, include: [{model: Product, as: 'Cart'}] })
+    const user = await User.findOne({where: { id: req.params.id }, include: [{model: Product, as: 'cart'}] })
     res.json(user)
   } catch (err) {
     next(err)
