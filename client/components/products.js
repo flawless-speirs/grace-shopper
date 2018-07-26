@@ -26,6 +26,11 @@ class Products extends Component {
               <div>Price: ${product.price}</div>
               <br/>
             </div>
+            // <div key={product.id}>
+            //   <div>Name: {product.name}</div>
+            //   <img src={product.imageUrl} />
+            //   <div>Price: ${product.price}</div>
+            // </div>
           )
         })}
       </div>

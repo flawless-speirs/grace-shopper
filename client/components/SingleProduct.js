@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { product } from '../store/product'
+import { product as addProduct } from '../store/product'
+import { addToCart } from '../store/user'
 
 class SingleProduct extends Component {
   async componentDidMount(){
     await this.props.retrieveSingleProduct()
   }
   render() {
-    console.log('WE ARE RENDERING')
-    console.log(this.props)
     return (
       <div>
         <div className="product-image"><img src={this.props.product.imageUrl} /></div>
         <div className="product-name">{this.props.product.name}</div>
         <div className="product-price">{this.props.product.price}</div>
         <div className="product-description">{this.props.product.description}</div>
+        <button type="submit" onClick={() => this.props.addToCart(this.props.product)}>Add To Cart</button>
       </div>
     )
   }
@@ -25,7 +25,33 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  retrieveSingleProduct: () => dispatch(product(ownProps.match.params.id))
+  retrieveSingleProduct: () => dispatch(addProduct(ownProps.match.params.id)),
+  addToCart: (product) => dispatch(addToCart(product))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+
+// import React from 'react'
+// import { addToCart } from '../store/user'
+// import { connect } from 'react-redux';
+
+// export const SingleProduct = props => {
+//   const product = props.product
+//   return (
+//     <div>
+//       <div className="product-image"><img src={product.imageUrl} /></div>
+//       <div className="product-name">{product.name}</div>
+//       <div className="product-price">{product.price}</div>
+//       <div className="product-description">{product.description}</div>
+//       <button type="submit" onClick={() => props.addToCart(props.product)}>Add To Cart</button>
+//     </div>
+//   )
+// }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addToCart: (product) => dispatch(addToCart(product))
+//   }
+// }
+
+// export default connect(null, mapDispatchToProps)(SingleProduct)

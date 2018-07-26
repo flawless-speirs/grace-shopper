@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "rick-and-morty-store-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: rickandmortystore # see README
+  api_key:
+    secure: yrKkipYcviRNeAxC0SQ4QEpjte1okTwbu8nYj7gXNXOUmoyhOse/FfryeAMF+QEGHsM+AwyHgoDRoWo1or1FJzeBvga3lUTVvANzCnBExZ/ysHAlsB9i2RonF9q3nQuWCrWCZazM7xenE9gyYGOVIDGUaYPE/CIrFwyHDIUxoSYvXe3tPIcOLb6Od52jxabq23x/5+CMEWkPIOsNLzm+rLbOMTk+yYBO4g0thd1JA9I+IGV3xNnKz7oCgxyH8pzjZ/zZFPEISMN1hXpF9P8qmgHPMVPl1EVWIDope7nUKxyzlXtvDUR9sL4rclMDi4MvU8r6rK+C36AI9gdTIhC2lfsh/P+gvnw0rZWNUe0aTmwX3nm0sTOOw2LxHmRO+8ZBPBOkaem7mjeuN7NK3f8Qs11ng6mwPiMf+8kXB2C85va3gbGegMxy7IePOMqZpk1ZSRnRK25/LMl26WY9xo16kLaizSQLx1LJmrudh4DEy8zu73I9IK3xnVLZsmWcPxgLMZV/6YMA89VbMieVqqCfe1dRfvPyxhgYgD78BWTR/g7jodApnK6oI47+hQDUZlNDB7t2n4zaRlg/Ot4qrcPB4r7xY4BwtZG7WE2427Wg3WlnXaYdM4EGS8Ss1C+3Gm+7RvL8zRNWsnRJ7b1BcIdWQFCZ6sLkwcTAe3hdpoCWRj8= # see README

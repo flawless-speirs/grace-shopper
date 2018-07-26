@@ -1,6 +1,8 @@
 const User = require('./user')
 const Product = require('./product')
 
+User.hasMany(Product, { as: 'Cart' })
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:

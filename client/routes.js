@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, HomePage, SingleProduct} from './components'
+import {Login, Signup, UserHome, HomePage} from './components'
 import Products from './components/products'
+import SingleProduct from './components/SingleProduct'
 import {me} from './store'
 
 /**
@@ -20,8 +21,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        {console.log(this.props,'these are the switch props')}
-        {/* <Route exact path="/" component={HomePage} /> */}
+        <Route exact path="/" component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products/:id" component={SingleProduct} />

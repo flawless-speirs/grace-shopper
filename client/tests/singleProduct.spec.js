@@ -16,7 +16,7 @@ const product = {
 const adapter = new Adapter();
 enzyme.configure({ adapter });
 
-describe('UserHome', () => {
+describe('SingleProduct', () => {
   let singleProduct;
 
   beforeEach(() => {
