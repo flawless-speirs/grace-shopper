@@ -66,6 +66,7 @@ export const addToCart = product => async dispatch => {
     await axios.put(`/api/users/${userId}`, { products: [...user.data.products, product] })
     const updatedUser = await axios.get(`/api/users/${userId}`)
     dispatch(addProduct(updatedUser.data))
+    console.log(updatedUser.data)
   } catch (err) {
     console.error(err)
   }
