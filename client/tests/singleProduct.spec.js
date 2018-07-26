@@ -16,8 +16,8 @@
 // const adapter = new Adapter();
 // enzyme.configure({ adapter });
 
-// describe('SingleProduct', () => {
-//   let singleProduct;
+describe('SingleProduct', () => {
+  let singleProduct;
 
 //   beforeEach(() => {
 //     singleProduct = shallow(<SingleProduct product={product} />);
