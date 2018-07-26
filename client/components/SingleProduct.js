@@ -10,7 +10,7 @@ export const SingleProduct = props => {
       <div className="product-name">{product.name}</div>
       <div className="product-price">{product.price}</div>
       <div className="product-description">{product.description}</div>
-      <button type="submit" onClick={props.addToCart(props.product)}>Add To Cart</button>
+      <button type="submit" onClick={() => props.addToCart(props.product)}>Add To Cart</button>
     </div>
   )
 }

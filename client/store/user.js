@@ -61,11 +61,10 @@ export const logout = () => async dispatch => {
 export const addToCart = product => async dispatch => {
   try {
     const session = await axios.get('/api/users/logged-in')
-    const id = session.passport.user
-    const user = await axios.get(`/api/users/${id}`)
-    const cart = user.products
-    await axios.put(`/api/users/${id}`, { products: [ ...cart, product ] })
-    const updatedUser = await axios.get(`/api/users/${id}`)
+    const userId = session.data.passport.user
+    const user = await axios.get(`/api/users/${userId}`)
+    await axios.put(`/api/users/${userId}`, { products: [...user.data.products, product] })
+    const updatedUser = await axios.get(`/api/users/${userId}`)
     dispatch(addProduct(updatedUser.data))
   } catch (err) {
     console.error(err)

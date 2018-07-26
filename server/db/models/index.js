@@ -2,7 +2,7 @@ const User = require('./user')
 const Product = require('./product')
 
 User.hasMany(Product)
-// Product.belongsToMany(User)
+Product.belongsToMany(User, { through: 'Cart'})
 
 /**
  * If we had any associations to make, this would be a great place to put them!
