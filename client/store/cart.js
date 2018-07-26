@@ -42,10 +42,12 @@ export const sendToDB = () => async (dispatch, getState) => {
 
 export const getFromDB = () => async dispatch => {
   const cart = await axios.get('/api/carts');
+  console.log('CART FROM DB:', cart);
   let cartState = new Map();
   cart.data.forEach(item => {
     cartState.set(item.productId, item.quantity);
   });
+  console.log('sending to cart state', cartState);
   dispatch(getCart(cartState));
 };
 
