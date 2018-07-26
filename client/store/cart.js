@@ -5,12 +5,14 @@ import axios from 'axios';
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const SAVE_CART = 'SAVE_CART';
+const GET_CART = 'GET_CART';
 
 // ACTION CREATORS
 
 const addProduct = cart => ({ type: ADD_PRODUCT, cart });
 const removeProduct = cart => ({ type: REMOVE_PRODUCT, cart });
 const saveCart = () => ({ type: SAVE_CART });
+const getCart = cart => ({ type: GET_CART, cart });
 
 // THUNKS
 
@@ -34,8 +36,17 @@ export const removeFromCart = id => (dispatch, getState) => {
 
 export const sendToDB = () => async (dispatch, getState) => {
   const cart = getState().cart;
-  dispatch(saveCart());
   await axios.put('/api/carts', cart);
+  dispatch(saveCart());
+};
+
+export const getFromDB = () => async dispatch => {
+  const cart = await axios.get('/api/carts');
+  let cartState = new Map();
+  cart.data.forEach(item => {
+    cartState.set(item.productId, item.quantity);
+  });
+  dispatch(getCart(cartState));
 };
 
 export default function(state = new Map(), action) {
@@ -46,6 +57,8 @@ export default function(state = new Map(), action) {
       return action.cart;
     case SAVE_CART:
       return new Map();
+    case GET_CART:
+      return action.cart;
     default:
       return state;
   }
