@@ -51,7 +51,7 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    dispatch(sendCartToDB());
+    await dispatch(sendCartToDB());
     await axios.post('/auth/logout');
     dispatch(removeUser());
     history.push('/login');
