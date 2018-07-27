@@ -31,7 +31,7 @@ class Cart extends Component {
     this.forceUpdate();
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     // await this.props.retrieveProducts();
     // await this.props.getCart();
     let products = [];

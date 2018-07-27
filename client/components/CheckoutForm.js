@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import { createOrder } from '../store/cart';
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -10,13 +11,14 @@ class CheckoutForm extends Component {
   }
 
   async submit(ev) {
+    ev.preventDefault();
     let { token } = await this.props.stripe.createToken({ name: 'Name' });
     let response = await fetch('/charge', {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: token.id,
     });
-
+    await this.props.createOrder();
     if (response.ok) this.setState({ complete: true });
   }
 
@@ -35,4 +37,14 @@ class CheckoutForm extends Component {
   }
 }
 
-export default injectStripe(connect()(CheckoutForm));
+const mapStateToProps = state => ({
+  cart: state.cart,
+});
+
+const mapDispatchToProps = dispatch => ({
+  createOrder: () => dispatch(createOrder()),
+});
+
+export default injectStripe(
+  connect(mapStateToProps, mapDispatchToProps)(CheckoutForm)
+);
