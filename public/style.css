@@ -32,7 +32,7 @@ form div {
 
 .btn {
   flex: 1 1 auto;
-  margin: 5px;
+  margin: 15px 10px 8px 8px;
   padding: 9px;
   text-align: center;
   text-transform: uppercase;
@@ -51,6 +51,15 @@ form div {
   background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%)
 }
 
+.home-btn {
+  margin-left: 20px;
+  background-color: #3b997d;
+}
+
+.cart-btn {
+  margin-right: 20px;
+}
+
 .gradient {
   /* background: rgb(34,193,195); */
   /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 50%, rgba(253,187,45,1) 100%); */
@@ -58,9 +67,12 @@ form div {
 }
 
 body {
-  /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%); */
   background: #b1ddcb;
   background-size: cover;
+}
+
+nav {
+  float: right;
 }
 
 .StripeElement {
