@@ -1,5 +1,12 @@
 const router = require('express').Router();
+
+const connectEnsureLogin = require('connect-ensure-login');
+
 module.exports = router;
+
+router.use('/', connectEnsureLogin.ensureLoggedIn(), (req, res, next) => {
+  next();
+});
 
 router.use('/users', require('./users'));
 

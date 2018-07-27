@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const compression = require('compression');
 const session = require('express-session');
 const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
@@ -40,6 +41,24 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+
+// Passport Strategy Configuration
+passport.use(
+  new Strategy(function(username, password, done) {
+    db.models.User.find({ where: { email: username } }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      if (user.password != password) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  })
+);
 
 const createApp = () => {
   // logging middleware
