@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { product as getProduct } from '../store/product';
 import { addToCart } from '../store/cart';
+import { updateTotal } from '../store/total';
 
 class SingleProduct extends Component {
   constructor() {
@@ -15,6 +16,7 @@ class SingleProduct extends Component {
 
   async handleClick(evt) {
     evt.preventDefault();
+    await this.props.updateTotal(this.props.product.price);
     await this.props.addToCart(this.props.product);
   }
 
@@ -48,11 +50,13 @@ class SingleProduct extends Component {
 const mapStateToProps = state => ({
   product: state.product,
   cart: state.cart,
+  total: state.total,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   retrieveSingleProduct: () => dispatch(getProduct(ownProps.match.params.id)),
   addToCart: product => dispatch(addToCart(product.id)),
+  updateTotal: amount => dispatch(updateTotal(amount)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
