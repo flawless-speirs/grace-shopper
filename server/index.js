@@ -44,7 +44,7 @@ passport.deserializeUser(async (id, done) => {
 // Passport Strategy Configuration
 passport.use(
   new Strategy(function(username, password, done) {
-    db.models.User.find({ where: { email: username } }, function(err, user) {
+    db.models.User.findOne({ where: { email: username } }, function(err, user) {
       if (err) {
         return done(err);
       }
