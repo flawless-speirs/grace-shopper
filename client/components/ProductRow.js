@@ -48,19 +48,25 @@ class ProductRow extends Component {
         <div className="row text-center">
           <div className="col-4">
             {' '}
-            <img src={product.imageUrl} />{' '}
+            <img height="150" width="150" src={product.imageUrl} />{' '}
           </div>
-          <div className="col-2"> {product.name} </div>
-          <div className="col-2"> {product.price} </div>
-          <div className="col-2">
-            {product.quantity}
-            <button type="button" onClick={this.handleAdd}>
-              +
-            </button>
-            <button type="button" onClick={this.handleRemove}>
-              -
-            </button>
-          </div>
+          <div className="col-2">{product.name}</div>
+          <div className="col-2">${product.price}</div>
+          <div className="col-1">{product.quantity}</div>
+          <button
+            className="btn btn-info"
+            type="button"
+            onClick={this.handleAdd}
+          >
+            +
+          </button>
+          <button
+            className="btn btn-info"
+            type="button"
+            onClick={this.handleRemove}
+          >
+            -
+          </button>
         </div>
       </div>
     );

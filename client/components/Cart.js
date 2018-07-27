@@ -62,7 +62,7 @@ class Cart extends Component {
             <div className="col-4" />
             <div className="col-2"> Product </div>
             <div className="col-2"> Price </div>
-            <div className="col-2"> Quantity </div>
+            <div className="col-1"> Quantity </div>
           </div>
           {products.map(product => {
             return (
@@ -82,7 +82,7 @@ class Cart extends Component {
         </Elements>
       </div>
     ) : (
-      <div>Loading...</div>
+      <div>Nothing in your cart yet</div>
     );
   }
 }
