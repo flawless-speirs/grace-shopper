@@ -12,3 +12,4 @@ export { default as Products } from './Products';
 export { default as SingleProduct } from './SingleProduct';
 export { default as Cart } from './Cart';
 export { default as CheckoutForm } from './CheckoutForm';
+export { default as CheckoutPage } from './CheckoutPage';
