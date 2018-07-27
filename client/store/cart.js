@@ -56,9 +56,8 @@ export const getFromDB = () => async dispatch => {
 };
 
 export const createOrder = () => async (dispatch, getState) => {
-  const cart = getState().cart;
-  console.log(cart);
-  await axios.post('/api/orders', cart);
+  const total = getState().total;
+  await axios.post('/api/orders', { amount: parseFloat(total) });
   dispatch(createdOrder());
 };
 

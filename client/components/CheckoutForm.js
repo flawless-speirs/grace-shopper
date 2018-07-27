@@ -18,7 +18,7 @@ class CheckoutForm extends Component {
       headers: { 'Content-Type': 'text/plain' },
       body: token.id,
     });
-    await this.props.createOrder();
+    await this.props.createOrder(this.props.total);
     if (response.ok) this.setState({ complete: true });
   }
 
@@ -39,6 +39,7 @@ class CheckoutForm extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart,
+  total: state.total,
 });
 
 const mapDispatchToProps = dispatch => ({

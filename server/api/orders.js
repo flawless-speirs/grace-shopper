@@ -4,10 +4,11 @@ module.exports = router;
 
 router.post('/', async (req, res, next) => {
   try {
-    const user = req.user;
-    const request = req.body;
-    let order = {};
-    const created = await Order.create({ userId: user.id });
+    console.log(req.body);
+    const created = await Order.create({
+      userId: req.user.id,
+      amount: req.body.amount,
+    });
     res.send(created);
   } catch (err) {
     next(err);
