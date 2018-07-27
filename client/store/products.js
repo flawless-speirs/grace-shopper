@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axios from 'axios';
 
 /**
  * ACTION TYPES
  */
-const GET_PRODUCTS = 'GET_PRODUCTS'
+const GET_PRODUCTS = 'GET_PRODUCTS';
 
 /**
  * INITIAL STATE
@@ -15,26 +15,38 @@ const defaultProducts = [
     imageUrl:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwqeFAYIE3hTj9Gs1j3v7o-oBadM5uDkuPBuXMPtXS85LufL7UVA',
     description: 'default description',
-    price: 0
-  }
-]
+    price: 0,
+  },
+];
 
 /**
  * ACTION CREATORS
  */
-const getProducts = products => ({type: GET_PRODUCTS, products})
+const getProducts = products => ({ type: GET_PRODUCTS, products });
 
 /**
  * THUNK CREATORS
  */
 export const products = () => async dispatch => {
   try {
-    const res = await axios.get('/api/products')
-    dispatch(getProducts(res.data))
+    let token = 'server@server.com:123';
+    let base64 = btoa(token);
+    let Basic = 'Basic ' + base64;
+    // const res = await axios.get('/api/products', {
+    //   Headers: { Authorization: Basic },
+    // });
+
+    const res = await axios.get('/api/products', {
+      auth: {
+        username: 'server@server.com',
+        password: '123',
+      },
+    });
+    dispatch(getProducts(res.data));
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
 /**
  * REDUCER
@@ -42,8 +54,8 @@ export const products = () => async dispatch => {
 export default function(state = defaultProducts, action) {
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products
+      return action.products;
     default:
-      return state
+      return state;
   }
 }
