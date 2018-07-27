@@ -1,19 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
-import {Router} from 'react-router-dom'
-import history from './history'
-import store from './store'
-import App from './app'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
+import history from './history';
+import store from './store';
+import App from './app';
+
+import { StripeProvider } from 'react-stripe-elements';
 
 // establishes socket connection
-import './socket'
+import './socket';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App/>
-    </Router>
-  </Provider>,
+  <StripeProvider apiKey="pk_test_WlG6iGyTWNvFyoGKJfEIuLtN">
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>
+  </StripeProvider>,
   document.getElementById('app')
-)
+);
