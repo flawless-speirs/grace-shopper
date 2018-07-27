@@ -42,7 +42,7 @@ const creators = [
 export const HomePage = props => {
   return (
     <div className="container-fluid text-center">
-      <h1>Wubba Lubba Dub Dub!</h1>
+      <h1 className="cool-header">Wubba Lubba Dub Dub!</h1>
       <div className="row">
         {creators.map(creator => (
           <div className="col-6" key={creator.id}>

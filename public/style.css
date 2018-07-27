@@ -26,8 +26,11 @@ form div {
 }
 
 .profile-picture {
-  height: 200px;
-  width: 200px;
+  height: 90%;
+  width: 90%;
+  border-radius: 10%;
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.8);
+  margin: 10px auto;
 }
 
 .btn {
@@ -73,6 +76,26 @@ body {
 
 nav {
   float: right;
+}
+
+.profile-card {
+  background-color: #c0c6d1;
+  margin: 10px auto;
+  padding: 20px 10px;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.profile-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.cool-header {
+  text-shadow: 3px 3px 5px #CCCCCC;
+  color: #ecfcff;
+  text-shadow: 0 0 5px #A5F1FF, 0 0 10px #A5F1FF,
+              0 0 20px #A5F1FF, 0 0 30px #A5F1FF,
+              0 0 40px #A5F1FF;
 }
 
 .StripeElement {
