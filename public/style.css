@@ -1,3 +1,8 @@
+* {
+  font-family: 'Lato', sans-serif;
+
+}
+
 body {
   font-family: sans-serif;
 }
@@ -23,6 +28,39 @@ form div {
 .profile-picture {
   height: 200px;
   width: 200px;
+}
+
+.btn {
+  flex: 1 1 auto;
+  margin: 5px;
+  padding: 9px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+
+.btn:hover {
+  background-position: right center;
+}
+
+.nav-btn {
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%)
+}
+
+.gradient {
+  /* background: rgb(34,193,195); */
+  /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 50%, rgba(253,187,45,1) 100%); */
+  /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%); */
+}
+
+body {
+  /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%); */
+  background: #b1ddcb;
+  background-size: cover;
 }
 
 .StripeElement {
