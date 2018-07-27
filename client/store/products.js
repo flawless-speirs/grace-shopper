@@ -35,6 +35,7 @@ export const products = () => async dispatch => {
     // const res = await axios.get('/api/products', {
     //   Headers: { Authorization: Basic },
     // });
+
     const res = await axios.get('/api/products', {
       auth: {
         username: 'server@server.com',
