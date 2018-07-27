@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
-const SAVE_CART = 'SAVE_CART';
+const CLEAR_CART = 'CLEAR_CART';
 const GET_CART = 'GET_CART';
 const CREATED_ORDER = 'CREATED_ORDER';
 
@@ -12,7 +12,7 @@ const CREATED_ORDER = 'CREATED_ORDER';
 
 const addProduct = cart => ({ type: ADD_PRODUCT, cart });
 const removeProduct = cart => ({ type: REMOVE_PRODUCT, cart });
-const saveCart = () => ({ type: SAVE_CART });
+const clearCart = () => ({ type: CLEAR_CART });
 const getCart = cart => ({ type: GET_CART, cart });
 const createdOrder = () => ({ type: CREATED_ORDER });
 
@@ -43,7 +43,7 @@ export const removeFromCart = id => (dispatch, getState) => {
 export const sendToDB = () => async (dispatch, getState) => {
   const cart = getState().cart;
   await axios.put('/api/carts', cart);
-  dispatch(saveCart());
+  dispatch(clearCart());
 };
 
 export const getFromDB = () => async dispatch => {
@@ -63,8 +63,10 @@ export const createOrder = () => async (dispatch, getState) => {
   cart.forEach(function(item) {
     item.orderId = orderId;
   });
+  console.log(cart);
   await axios.put('/api/carts', cart);
   dispatch(createdOrder());
+  dispatch(clearCart());
 };
 
 export default function(state = [], action) {
@@ -73,7 +75,7 @@ export default function(state = [], action) {
       return action.cart;
     case REMOVE_PRODUCT:
       return action.cart;
-    case SAVE_CART:
+    case CLEAR_CART:
       return [];
     case GET_CART:
       return action.cart;

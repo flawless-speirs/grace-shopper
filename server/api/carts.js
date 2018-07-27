@@ -24,20 +24,29 @@ router.put('/', async (req, res, next) => {
           where: { userId, productId: product.productId },
         }).then(response => {
           if (response) {
-            if (product.cartId) {
+            if (product.orderId) {
               response.update({
                 quantity: product.quantity,
-                cartId: product.cartId,
+                orderId: product.orderId,
               });
             } else {
               response.update({ quantity: product.quantity });
             }
           } else {
-            Cart.create({
-              userId,
-              productId: product.productId,
-              quantity: product.quantity,
-            });
+            if (product.orderId) {
+              Cart.create({
+                userId,
+                productId: product.productId,
+                quantity: product.quantity,
+                orderId: product.orderId,
+              });
+            } else {
+              Cart.create({
+                userId,
+                productId: product.productId,
+                quantity: product.quantity,
+              });
+            }
           }
         });
       }
