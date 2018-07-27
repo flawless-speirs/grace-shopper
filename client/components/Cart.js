@@ -22,8 +22,10 @@ class Cart extends Component {
           <ProductRow />
           <div> Total </div>
         </div>
-        <Elements>
-          <CheckoutForm />
+        <Elements className="row">
+          <div className="col-4">
+            <CheckoutForm />
+          </div>
         </Elements>
       </div>
     );

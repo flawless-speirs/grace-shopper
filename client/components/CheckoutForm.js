@@ -25,9 +25,10 @@ class CheckoutForm extends Component {
 
     return (
       <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
         <CardElement />
-        <button onClick={this.submit}>Send</button>
+        <button className="btn btn-warning" onClick={this.submit}>
+          Pay
+        </button>
       </div>
     );
   }

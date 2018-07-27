@@ -10,7 +10,6 @@ import {
   Products,
   SingleProduct,
   Cart,
-  CheckoutForm,
 } from './components';
 import { me } from './store';
 
