@@ -4,7 +4,7 @@ import ProductRow from './ProductRow';
 import CheckoutForm from './CheckoutForm';
 import { Elements } from 'react-stripe-elements';
 import { products as getProducts } from '../store/products';
-import { getFromDB } from '../store/cart';
+import { getFromDB, addToCart, removeFromCart } from '../store/cart';
 
 /**
  * COMPONENT
@@ -14,20 +14,38 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = { products: [] };
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  async handleRemove(evt, id) {
+    evt.preventDefault();
+    await this.props.removeFromCart(id);
+    this.forceUpdate();
+  }
+
+  async handleAdd(evt, id) {
+    evt.preventDefault();
+    await this.props.addToCart(id);
+    this.forceUpdate();
   }
 
   async componentDidMount() {
-    await this.props.retrieveProducts();
-    await this.props.getCart();
+    // await this.props.retrieveProducts();
+    // await this.props.getCart();
     let products = [];
-    if (this.props.cart) {
-      this.props.cart.forEach((value, key) => {
-        const toAdd = this.props.products.find(product => product.id === key);
+    if (this.props.cart.length) {
+      this.props.cart.forEach(item => {
+        const toAdd = this.props.products.find(
+          product => item.productId === product.id
+        );
         if (toAdd) {
           products.push({
+            id: toAdd.id,
             name: toAdd.name,
             price: toAdd.price,
-            quantity: value,
+            imageUrl: toAdd.imageUrl,
+            quantity: item.quantity,
           });
         }
       });
@@ -41,16 +59,19 @@ class Cart extends Component {
       <div>
         <div className="container-fluid text-center">
           <div className="row text-center">
-            <div className="col-4"> Product </div>
+            <div className="col-4" />
+            <div className="col-2"> Product </div>
             <div className="col-2"> Price </div>
             <div className="col-2"> Quantity </div>
-            <div className="col-2"> Amount </div>
           </div>
           {products.map(product => {
-            console.log(product);
             return (
               <div key={product.id}>
-                <ProductRow product={product} />
+                <ProductRow
+                  product={product}
+                  handleAdd={this.handleAdd}
+                  handleRemove={this.handleRemove}
+                />
               </div>
             );
           })}
@@ -78,6 +99,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(getProducts()),
   getCart: () => dispatch(getFromDB()),
+  addToCart: id => dispatch(addToCart(id)),
+  removeFromCart: id => dispatch(removeFromCart(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

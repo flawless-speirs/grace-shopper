@@ -10,26 +10,46 @@ import { addToCart, removeFromCart } from '../store/cart';
 class ProductRow extends Component {
   constructor() {
     super();
+    this.state = {};
     this.handleAdd = this.handleAdd.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState(this.props.product);
   }
 
   async handleAdd(evt) {
     evt.preventDefault();
     await this.props.addToCart(this.props.product.id);
+    this.setState(prevState => {
+      return { ...prevState, quantity: prevState.quantity + 1 };
+    });
+    // this.props.product.quantity++;
+    // this.forceUpdate();
   }
 
   async handleRemove(evt) {
     evt.preventDefault();
-    await this.props.removeFromCart(this.props.product.id);
+    if (this.state.quantity > 0) {
+      await this.props.removeFromCart(this.props.product.id);
+      this.setState(prevState => {
+        return { ...prevState, quantity: prevState.quantity - 1 };
+      });
+    }
+    // this.props.product.quantity--
+    // this.forceUpdate();
   }
 
   render() {
-    const product = this.props.product;
+    const product = this.state;
     return (
       <div className="container-fluid text-center">
         <div className="row text-center">
-          <div className="col-4"> Product Image </div>
+          <div className="col-4">
+            {' '}
+            <img src={product.imageUrl} />{' '}
+          </div>
           <div className="col-2"> {product.name} </div>
           <div className="col-2"> {product.price} </div>
           <div className="col-2">
