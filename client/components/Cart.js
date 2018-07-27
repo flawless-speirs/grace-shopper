@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
 import CheckoutForm from './CheckoutForm';
 import { Elements } from 'react-stripe-elements';
@@ -76,10 +77,10 @@ class Cart extends Component {
             );
           })}
           <div> Total </div>
+          <Link to="/cart/checkout" className="btn btn-warning">
+            Checkout
+          </Link>
         </div>
-        <Elements>
-          <CheckoutForm />
-        </Elements>
       </div>
     ) : (
       <div>Loading...</div>
