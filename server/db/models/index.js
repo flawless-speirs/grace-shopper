@@ -1,8 +1,11 @@
 const User = require('./user');
 const Product = require('./product');
 const Cart = require('./cart');
+const Order = require('./order');
 
 User.hasMany(Cart);
+Order.hasMany(Cart);
+User.hasMany(Order);
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -21,4 +24,5 @@ module.exports = {
   User,
   Product,
   Cart,
+  Order,
 };

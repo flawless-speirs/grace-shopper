@@ -6,6 +6,7 @@ const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const SAVE_CART = 'SAVE_CART';
 const GET_CART = 'GET_CART';
+const CREATED_ORDER = 'CREATED_ORDER';
 
 // ACTION CREATORS
 
@@ -13,6 +14,7 @@ const addProduct = cart => ({ type: ADD_PRODUCT, cart });
 const removeProduct = cart => ({ type: REMOVE_PRODUCT, cart });
 const saveCart = () => ({ type: SAVE_CART });
 const getCart = cart => ({ type: GET_CART, cart });
+const createdOrder = () => ({ type: CREATED_ORDER });
 
 // THUNKS
 
@@ -51,6 +53,12 @@ export const getFromDB = () => async dispatch => {
     cartState.push({ productId: item.productId, quantity: item.quantity });
   });
   dispatch(getCart(cartState));
+};
+
+export const createOrder = () => async (dispatch, getState) => {
+  const total = getState().total;
+  await axios.post('/api/orders', { amount: parseFloat(total) });
+  dispatch(createdOrder());
 };
 
 export default function(state = [], action) {

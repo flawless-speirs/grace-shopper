@@ -22,6 +22,7 @@ class ProductRow extends Component {
   async handleAdd(evt) {
     evt.preventDefault();
     await this.props.addToCart(this.props.product.id);
+    await this.props.updateTotal(this.props.product.price);
     this.setState(prevState => {
       return { ...prevState, quantity: prevState.quantity + 1 };
     });
@@ -33,6 +34,7 @@ class ProductRow extends Component {
     evt.preventDefault();
     if (this.state.quantity > 0) {
       await this.props.removeFromCart(this.props.product.id);
+      await this.props.updateTotal(-1 * this.props.product.price);
       this.setState(prevState => {
         return { ...prevState, quantity: prevState.quantity - 1 };
       });
