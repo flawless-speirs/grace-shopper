@@ -4,9 +4,14 @@ module.exports = router;
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body);
+    let userId;
+    if (req.user) {
+      userId = req.user.id;
+    } else {
+      userId = null;
+    }
     const created = await Order.create({
-      userId: req.user.id,
+      userId,
       amount: req.body.amount,
     });
     res.send(created);
