@@ -46,7 +46,7 @@ class ProductRow extends Component {
   render() {
     const product = this.state;
     return (
-      <div className="container-fluid text-center">
+      <div className="container-fluid text-center product-row-card">
         <div className="row text-center">
           <div className="col-4">
             {' '}
