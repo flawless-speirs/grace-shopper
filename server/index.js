@@ -11,6 +11,7 @@ const sessionStore = new SequelizeStore({ db });
 const PORT = process.env.PORT || 8080;
 const app = express();
 const socketio = require('socket.io');
+const stripe = require('stripe')('sk_test_TZtWjhogwDxDLuKJZwwhZ3tO');
 module.exports = app;
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -67,6 +68,9 @@ const createApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // added for Stripe
+  app.use(require('body-parser').text());
+
   // compression middleware
   app.use(compression());
 
@@ -88,6 +92,21 @@ const createApp = () => {
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')));
+
+  app.post('/charge', async (req, res) => {
+    try {
+      let { status } = await stripe.charges.create({
+        amount: 2000,
+        currency: 'usd',
+        description: 'An example charge',
+        source: req.body,
+      });
+
+      res.json({ status });
+    } catch (err) {
+      res.status(500).end();
+    }
+  });
 
   // any remaining requests with an extension (.js, .css, etc.) send 404
   app.use((req, res, next) => {
