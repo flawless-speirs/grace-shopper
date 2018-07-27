@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
-import CheckoutForm from './CheckoutForm';
-import { Elements } from 'react-stripe-elements';
 
 /**
  * COMPONENT
@@ -21,12 +20,10 @@ class Cart extends Component {
           </div>
           <ProductRow />
           <div> Total </div>
+          <Link to="/cart/checkout" className="btn btn-warning">
+            Checkout
+          </Link>
         </div>
-        <Elements className="row">
-          <div className="col-4">
-            <CheckoutForm />
-          </div>
-        </Elements>
       </div>
     );
   }
