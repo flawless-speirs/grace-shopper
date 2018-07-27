@@ -5,6 +5,7 @@ const Order = require('./order');
 
 User.hasMany(Cart);
 Order.hasMany(Cart);
+Order.belongsTo(User);
 User.hasMany(Order);
 
 /**

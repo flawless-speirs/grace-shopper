@@ -39,6 +39,7 @@ class Cart extends Component {
         }
       });
     }
+    // this.props.updateTotal();
     this.setState({ products });
   }
 

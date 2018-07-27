@@ -24,7 +24,14 @@ router.put('/', async (req, res, next) => {
           where: { userId, productId: product.productId },
         }).then(response => {
           if (response) {
-            response.update({ quantity: product.quantity });
+            if (product.cartId) {
+              response.update({
+                quantity: product.quantity,
+                cartId: product.cartId,
+              });
+            } else {
+              response.update({ quantity: product.quantity });
+            }
           } else {
             Cart.create({
               userId,
