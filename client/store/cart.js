@@ -18,20 +18,24 @@ const getCart = cart => ({ type: GET_CART, cart });
 
 export const addToCart = id => (dispatch, getState) => {
   const cart = getState().cart;
-  if (!cart.get(id)) {
-    cart.set(id, 1);
+  const item = cart.find(el => el.productId === id);
+  if (!item) {
+    cart.push({ productId: id, quantity: 1 });
   } else {
-    let currentQuantity = cart.get(id);
-    cart.set(id, currentQuantity + 1);
+    let currentQuantity = item.quantity;
+    item.quantity = currentQuantity + 1;
   }
   dispatch(addProduct(cart));
 };
 
 export const removeFromCart = id => (dispatch, getState) => {
   const cart = getState().cart;
-  let currentQuantity = cart.get(id);
-  cart.set(id, currentQuantity - 1);
-  dispatch(removeProduct(cart));
+  const item = cart.find(el => el.productId === id);
+  let currentQuantity = item.quantity;
+  if (currentQuantity > 0) {
+    item.quantity = currentQuantity - 1;
+    dispatch(removeProduct(cart));
+  }
 };
 
 export const sendToDB = () => async (dispatch, getState) => {
@@ -42,21 +46,21 @@ export const sendToDB = () => async (dispatch, getState) => {
 
 export const getFromDB = () => async dispatch => {
   const cart = await axios.get('/api/carts');
-  let cartState = new Map();
+  let cartState = [];
   cart.data.forEach(item => {
-    cartState.set(item.productId, item.quantity);
+    cartState.push({ productId: item.productId, quantity: item.quantity });
   });
   dispatch(getCart(cartState));
 };
 
-export default function(state = new Map(), action) {
+export default function(state = [], action) {
   switch (action.type) {
     case ADD_PRODUCT:
       return action.cart;
     case REMOVE_PRODUCT:
       return action.cart;
     case SAVE_CART:
-      return new Map();
+      return [];
     case GET_CART:
       return action.cart;
     default:

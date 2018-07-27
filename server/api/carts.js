@@ -18,20 +18,22 @@ router.put('/', async (req, res, next) => {
   try {
     const userId = req.user.id;
     const newCart = req.body;
-    await newCart.forEach(async productData => {
-      await Cart.findOne({ where: { userId, productId: productData[0] } }).then(
-        product => {
-          if (product) {
-            product.update({ quantity: productData[1] });
+    await newCart.forEach(async product => {
+      if (product.quantity) {
+        await Cart.findOne({
+          where: { userId, productId: product.productId },
+        }).then(response => {
+          if (response) {
+            response.update({ quantity: product.quantity });
           } else {
             Cart.create({
               userId,
-              productId: productData[0],
-              quantity: productData[1],
+              productId: product.productId,
+              quantity: product.quantity,
             });
           }
-        }
-      );
+        });
+      }
     });
     res.status(204).end();
   } catch (err) {
