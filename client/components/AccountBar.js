@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
+import AccountPreferences from './AccountPreferences';
+import OrderHistory from './OrderHistory';
+// import store from '../store';
 
-const AccountBar = ({ name }) => {
-  console.log("THIS IS THE USER'S NAME", name);
+const AccountBar = props => {
+  console.log("THIS IS THE USER'S NAME", props.match);
   return (
     <div>
-      <div>Welcome {name}</div>
+      <div>Welcome {props.name}</div>
       <div>
         <Link to="/profile">Profile</Link>
         <Link to="/orders">Order History</Link>

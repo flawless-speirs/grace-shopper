@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AccountBar from './AccountBar';
-import { Link, connect } from 'react-redux';
+import AccountPreferences from './AccountPreferences';
+import OrderHistory from './OrderHistory';
 
 class Account extends Component {
   constructor() {
@@ -10,7 +13,13 @@ class Account extends Component {
   render() {
     return (
       <div>
-        <AccountBar />
+        <BrowserRouter>
+          <div>
+            <AccountBar />
+            <Route path="/profile" component={AccountPreferences} />
+            <Route path="/orders" component={OrderHistory} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

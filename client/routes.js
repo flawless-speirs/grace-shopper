@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
+  AccountPreferences,
+  OrderHistory,
   Account,
   Login,
   Signup,
@@ -41,6 +43,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             {/* <Route exact path="/home" component={UserHome} /> */}
             <Route exact path="/account" component={Account} />
+            {/* <Route path="/profile" component={AccountPreferences} />
+            <Route path="/orders" component={OrderHistory} /> */}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
