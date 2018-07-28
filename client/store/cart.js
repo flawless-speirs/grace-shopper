@@ -62,8 +62,15 @@ export const saveMyCart = () => async (dispatch, getState) => {
 
 export const createOrder = () => async (dispatch, getState) => {
   const total = getState().total;
-  await axios.post('/api/orders', { amount: parseFloat(total) });
+  const cart = getState().cart;
+  const order = await axios.post('/api/orders', { amount: parseFloat(total) });
+  const orderId = order.data.id;
+  cart.forEach(function(item) {
+    item.orderId = orderId;
+  });
+  await axios.put('/api/carts', cart);
   dispatch(createdOrder());
+  dispatch(clearCart());
 };
 
 export default function(state = [], action) {
