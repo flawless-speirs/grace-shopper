@@ -4,10 +4,16 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    if (req.user) {
-      const userId = req.user.id;
-      const cart = await Cart.findAll({ where: { userId } });
+    if (req.session.cart) {
+      console.log('getting from SESSION');
+      res.json(req.session.cart);
+    } else if (req.user) {
+      const cart = await Cart.findAll({ where: { userId: req.user.id } });
+      req.session.cart = cart.data;
       res.json(cart);
+    } else {
+      req.session.cart = [];
+      res.json(req.session.cart);
     }
   } catch (err) {
     next(err);

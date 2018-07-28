@@ -22,6 +22,8 @@ class Cart extends Component {
   }
 
   componentDidMount() {
+    this.props.getCart();
+
     let products = [];
     if (this.props.cart.length) {
       this.props.cart.forEach(item => {
