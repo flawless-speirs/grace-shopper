@@ -41,7 +41,7 @@ const creators = [
 
 export const HomePage = props => {
   return (
-    <div className="container-fluid text-center">
+    <div className="container-fluid text-center profile-bg">
       <h1 className="cool-header">Wubba Lubba Dub Dub!</h1>
       <div className="row">
         {creators.map(creator => (

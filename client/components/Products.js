@@ -14,7 +14,7 @@ class Products extends Component {
 
   render() {
     return (
-      <div className="container-fluid text-center">
+      <div className="container-fluid text-center all-products-bg">
         <h1>Products</h1>
         <div className="row all-products-margin">
           {this.props.products.map(product => {
