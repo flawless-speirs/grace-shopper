@@ -53,8 +53,8 @@ form div {
 
 .btn {
   flex: 1 1 auto;
-  margin: 15px 10px 8px 8px;
-  padding: 9px;
+  margin: 1vw 1vw;
+  padding: 1vw;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
@@ -84,23 +84,62 @@ form div {
 .navbar-btns {
   position: relative;
   top: 50%;
-  transform: translateY(9vw);
+  transform: translateY(4vw);
+}
+
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: rgba(136, 175, 162, 0.5);
+  z-index: 3;
 }
 
 .profile-card {
-  background-color: #c0c6d1;
-    margin: 3vw auto;
-    padding: 5vw 2vw;
-    width: 30vw;
+  margin: 3vw auto;
+  padding: 5vw 2vw;
+  width: 30vw;
+}
+
+.profile-bg {
+  background-color: rgb(234, 241, 255, 0.95);
+  margin: 5vw 5vw;
+  padding: 1vw 1vw;
+  width: 90vw;
+  border-radius: 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.all-products-bg {
+  background-color: rgb(234, 241, 255, 0.95);
+  margin: 5vw 5vw;
+  padding: 1vw 1vw;
+  width: 90vw;
+  border-radius: 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.single-product-bg {
+  background-color: rgb(234, 241, 255, 0.95);
+  margin: 5vw 5vw;
+  padding: 4vw 4vw;
+  width: 90vw;
+  border-radius: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .form-card {
   background-color: #c0c6d1;
-  margin: 10px auto;
-  padding: 20px 10px;
-  width: 50%;
+  margin: 5vw auto;
+  padding: 1vw 1vw 5vw 1vw;
+  width: 45vw;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 1vw;
+}
+
+.form-control {
+  text-align: center;
 }
 
 .product-img {
@@ -109,15 +148,15 @@ form div {
 }
 
 .product-card {
-  background-color: #c0c6d1;
-  margin: 2vw 4vw;
+  background-color: #9ce2c2;
+  margin: 2vw 3.5vw;
   padding: 2vw 0vw;
-  width: 4vw;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 1vw;
 }
 
 .product-row-card {
-  background-color: #c0c6d1;
+  background-color: #a8cfd4;
   margin: 25px 30px;
   padding: 20px 40px 20px 0px;
   width: 95%;
@@ -125,16 +164,17 @@ form div {
 }
 
 .product-table-head {
-  background-color: #8ca4cf;
-  margin: 25px 30px;
-  padding: 20px 40px 20px 0px;
+  background-color: rgba(226, 255, 189, 0.95);
+  margin: 5vw 2vw;
+  padding: 3vw 3vw 3vw 2vw;
   width: 95%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 1vw;
 }
 
-.profile-card:hover {
+/* .profile-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+} */
 
 .cool-header {
   color: #37daf9;

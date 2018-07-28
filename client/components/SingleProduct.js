@@ -22,12 +22,12 @@ class SingleProduct extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid single-product-bg">
         <div className="row">
-          <div className="product-image col-4 text-center">
+          <div className="product-image text-center">
             <img src={this.props.product.imageUrl} />
           </div>
-          <div className="col-8">
+          <div className="">
             <div className="product-name">{this.props.product.name}</div>
             <div className="product-price">${this.props.product.price}</div>
             <div className="product-description">

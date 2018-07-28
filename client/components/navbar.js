@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, userEmail }) => (
-  <div>
+  <div className="sticky">
     {/* <Link to="/" className="btn home-btn">The Rick and Morty Store</Link> */}
     <Link to="/">
       <img src={window.location.origin + '/logo.png'} className="logo" />
