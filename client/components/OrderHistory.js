@@ -8,7 +8,6 @@ class OrderHistory extends Component {
   }
 
   render() {
-    console.log('CURRENT USER: ', this.props.user);
     return this.props.user.orders ? (
       <div>
         {this.props.user.orders.map(order => {
