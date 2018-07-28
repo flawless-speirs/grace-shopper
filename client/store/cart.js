@@ -11,8 +11,9 @@ const GET_CART = 'GET_CART';
 
 const addProduct = cart => ({ type: ADD_PRODUCT, cart });
 const removeProduct = cart => ({ type: REMOVE_PRODUCT, cart });
-const saveCart = () => ({ type: SAVE_CART });
+const saveCart = cart => ({ type: SAVE_CART, cart });
 const getCart = cart => ({ type: GET_CART, cart });
+// should be called loadCart
 
 // THUNKS
 
@@ -38,19 +39,15 @@ export const removeFromCart = id => (dispatch, getState) => {
   }
 };
 
-export const sendToDB = () => async (dispatch, getState) => {
-  const cart = getState().cart;
-  await axios.put('/api/carts', cart);
-  dispatch(saveCart());
+export const getMyCart = () => async dispatch => {
+  const cart = await axios.get('/api/carts');
+  dispatch(getCart(cart.data));
 };
 
-export const getFromDB = () => async dispatch => {
-  const cart = await axios.get('/api/carts');
-  let cartState = [];
-  cart.data.forEach(item => {
-    cartState.push({ productId: item.productId, quantity: item.quantity });
-  });
-  dispatch(getCart(cartState));
+export const saveMyCart = () => async (dispatch, getState) => {
+  const cart = getState().cart;
+  await axios.put('/api/carts', cart);
+  dispatch(saveCart(cart));
 };
 
 export default function(state = [], action) {
@@ -59,9 +56,10 @@ export default function(state = [], action) {
       return action.cart;
     case REMOVE_PRODUCT:
       return action.cart;
-    case SAVE_CART:
-      return [];
     case GET_CART:
+      return action.cart;
+    // this gives error if changes to action.cart because cart is undefined
+    case SAVE_CART:
       return action.cart;
     default:
       return state;

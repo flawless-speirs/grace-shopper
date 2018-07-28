@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from '../history';
-import { sendToDB as sendCartToDB, getFromDB as getCartFromDB } from './cart';
+import { saveMyCart } from './cart';
 
 /**
  * ACTION TYPES
@@ -26,7 +26,6 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
     dispatch(getUser(res.data || defaultUser));
-    dispatch(getCartFromDB());
   } catch (err) {
     console.error(err);
   }
@@ -42,7 +41,6 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data));
-    dispatch(getCartFromDB());
     history.push('/home');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
@@ -51,7 +49,7 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    await dispatch(sendCartToDB());
+    await dispatch(saveMyCart());
     await axios.post('/auth/logout');
     dispatch(removeUser());
     history.push('/login');

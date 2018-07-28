@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
-import CheckoutForm from './CheckoutForm';
-import { Elements } from 'react-stripe-elements';
 import { products as getProducts } from '../store/products';
-import { getFromDB, addToCart, removeFromCart } from '../store/cart';
+import { getMyCart, addToCart, removeFromCart } from '../store/cart';
 
 /**
  * COMPONENT
@@ -15,25 +13,13 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = { products: [] };
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
   }
 
-  async handleRemove(evt, id) {
-    evt.preventDefault();
-    await this.props.removeFromCart(id);
-    this.forceUpdate();
-  }
-
-  async handleAdd(evt, id) {
-    evt.preventDefault();
-    await this.props.addToCart(id);
-    this.forceUpdate();
-  }
-
+  // REVIEW THIS CODE
   async componentDidMount() {
-    // await this.props.retrieveProducts();
-    // await this.props.getCart();
+    await this.props.retrieveProducts();
+    await this.props.getCart();
+
     let products = [];
     if (this.props.cart.length) {
       this.props.cart.forEach(item => {
@@ -68,11 +54,7 @@ class Cart extends Component {
           {products.map(product => {
             return (
               <div key={product.id}>
-                <ProductRow
-                  product={product}
-                  handleAdd={this.handleAdd}
-                  handleRemove={this.handleRemove}
-                />
+                <ProductRow product={product} />
               </div>
             );
           })}
@@ -83,7 +65,7 @@ class Cart extends Component {
         </div>
       </div>
     ) : (
-      <div>Nothing in your cart yet</div>
+      <div className="text-center">There is nothing in your cart yet</div>
     );
   }
 }
@@ -99,7 +81,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(getProducts()),
-  getCart: () => dispatch(getFromDB()),
+  getCart: () => dispatch(getMyCart()),
   addToCart: id => dispatch(addToCart(id)),
   removeFromCart: id => dispatch(removeFromCart(id)),
 });
