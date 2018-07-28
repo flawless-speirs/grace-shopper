@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const { Product } = require('../db/models');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const Strategy = require('passport-http').BasicStrategy;
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
