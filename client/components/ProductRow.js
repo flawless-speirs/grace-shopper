@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { addToCart, removeFromCart } from '../store/cart';
+import { addToCart, removeFromCart, saveMyCart } from '../store/cart';
 
 /**
  * COMPONENT
@@ -26,8 +25,6 @@ class ProductRow extends Component {
     this.setState(prevState => {
       return { ...prevState, quantity: prevState.quantity + 1 };
     });
-    // this.props.product.quantity++;
-    // this.forceUpdate();
   }
 
   async handleRemove(evt) {
@@ -39,8 +36,6 @@ class ProductRow extends Component {
         return { ...prevState, quantity: prevState.quantity - 1 };
       });
     }
-    // this.props.product.quantity--
-    // this.forceUpdate();
   }
 
   render() {
@@ -79,11 +74,9 @@ class ProductRow extends Component {
  * CONTAINER
  */
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = dispatch => ({
   addToCart: id => dispatch(addToCart(id)),
   removeFromCart: id => dispatch(removeFromCart(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductRow);
+export default connect(null, mapDispatchToProps)(ProductRow);
