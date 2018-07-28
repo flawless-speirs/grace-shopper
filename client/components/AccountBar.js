@@ -6,12 +6,11 @@ import OrderHistory from './OrderHistory';
 // import store from '../store';
 
 const AccountBar = props => {
-  console.log("THIS IS THE USER'S NAME", props.match);
   return (
     <div>
       <div>Welcome {props.name}</div>
       <div>
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile">Change Password</Link>
         <Link to="/orders">Order History</Link>
       </div>
     </div>

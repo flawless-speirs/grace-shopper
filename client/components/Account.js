@@ -16,6 +16,7 @@ class Account extends Component {
         <BrowserRouter>
           <div>
             <AccountBar />
+            **Account features in beta**
             <Route path="/profile" component={AccountPreferences} />
             <Route path="/orders" component={OrderHistory} />
           </div>
