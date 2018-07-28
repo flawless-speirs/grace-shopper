@@ -22,6 +22,7 @@ class ProductRow extends Component {
     evt.preventDefault();
     await this.props.addToCart(this.props.product.id);
     this.props.saveCart();
+    await this.props.updateTotal(this.props.product.price);
     this.setState(prevState => {
       return { ...prevState, quantity: prevState.quantity + 1 };
     });
@@ -32,6 +33,7 @@ class ProductRow extends Component {
     if (this.state.quantity > 0) {
       await this.props.removeFromCart(this.props.product.id);
       this.props.saveCart();
+      await this.props.updateTotal(-1 * this.props.product.price);
       this.setState(prevState => {
         return { ...prevState, quantity: prevState.quantity - 1 };
       });
@@ -41,7 +43,7 @@ class ProductRow extends Component {
   render() {
     const product = this.state;
     return (
-      <div className="container-fluid text-center">
+      <div className="container-fluid text-center product-row-card">
         <div className="row text-center">
           <div className="col-4">
             {' '}

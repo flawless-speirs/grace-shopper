@@ -8,7 +8,7 @@ export default function Creator(props) {
   const urlArray = props.creator.urlArray;
   return (
     <div>
-      <div className="profile">
+      <div className="profile profile-card">
         <div className="headshot">
           <img className="profile-picture" src={imageUrl} />
         </div>

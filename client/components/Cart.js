@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
 import { products as getProducts } from '../store/products';
-import { getMyCart, addToCart, removeFromCart } from '../store/cart';
+import { getMyCart } from '../store/cart';
+import { updateTotal } from '../store/total';
 
 /**
  * COMPONENT
@@ -13,9 +14,13 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = { products: [] };
+    this.updateTotal = this.updateTotal.bind(this);
   }
 
-  // REVIEW THIS CODE
+  updateTotal(amount) {
+    this.props.updateTotal(amount);
+  }
+
   async componentDidMount() {
     await this.props.retrieveProducts();
     await this.props.getCart();
@@ -44,7 +49,7 @@ class Cart extends Component {
     const products = this.state.products;
     return products.length ? (
       <div>
-        <div className="container-fluid text-center">
+        <div className="container-fluid text-center product-table-head">
           <div className="row text-center">
             <div className="col-4" />
             <div className="col-2"> Product </div>
@@ -54,11 +59,14 @@ class Cart extends Component {
           {products.map(product => {
             return (
               <div key={product.id}>
-                <ProductRow product={product} />
+                <ProductRow
+                  product={product}
+                  updateTotal={this.props.updateTotal}
+                />
               </div>
             );
           })}
-          <div> Total </div>
+          <div> Total: {this.props.total} </div>
           <Link to="/cart/checkout" className="btn btn-warning">
             Checkout
           </Link>
@@ -77,13 +85,13 @@ class Cart extends Component {
 const mapStateToProps = state => ({
   cart: state.cart,
   products: state.products,
+  total: state.total,
 });
 
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(getProducts()),
   getCart: () => dispatch(getMyCart()),
-  addToCart: id => dispatch(addToCart(id)),
-  removeFromCart: id => dispatch(removeFromCart(id)),
+  updateTotal: amount => dispatch(updateTotal(amount)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
