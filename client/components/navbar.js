@@ -6,10 +6,11 @@ import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <Link to="/" className="btn home-btn">The Rick and Morty Store</Link>
+    {/* <Link to="/" className="btn home-btn">The Rick and Morty Store</Link> */}
+    <Link to="/" ><img src={window.location.origin + '/logo.png'} className="logo"/></Link>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="navbar-btns">
           {/* The navbar will show these links after you log in */}
           <Link to="/home" className="btn nav-btn">Home</Link>
           <Link to="/products" className="btn nav-btn">All Products</Link>
@@ -19,7 +20,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to="/cart" className="btn nav-btn cart-btn">Cart</Link>
         </div>
       ) : (
-        <div>
+        <div className="navbar-btns">
           {/* The navbar will show these links before you log in */}
           <Link to="/login" className="btn nav-btn" >Login</Link>
           <Link to="/signup" className="btn nav-btn">Sign Up</Link>
@@ -38,6 +39,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    userEmail: state.user.email,
   };
 };
 

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
 import { products as getProducts } from '../store/products';
-import { getFromDB, addToCart, removeFromCart } from '../store/cart';
-import { updateTotal } from '../store/total';
+import { getMyCart, updateSession } from '../store/cart';
+import { computeTotal, updateTotal } from '../store/total';
 
 /**
  * COMPONENT
@@ -13,7 +13,7 @@ import { updateTotal } from '../store/total';
 class Cart extends Component {
   constructor() {
     super();
-    this.state = { products: [] };
+    this.state = { productsInCart: [] };
     this.updateTotal = this.updateTotal.bind(this);
   }
 
@@ -21,15 +21,23 @@ class Cart extends Component {
     this.props.updateTotal(amount);
   }
 
-  componentDidMount() {
-    let products = [];
+  async componentDidMount() {
+    await this.props.retrieveProducts();
+    if (!this.props.cart.length) {
+      await this.props.getCart();
+    }
+    if (this.props.cart.length && !this.props.total) {
+      await this.props.computeTotal();
+    }
+
+    let productsInCart = [];
     if (this.props.cart.length) {
       this.props.cart.forEach(item => {
         const toAdd = this.props.products.find(
           product => item.productId === product.id
         );
         if (toAdd) {
-          products.push({
+          productsInCart.push({
             id: toAdd.id,
             name: toAdd.name,
             price: toAdd.price,
@@ -39,12 +47,15 @@ class Cart extends Component {
         }
       });
     }
-    // this.props.updateTotal();
-    this.setState({ products });
+    this.setState({ productsInCart });
+  }
+
+  async componentWillUnmount() {
+    await this.props.updateSession();
   }
 
   render() {
-    const products = this.state.products;
+    const products = this.state.productsInCart;
     return products.length ? (
       <div>
         <div className="container-fluid text-center product-table-head">
@@ -57,7 +68,10 @@ class Cart extends Component {
           {products.map(product => {
             return (
               <div key={product.id}>
-                <ProductRow product={product} updateTotal={this.updateTotal} />
+                <ProductRow
+                  product={product}
+                  updateTotal={this.props.updateTotal}
+                />
               </div>
             );
           })}
@@ -68,7 +82,7 @@ class Cart extends Component {
         </div>
       </div>
     ) : (
-      <div>Nothing in your cart yet</div>
+      <div className="text-center">There is nothing in your cart yet</div>
     );
   }
 }
@@ -85,10 +99,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(getProducts()),
-  getCart: () => dispatch(getFromDB()),
-  addToCart: id => dispatch(addToCart(id)),
-  removeFromCart: id => dispatch(removeFromCart(id)),
+  getCart: () => dispatch(getMyCart()),
+  computeTotal: () => dispatch(computeTotal()),
   updateTotal: amount => dispatch(updateTotal(amount)),
+  updateSession: () => dispatch(updateSession()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
