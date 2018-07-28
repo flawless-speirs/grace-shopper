@@ -42,7 +42,7 @@ router.put('/', async (req, res, next) => {
           });
         }
       });
-      res.status(204).end();
+      res.status(200).end();
     } else {
       req.session.cart = req.body;
       res.sendStatus(200);
