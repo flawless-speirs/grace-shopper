@@ -13,7 +13,9 @@ const AccountPreferences = props => {
         <input type="text" name="password" />
         <br />
       </form>
-      <button type='submit', onClick={}>Submit</button>
+      <button type="submit" onClick={() => {}}>
+        Submit
+      </button>
     </div>
   );
 };
