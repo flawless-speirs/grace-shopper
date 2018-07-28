@@ -63,7 +63,6 @@ export const createOrder = () => async (dispatch, getState) => {
   cart.forEach(function(item) {
     item.orderId = orderId;
   });
-  console.log(cart);
   await axios.put('/api/carts', cart);
   dispatch(createdOrder());
   dispatch(clearCart());
