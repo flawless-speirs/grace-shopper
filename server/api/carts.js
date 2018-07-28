@@ -5,7 +5,6 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     if (req.session.cart && req.session.cart.length) {
-      console.log('getting from SESSION');
       res.json(req.session.cart);
     } else if (req.user) {
       const cart = await Cart.findAll({ where: { userId: req.user.id } });
