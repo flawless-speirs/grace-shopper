@@ -4,7 +4,16 @@
 }
 
 body {
-  font-family: sans-serif;
+  background: #b1ddcb;
+  background-size: cover;
+}
+
+.background-for-body {
+  background-image: url('./background.png');
+}
+
+nav {
+  float: right;
 }
 
 a {
@@ -25,12 +34,21 @@ form div {
   display: inline-block;
 }
 
+.center {
+  margin: auto auto;
+}
+
 .profile-picture {
-  height: 90%;
-  width: 90%;
+  height: 21vw;
+  width: 21vw;
   border-radius: 10%;
   box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.8);
   margin: 10px auto;
+}
+
+.logo {
+  width: 25vw;
+  margin-left: 4vw;
 }
 
 .btn {
@@ -60,29 +78,20 @@ form div {
 }
 
 .cart-btn {
-  margin-right: 20px;
+  margin-right: 4vw;
 }
 
-.gradient {
-  /* background: rgb(34,193,195); */
-  /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 50%, rgba(253,187,45,1) 100%); */
-  /* background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%); */
-}
-
-body {
-  background: #b1ddcb;
-  background-size: cover;
-}
-
-nav {
-  float: right;
+.navbar-btns {
+  position: relative;
+  top: 50%;
+  transform: translateY(9vw);
 }
 
 .profile-card {
   background-color: #c0c6d1;
-  margin: 15px 20px;
-  padding: 20px 10px;
-  width: 50%;
+    margin: 3vw auto;
+    padding: 5vw 2vw;
+    width: 30vw;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -101,9 +110,9 @@ nav {
 
 .product-card {
   background-color: #c0c6d1;
-  margin: 10px 20px;
-  padding: 20px 10px;
-  width: 50%;
+  margin: 2vw 4vw;
+  padding: 2vw 0vw;
+  width: 4vw;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -128,11 +137,9 @@ nav {
 }
 
 .cool-header {
-  text-shadow: 3px 3px 5px #CCCCCC;
-  color: #ecfcff;
-  text-shadow: 0 0 5px #A5F1FF, 0 0 10px #A5F1FF,
-              0 0 20px #A5F1FF, 0 0 30px #A5F1FF,
-              0 0 40px #A5F1FF;
+  color: #37daf9;
+  text-shadow: 0 0 5px #000000,0 0 10px #4be62a, 0 0 20px #A5F1FF, 0 0 30px #346d35, 0 0 40px #000000;
+  margin: 4vw 0vw;
 }
 
 .all-products-margin {
