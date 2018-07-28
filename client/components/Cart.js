@@ -47,7 +47,7 @@ class Cart extends Component {
     const products = this.state.products;
     return products.length ? (
       <div>
-        <div className="container-fluid text-center">
+        <div className="container-fluid text-center product-table-head">
           <div className="row text-center">
             <div className="col-4" />
             <div className="col-2"> Product </div>

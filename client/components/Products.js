@@ -16,13 +16,13 @@ class Products extends Component {
     return (
       <div className="container-fluid text-center">
         <h1>Products</h1>
-        <div className="row">
+        <div className="row all-products-margin">
           {this.props.products.map(product => {
             return (
-              <div className="col-4" key={product.id}>
+              <div className="col-3 product-card" key={product.id}>
                 <div>{product.name}</div>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} />
+                  <img className="product-img" src={product.imageUrl} />
                 </Link>
                 <div>${product.price}</div>
                 <br />
