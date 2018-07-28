@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    if (req.user) {
+    if (req.user && req.body.length) {
       const userId = req.user.id;
       const newCart = req.body;
       await newCart.forEach(async product => {

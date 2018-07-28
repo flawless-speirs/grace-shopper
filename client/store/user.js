@@ -7,6 +7,8 @@ import { saveMyCart } from './cart';
  */
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
+const GET_ORDERS = 'GET_ORDERS';
+const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 
 /**
  * INITIAL STATE
@@ -18,6 +20,8 @@ const defaultUser = {};
  */
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
+const getOrders = user => ({ type: GET_ORDERS, user });
+const changedPassword = user => ({ type: CHANGE_PASSWORD, user });
 
 /**
  * THUNK CREATORS
@@ -41,7 +45,8 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data));
-    history.push('/home');
+    // dispatch(getCartFromDB());
+    history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
   }
@@ -58,6 +63,24 @@ export const logout = () => async dispatch => {
   }
 };
 
+export const getPastOrders = id => async dispatch => {
+  try {
+    const userWithOrders = await axios.get(`/api/users/${id}`);
+    dispatch(getOrders(userWithOrders.data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const changePassword = (user, password) => async dispatch => {
+  try {
+    await axios.put(`/api/users/${user.id}`, { password });
+    dispatch(changedPassword(user));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 /**
  * REDUCER
  */
@@ -67,6 +90,10 @@ export default function(state = defaultUser, action) {
       return action.user;
     case REMOVE_USER:
       return defaultUser;
+    case GET_ORDERS:
+      return action.user;
+    case CHANGE_PASSWORD:
+      return action.user;
     default:
       return state;
   }

@@ -13,3 +13,5 @@ export { default as SingleProduct } from './SingleProduct';
 export { default as Cart } from './Cart';
 export { default as CheckoutForm } from './CheckoutForm';
 export { default as CheckoutPage } from './CheckoutPage';
+export { default as Account } from './Account';
+export { default as OrderHistory } from './OrderHistory';
