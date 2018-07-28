@@ -74,11 +74,12 @@ export default function(state = [], action) {
       return action.cart;
     case GET_CART:
       return action.cart;
-    case CLEAR_CART:
-      return [];
-    // this gives error if changes to action.cart because cart is undefined
     case UPDATE_SESSION:
       return action.cart;
+    case CLEAR_CART:
+      return [];
+    case CREATED_ORDER:
+      return [];
     default:
       return state;
   }
