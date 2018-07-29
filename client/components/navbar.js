@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
-const Navbar = ({ handleClick, isLoggedIn, userEmail }) => (
+const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
   <div className="sticky">
     {/* <Link to="/" className="btn home-btn">The Rick and Morty Store</Link> */}
     <Link to="/">
@@ -28,7 +28,7 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail }) => (
             Logout
           </a>
           <Link to="/cart" className="btn nav-btn cart-btn">
-            Cart
+            Cart ({itemsInCart()})
           </Link>
         </div>
       ) : (
@@ -44,7 +44,7 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail }) => (
             All Products
           </Link>
           <Link to="/cart" className="btn nav-btn cart-btn">
-            Cart
+            Cart ({itemsInCart()})
           </Link>
         </div>
       )}
@@ -60,6 +60,15 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     userEmail: state.user.email,
+    itemsInCart: () => {
+      let numItems = 0;
+      if (state.cart.length) {
+        state.cart.forEach(element => {
+        numItems += element.quantity;
+        });  
+      };
+      return numItems;
+    },
   };
 };
 
