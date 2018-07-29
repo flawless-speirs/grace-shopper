@@ -75,7 +75,7 @@ class Cart extends Component {
               </div>
             );
           })}
-          <div> Total: {this.props.total} </div>
+          <div> Total: ${this.props.total.toFixed(2)} </div>
           <Link to="/cart/checkout" className="btn btn-warning">
             Checkout
           </Link>
