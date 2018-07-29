@@ -15,6 +15,11 @@ class Cart extends Component {
     super();
     this.state = { productsInCart: [] };
     this.updateTotal = this.updateTotal.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
+  }
+
+  onRefresh() {
+    this.props.updateSession();
   }
 
   updateTotal(amount) {
@@ -47,11 +52,13 @@ class Cart extends Component {
         }
       });
     }
+    window.addEventListener('beforeunload', this.onRefresh);
     this.setState({ productsInCart });
   }
 
   async componentWillUnmount() {
     await this.props.updateSession();
+    window.removeEventListener('beforeunload', this.onRefresh);
   }
 
   render() {
