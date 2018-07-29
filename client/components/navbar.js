@@ -44,7 +44,7 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
             All Products
           </Link>
           <Link to="/cart" className="btn nav-btn cart-btn">
-            ({itemsInCart()}) Cart
+            Cart ({itemsInCart()})
           </Link>
         </div>
       )}
