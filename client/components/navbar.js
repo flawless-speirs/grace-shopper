@@ -62,9 +62,11 @@ const mapState = state => {
     userEmail: state.user.email,
     itemsInCart: () => {
       let numItems = 0;
-      state.cart.forEach(element => {
+      if (state.cart.length) {
+        state.cart.forEach(element => {
         numItems += element.quantity;
-      });
+        });  
+      };
       return numItems;
     },
   };
