@@ -28,7 +28,7 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
             Logout
           </a>
           <Link to="/cart" className="btn nav-btn cart-btn">
-            ({itemsInCart()}) Cart
+            Cart ({itemsInCart()})
           </Link>
         </div>
       ) : (
