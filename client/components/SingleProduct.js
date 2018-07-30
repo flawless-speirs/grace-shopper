@@ -37,7 +37,7 @@ class SingleProduct extends Component {
             <div className="product-image text-center">
               <img src={this.props.product.imageUrl} />
             </div>
-            <div className="">
+            <div>
               <div className="product-name">{this.props.product.name}</div>
               <div className="product-price">${this.props.product.price}</div>
               <div className="product-description">
