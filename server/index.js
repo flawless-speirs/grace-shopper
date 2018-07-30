@@ -42,53 +42,6 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-/**
- * PASSPORT AREA
- */
-
-/**
- * Boilerplate code
- */
-/**
- * End of Bilerplate
- */
-passport.use(
-  new Strategy(async function(username, password, cb) {
-    try {
-      const user = await db.models.user.findOne({
-        where: {
-          email: username,
-        },
-      });
-      if (!user.correctPassword(password)) {
-        return cb(null, false);
-      }
-      if (!user) {
-        return cb(null, false);
-      }
-      return cb(null, user);
-    } catch (err) {
-      return cb(err);
-    }
-    // db.models.user.findById(username, function(err, user) {
-    //   if (err) {
-    //     return cb(err);
-    //   }
-    //   if (!user) {
-    //     return cb(null, false);
-    //   }
-    //   if (user.password != password) {
-    //     return cb(null, false);
-    //   }
-    //   return cb(null, user);
-    // });
-  })
-);
-
-/**
- * END OF PASSPOING AREA
- */
-
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'));
