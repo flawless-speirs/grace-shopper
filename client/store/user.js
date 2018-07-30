@@ -1,6 +1,7 @@
 import axios from 'axios';
 import history from '../history';
-import { saveMyCart } from './cart';
+import { getMyCart, saveMyCart, updateSession } from './cart';
+import { updateTotal, clearTotal } from './total';
 
 /**
  * ACTION TYPES
@@ -39,13 +40,17 @@ export const auth = (email, password, method) => async dispatch => {
   let res;
   try {
     res = await axios.post(`/auth/${method}`, { email, password });
+    if (res) {
+      await dispatch(updateSession());
+      await dispatch(getMyCart());
+      await dispatch(updateTotal());
+    }
   } catch (authError) {
     return dispatch(getUser({ error: authError }));
   }
 
   try {
     dispatch(getUser(res.data));
-    // dispatch(getCartFromDB());
     history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
@@ -55,6 +60,7 @@ export const auth = (email, password, method) => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await dispatch(saveMyCart());
+    await dispatch(clearTotal());
     await axios.post('/auth/logout');
     dispatch(removeUser());
     history.push('/login');
