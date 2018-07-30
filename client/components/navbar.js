@@ -6,7 +6,6 @@ import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
   <div className="sticky">
-    {/* <Link to="/" className="btn home-btn">The Rick and Morty Store</Link> */}
     <Link to="/">
       <img src={window.location.origin + '/logo.png'} className="logo" />
     </Link>
@@ -16,9 +15,6 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
         <div className="welcome-message">Logged in as {userEmail}</div>
         <div className="navbar-btns">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home" className="btn nav-btn">
-            Home
-          </Link>
           <Link to="/products" className="btn nav-btn">
             All Products
           </Link>
