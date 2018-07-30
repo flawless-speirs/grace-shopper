@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changePassword } from '../store/user';
-import Popup from 'reactjs-popup';
 
 class AccountPreferences extends Component {
   constructor({ user, passwordError }) {
