@@ -93,7 +93,7 @@ class Cart extends Component {
           </div>
         </div>
       ) : (
-        <div className="text-center">There is nothing in your cart yet</div>
+        <div className="text-center form-card">There is nothing in your cart yet</div>
       );
     }
   }

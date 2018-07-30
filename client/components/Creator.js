@@ -25,6 +25,9 @@ export default function Creator(props) {
               );
             })} */}
           </div>
+          <a href={urlArray[0]} className="fa fa-linkedin" />
+          <a href={urlArray[1]} className="fa fa-github" />
+
         </div>
       </div>
     </div>
