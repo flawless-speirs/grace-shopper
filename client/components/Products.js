@@ -13,7 +13,17 @@ class Products extends Component {
     super();
     this.state = {
       loading: true,
+      searchValue: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ searchValue: event.target.value });
+  }
+
+  componentDidMount() {
+    this.props.retrieveProducts();
   }
 
   async componentDidMount() {
@@ -28,19 +38,45 @@ class Products extends Component {
       return (
         <div className="container-fluid text-center all-products-bg">
           <h1>Products</h1>
+          <input
+            className="form-control"
+            value={this.state.searchValue}
+            onChange={this.handleChange}
+            type="text"
+            placeholder="Search"
+          />
           <div className="row all-products-margin">
-            {this.props.products.map(product => {
-              return (
-                <div className="col-3 product-card" key={product.id}>
-                  <div>{product.name}</div>
-                  <Link to={`/products/${product.id}`}>
-                    <img className="product-img" src={product.imageUrl} />
-                  </Link>
-                  <div>${product.price}</div>
-                  <br />
-                </div>
-              );
-            })}
+            {this.state.searchValue === ''
+              ? this.props.products.map(product => {
+                  return (
+                    <div className="col-3 product-card" key={product.id}>
+                      <div>{product.name}</div>
+                      <Link to={`/products/${product.id}`}>
+                        <img className="product-img" src={product.imageUrl} />
+                      </Link>
+                      <div>${product.price}</div>
+                      <br />
+                    </div>
+                  );
+                })
+              : this.props.products
+                  .filter(product => {
+                    return product.name
+                      .toLowerCase()
+                      .includes(this.state.searchValue.toLowerCase());
+                  })
+                  .map(product => {
+                    return (
+                      <div className="col-3 product-card" key={product.id}>
+                        <div>{product.name}</div>
+                        <Link to={`/products/${product.id}`}>
+                          <img className="product-img" src={product.imageUrl} />
+                        </Link>
+                        <div>${product.price}</div>
+                        <br />
+                      </div>
+                    );
+                  })}
           </div>
         </div>
       );
