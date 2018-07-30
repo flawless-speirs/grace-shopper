@@ -12,8 +12,9 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
     </Link>
     <nav>
       {isLoggedIn ? (
+        <React.Fragment>
+        <div className="welcome-message">Logged in as {userEmail}</div>
         <div className="navbar-btns">
-          Logged in as {userEmail}
           {/* The navbar will show these links after you log in */}
           <Link to="/home" className="btn nav-btn">
             Home
@@ -31,6 +32,7 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
             Cart ({itemsInCart()})
           </Link>
         </div>
+        </React.Fragment>
       ) : (
         <div className="navbar-btns">
           {/* The navbar will show these links before you log in */}
@@ -65,7 +67,7 @@ const mapState = state => {
       if (state.cart.length) {
         state.cart.forEach(element => {
         numItems += element.quantity;
-        });  
+        });
       };
       return numItems;
     },

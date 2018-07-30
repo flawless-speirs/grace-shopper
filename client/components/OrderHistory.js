@@ -8,16 +8,23 @@ class OrderHistory extends Component {
   }
 
   render() {
+    const dateParse = (str) => {
+      const arr = str.split('-')
+      const year = arr[0]
+      const month = arr[1]
+      const day = arr[2].slice(0,2)
+      return `${month}-${day}-${year}`
+    }
     return this.props.user.orders ? (
       <div>
         {this.props.user.orders.map(order => {
           return (
             <div key={order.id}>
               <hr />
-              <div>TOTAL: {order.amount}</div>
-              <div>DATE: {order.createdAt}</div>
-              <div>SHIPPED: {order.sent}</div>
-              <div>DELIVERED: {order.received}</div>
+              <div>Total: ${order.amount}</div>
+              <div>Date: {dateParse(order.createdAt)}</div>
+              <div>Shipped: {order.sent}</div>
+              <div>Status: {order.received}</div>
               <hr />
             </div>
           );
