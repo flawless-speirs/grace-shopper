@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
+import LoadingScreen from './LoadingScreen';
 import { products as getProducts } from '../store/products';
 import { getMyCart, updateSession } from '../store/cart';
 import { computeTotal, updateTotal } from '../store/total';
@@ -13,7 +14,7 @@ import { computeTotal, updateTotal } from '../store/total';
 class Cart extends Component {
   constructor() {
     super();
-    this.state = { productsInCart: [] };
+    this.state = { productsInCart: [], loading: true };
     this.updateTotal = this.updateTotal.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
   }
@@ -53,7 +54,7 @@ class Cart extends Component {
       });
     }
     window.addEventListener('beforeunload', this.onRefresh);
-    this.setState({ productsInCart });
+    this.setState({ productsInCart, loading: false });
   }
 
   async componentWillUnmount() {
@@ -62,35 +63,39 @@ class Cart extends Component {
   }
 
   render() {
-    const products = this.state.productsInCart;
-    return products.length ? (
-      <div>
-        <div className="container-fluid text-center product-table-head">
-          <div className="row text-center">
-            <div className="col-4" />
-            <div className="col-2"> Product </div>
-            <div className="col-2"> Price </div>
-            <div className="col-1"> Quantity </div>
+    if (this.state.loading) {
+      return <LoadingScreen />;
+    } else {
+      const products = this.state.productsInCart;
+      return products.length ? (
+        <div>
+          <div className="container-fluid text-center product-table-head">
+            <div className="row text-center">
+              <div className="col-4" />
+              <div className="col-2"> Product </div>
+              <div className="col-2"> Price </div>
+              <div className="col-1"> Quantity </div>
+            </div>
+            {products.map(product => {
+              return (
+                <div key={product.id}>
+                  <ProductRow
+                    product={product}
+                    updateTotal={this.props.updateTotal}
+                  />
+                </div>
+              );
+            })}
+            <div> Total: ${this.props.total.toFixed(2)} </div>
+            <Link to="/cart/checkout" className="btn btn-warning">
+              Checkout
+            </Link>
           </div>
-          {products.map(product => {
-            return (
-              <div key={product.id}>
-                <ProductRow
-                  product={product}
-                  updateTotal={this.props.updateTotal}
-                />
-              </div>
-            );
-          })}
-          <div> Total: ${this.props.total.toFixed(2)} </div>
-          <Link to="/cart/checkout" className="btn btn-warning">
-            Checkout
-          </Link>
         </div>
-      </div>
-    ) : (
-      <div className="text-center">There is nothing in your cart yet</div>
-    );
+      ) : (
+        <div className="text-center">There is nothing in your cart yet</div>
+      );
+    }
   }
 }
 

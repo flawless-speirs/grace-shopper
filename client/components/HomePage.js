@@ -7,7 +7,7 @@ const creators = [
     name: 'Andrew Miller',
     title: 'Fullstack Software Engineer',
     description: 'Math, Amherst.',
-    imageUrl: 'https://avatars3.githubusercontent.com/u/31660392?s=400&v=4',
+    imagePath: './Andrew.jpg',
     urlArray: [],
   },
   {
@@ -15,8 +15,7 @@ const creators = [
     name: 'Rick Terry',
     title: 'Fullstack Software Engineer',
     description: 'Computer Science, Amherst, ⚾.',
-    imageUrl:
-      'http://athletics.amherst.edu/sports/bsb/2012-13/photos/0001/Terry.jpg?max_width=300',
+    imagePath: './Rick.jpg',
     urlArray: [],
   },
   {
@@ -24,8 +23,7 @@ const creators = [
     name: 'Michael Lin',
     title: 'Fullstack Software Engineer',
     description: 'Math, Binghamton.',
-    imageUrl:
-      'https://media.licdn.com/dms/image/C4D03AQGK98hiiIsXZQ/profile-displayphoto-shrink_800_800/0?e=1538006400&v=beta&t=y7wRzUurB4b9G7PY4pGzMyx74pfpWi6EaXOuMmvaTxQ',
+    imagePath: './Michael.jpg',
     urlArray: [],
   },
   {
@@ -33,13 +31,12 @@ const creators = [
     name: 'Kevin Ho',
     title: 'Fullstack Software Engineer',
     description: 'Computer Science, Fordham, 🏀.',
-    imageUrl:
-      'https://static1.squarespace.com/static/58daab3d1b10e3e2a2358f0e/59e001f51f318d21e6e6c18c/59e001f8f14aa1fa521a9c75/1518156986151/AAEAAQAAAAAAAAtCAAAAJDgzMDIxZjAxLTczNGItNDQ5YS1iMTQ1LWVjN2M3OWJiNjI3ZQ.jpg',
+    imagePath: 'Kevin.jpg',
     urlArray: [],
   },
 ];
 
-export const HomePage = props => {
+export const HomePage = () => {
   return (
     <div className="container-fluid text-center profile-bg">
       <h1 className="cool-header">Wubba Lubba Dub Dub!</h1>
