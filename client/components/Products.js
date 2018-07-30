@@ -2,36 +2,81 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { products } from '../store/products';
 import { Link } from 'react-router-dom';
+import LoadingScreen from './LoadingScreen';
 
 /**
  * COMPONENT
  */
 
 class Products extends Component {
-  componentDidMount() {
-    this.props.retrieveProducts();
+  constructor() {
+    super();
+    this.state = {
+      loading: true,
+      searchValue: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ searchValue: event.target.value });
+  }
+
+  async componentDidMount() {
+    await this.props.retrieveProducts();
+    this.setState({ loading: false });
   }
 
   render() {
-    return (
-      <div className="container-fluid text-center">
-        <h1>Products</h1>
-        <div className="row">
-          {this.props.products.map(product => {
-            return (
-              <div className="col-4" key={product.id}>
-                <div>{product.name}</div>
-                <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} />
-                </Link>
-                <div>${product.price}</div>
-                <br />
-              </div>
-            );
-          })}
+    if (this.state.loading) {
+      return <LoadingScreen />;
+    } else {
+      return (
+        <div className="container-fluid text-center all-products-bg">
+          <h1>Products</h1>
+          <input
+            className="form-control"
+            value={this.state.searchValue}
+            onChange={this.handleChange}
+            type="text"
+            placeholder="Search"
+          />
+          <div className="row all-products-margin">
+            {this.state.searchValue === ''
+              ? this.props.products.map(product => {
+                  return (
+                    <div className="col-3 product-card" key={product.id}>
+                      <div>{product.name}</div>
+                      <Link to={`/products/${product.id}`}>
+                        <img className="product-img" src={product.imageUrl} />
+                      </Link>
+                      <div>${product.price}</div>
+                      <br />
+                    </div>
+                  );
+                })
+              : this.props.products
+                  .filter(product => {
+                    return product.name
+                      .toLowerCase()
+                      .includes(this.state.searchValue.toLowerCase());
+                  })
+                  .map(product => {
+                    return (
+                      <div className="col-3 product-card" key={product.id}>
+                        <div>{product.name}</div>
+                        <Link to={`/products/${product.id}`}>
+                          <img className="product-img" src={product.imageUrl} />
+                        </Link>
+                        <div>${product.price}</div>
+                        <br />
+                      </div>
+                    );
+                  })}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

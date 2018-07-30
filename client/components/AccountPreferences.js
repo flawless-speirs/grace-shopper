@@ -1,70 +1,74 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { newPassword, auth } from '../store';
+import { changePassword } from '../store/user';
 
 class AccountPreferences extends Component {
   constructor() {
     super();
-    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      currentPassword: '',
+      password: '',
+      confirmPassword: '',
+    };
+  }
+  handleSubmit(evt) {
+    evt.preventDefault();
+    if (this.state.password === this.state.confirmPassword) {
+      this.props.changePassword(this.props.user, this.state.password);
+    }
   }
 
-  handleChange(event) {
-    event.preventDefault();
-    console.log('test here!!!');
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-    console.log(this.state);
-  }
-
-  async handleSubmit(event) {
-    'inside handle submit!';
-    event.preventDefault();
-    await this.props.updateUser();
+  handleChange(evt) {
+    if (evt.target.name === 'current-password') {
+      this.setState({ currentPassword: evt.target.value });
+    }
+    if (evt.target.name === 'confirm-password') {
+      this.setState({ confirmPassword: evt.target.value });
+    }
+    if (evt.target.name === 'password') {
+      this.setState({ password: evt.target.value });
+    }
   }
 
   render() {
     return (
       <div>
-        <form name="test">
-          <label htmlFor="email">email address:</label>
-          <input onChange={this.handleChange} type="text" name="email" />
+        <form>
+          <label name="password">Current password:</label>
+          <input type="text" name="current-password" />
           <br />
-
-          <label htmlFor="currentPassword">current password:</label>
+          <label name="password">New password:</label>
+          <input onChange={this.handleChange} type="text" name="password" />
+          <br />
+          <label name="confirm-password">Confirm password:</label>
           <input
             onChange={this.handleChange}
             type="text"
-            name="currentPassword"
+            name="confirm-password"
           />
           <br />
-
-          <label htmlFor="newPassword">new password:</label>
-          <input onChange={this.handleChange} type="text" name="new-password" />
-          <br />
         </form>
-        <button onClick={this.handleSubmit} type="submit">
-          Submit
+        <button type="submit" onClick={this.handleSubmit}>
+          Change Password
         </button>
       </div>
     );
   }
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     user: state.user,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
-    updateUser: (email, newPassword, currentPassword) => {
-      dispatch(newPassword(email, newPassword, currentPassword));
-    },
+    changePassword: (user, password) =>
+      dispatch(changePassword(user, password)),
   };
 };
 
-export default connect(mapState, mapDispatch)(AccountPreferences);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountPreferences);

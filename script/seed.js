@@ -21,8 +21,10 @@ async function seed() {
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
   const users = await Promise.all([
-    User.create({ email: 'cody@email.com', password: '123' }),
-    User.create({ email: 'murphy@email.com', password: '123' }),
+    User.create({ email: 'kevin@email.com', password: '123' }),
+    User.create({ email: 'andrew@email.com', password: '123' }),
+    User.create({ email: 'michael@email.com', password: '123' }),
+    User.create({ email: 'rick@email.com', password: '123' }),
     User.create({ email: 'server@server.com', password: '123' }),
   ]);
 
@@ -60,10 +62,70 @@ async function seed() {
       price: 0.01,
     }),
     Product.create({
+      name: 'Blim Blam',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/50.jpeg',
+      description: `Blim Blam is a Korblock murderer who eats babies, and apparently traveled to Earth to do so. He was eventually captured and chained up by Rick in an attempt to cure Blim Blam's "space AIDS" in order to become rich selling the cure. He was discovered by Beth and Jerry, however, and the two's bickering annoyed Blim Blam to the point that he broke free, berated the two by using a translation device Rick had (as he could only speak in alien beforehand), and then left promising never to return to Earth.`,
+      price: 100000.0,
+    }),
+    Product.create({
+      name: 'Cronenberg Rick',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/82.jpeg',
+      description: `Cronenberg Rick is a version of Rick Sanchez who originates from Cronenberg World. In the episode "Rick Potion No. 9" Cronenberg Rick and Cronenberg Morty take a portal to Earth C-137 after they discovered that C-137 Rick turned the entire population of Earth, except Beth, Jerry and Summer, into Cronenbergs. Cronenberg Rick and Cronenberg Morty did this because they turned the entire population of Cronenberg World into normal Humans and wanted a world where they would fit in.`,
+      price: 1000.0,
+    }),
+    Product.create({
+      name: 'Cronenberg Morty',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/83.jpeg',
+      description: `Cronenberg Morty is a version of Morty Smith who originates from Cronenberg World. In the episode "Rick Potion No. 9", Cronenberg Rick and Cronenberg Morty take a portal to Earth C-137 after they discovered that C-137 Rick turned the entire population of Earth, except Beth, Jerry and Summer, into Cronenbergs. Cronenberg Rick and Cronenberg Morty did this because they turned the entire population of Cronenberg World into normal Humans and wanted to live in a world where they would fit in.`,
+      price: 5.0,
+    }),
+    Product.create({
+      name: 'Hamurai',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/154.jpeg',
+      description: `Hamurai was a false character, portrayed by the Alien Parasites. He was mentioned to have gone to college with Reverse Giraffe.`,
+      price: 75.0,
+    }),
+    Product.create({
+      name: 'Ice-T',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/162.jpeg',
+      description: `Ice-T (also known as Tracy Lauren Marrow), is a well-known human rapper on Earth, who is actually an ageless wandering alien from the dawn of time known as Water-T.`,
+      price: 8000.0,
+    }),
+    Product.create({
+      name: 'Morty Jr.',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/230.jpeg',
+      description: `Mortimer "Morty" Smith Jr. is Morty Smith's son. Morty Jr. grew from an infant to a full adult at a hyper-increased rate, allowing him to quickly outgrow his father.`,
+      price: 799.99,
+    }),
+    Product.create({
+      name: 'Mr. Beauregard',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/236.jpeg',
+      description: `Mr. Beauregard is the Smith family butler and saves the family and Cousin Nicky when they are captured by a Nazi. He helps Jerry Smith dislodge his head when it's stuck between the railings on the stairs, as well as attends Morty Smith's dance as his date. Like many of the other characters in the episode, he is a persona created by the Alien Parasites.`,
+      price: 19.99,
+    }),
+    Product.create({
+      name: 'Mr. Meeseeks',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/242.jpeg',
+      description: `Mr. Meeseeks (voiced by Justin Roiland) is the name of all the Meeseeks summoned by activating a Meeseeks Box. The Meeseeks appear in the fifth episode of the first season, "Meeseeks and Destroy". They are known to inhabit planets across the universe.`,
+      price: 600.0,
+    }),
+    Product.create({
       name: 'Pickle Rick',
       imageUrl: 'https://rickandmortyapi.com/api/character/avatar/265.jpeg',
       description: `Pickle Rick is a version of Rick Sanchez. His only functional body parts are his eyes and a mouth. This situation forces him to create gruesome means of transportation.`,
       price: 9999999.0,
+    }),
+    Product.create({
+      name: 'Shnoopy Bloopers',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/320.jpeg',
+      description: `Shnoopy Bloopers is an alien friend of Rick's who made his first appearance in "The Whirly Dirly Conspiracy." He is the owner of an unnamed restaurant in the Immortality Field Resort.`,
+      price: 27.5,
+    }),
+    Product.create({
+      name: 'Squanchy',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/331.jpeg',
+      description: `Squanchy is a cat-like anthropomorphic creature that was invited to Rick and Summer's party in "Ricksy Business". He is a recurring character in Rick and Morty, and very good friends with Rick, sharing his love for alcohol.`,
+      price: 2.0,
     }),
   ]);
   // Wowzers! We can even `await` on the right-hand side of the assignment operator

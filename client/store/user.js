@@ -1,13 +1,14 @@
 import axios from 'axios';
 import history from '../history';
-import { sendToDB as sendCartToDB, getFromDB as getCartFromDB } from './cart';
+import { saveMyCart } from './cart';
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
-const UPDATE_PASS = 'UPDATE_PASS';
+const GET_ORDERS = 'GET_ORDERS';
+const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 
 /**
  * INITIAL STATE
@@ -19,7 +20,8 @@ const defaultUser = {};
  */
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
-const updatePass = () => ({ type: UPDATE_PASS, user });
+const getOrders = user => ({ type: GET_ORDERS, user });
+const changedPassword = user => ({ type: CHANGE_PASSWORD, user });
 
 /**
  * THUNK CREATORS
@@ -56,7 +58,6 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
     dispatch(getUser(res.data || defaultUser));
-    dispatch(getCartFromDB());
   } catch (err) {
     console.error(err);
   }
@@ -72,7 +73,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data));
-    dispatch(getCartFromDB());
+    // dispatch(getCartFromDB());
     history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
@@ -81,10 +82,28 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    await dispatch(sendCartToDB());
+    await dispatch(saveMyCart());
     await axios.post('/auth/logout');
     dispatch(removeUser());
     history.push('/login');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getPastOrders = id => async dispatch => {
+  try {
+    const userWithOrders = await axios.get(`/api/users/${id}`);
+    dispatch(getOrders(userWithOrders.data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const changePassword = (user, password) => async dispatch => {
+  try {
+    await axios.put(`/api/users/${user.id}`, { password });
+    dispatch(changedPassword(user));
   } catch (err) {
     console.error(err);
   }
@@ -99,8 +118,10 @@ export default function(state = defaultUser, action) {
       return action.user;
     case REMOVE_USER:
       return defaultUser;
-    case UPDATE_PASS:
-      return defaultUser;
+    case GET_ORDERS:
+      return action.user;
+    case CHANGE_PASSWORD:
+      return action.user;
     default:
       return state;
   }
