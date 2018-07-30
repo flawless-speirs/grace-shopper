@@ -21,6 +21,7 @@ describe('Order routes', () => {
     it('can POST an empty order', async () => {
       const res = await request(app)
         .post('/api/orders', {})
+        .set('referer', 'http://locahost:8080')
         .expect(200);
 
       expect(res.body).to.be.an('object');
