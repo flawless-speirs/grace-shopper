@@ -22,10 +22,6 @@ class Products extends Component {
     this.setState({ searchValue: event.target.value });
   }
 
-  componentDidMount() {
-    this.props.retrieveProducts();
-  }
-
   async componentDidMount() {
     await this.props.retrieveProducts();
     this.setState({ loading: false });
