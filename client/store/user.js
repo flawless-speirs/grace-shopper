@@ -26,6 +26,19 @@ const changedPassword = user => ({ type: CHANGE_PASSWORD, user });
 /**
  * THUNK CREATORS
  */
+export const newPassword = () => async dispatch => {
+  try {
+    const res = await axios.post(`/auth/update`, {
+      email,
+      newPass,
+      currentPass,
+    });
+    dispatch(me());
+  } catch (err) {
+    console.err;
+  }
+};
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
@@ -45,7 +58,6 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data));
-    // dispatch(getCartFromDB());
     history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
