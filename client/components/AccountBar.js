@@ -11,6 +11,7 @@ const AccountBar = props => {
       <div>Welcome {props.name}</div>
       <div>
         <Link to="/profile">Change Password</Link>
+        <br />
         <Link to="/orders">Order History</Link>
       </div>
     </div>

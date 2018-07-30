@@ -46,7 +46,7 @@ form div {
 }
 
 .logo {
-  width: 25vw;
+  width: 13vw;
   margin-left: 4vw;
 }
 
@@ -88,7 +88,7 @@ form div {
 .navbar-btns {
   position: relative;
   top: 50%;
-  transform: translateY(4vw);
+  transform: translateY(1.5vw);
 }
 
 .sticky {
@@ -135,7 +135,7 @@ form div {
 .form-card {
   background-color: #c0c6d1;
   margin: 5vw auto;
-  padding: 1vw 1vw 5vw 1vw;
+  padding: 1vw 1vw 1vw 1vw;
   width: 45vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 1vw;
@@ -184,6 +184,19 @@ form div {
   text-shadow: 0 0 5px #000000, 0 0 10px #4be62a, 0 0 20px #a5f1ff,
     0 0 30px #346d35, 0 0 40px #000000;
   margin: 4vw 0vw;
+}
+
+.error-message {
+  display: block;
+  color: #ff0000;
+  text-shadow: 0 0 5px #000000, 0 0 10px #ff0011, 0 0 20px #a5f1ff, 0 0 30px #000000, 0 0 40px #000000;
+  font-size: 2em;
+}
+
+.welcome-message {
+  float: left;
+  margin: 3.5vw -25vw;
+  color: white;
 }
 
 .all-products-margin {
