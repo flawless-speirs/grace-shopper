@@ -50,13 +50,13 @@ class SingleProduct extends Component {
               >
                 Add to Cart
               </button>
-                    <div
-              id="addedToCartAlert"
-              className="alert alert-success d-none"
-              role="alert"
-            >
-              Added to Cart!
-            </div>
+              <div
+                id="addedToCartAlert"
+                className="alert alert-success d-none"
+                role="alert"
+              >
+                Added to Cart!
+              </div>
             </div>
           </div>
         </div>
