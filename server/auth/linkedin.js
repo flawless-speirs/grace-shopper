@@ -7,7 +7,7 @@ module.exports = router;
 const LinkedInConfig = {
   clientID: '77s5n75yjk4f4z',
   clientSecret: 'hCY7zZhf2Hd9UdrX',
-  callbackURL: 'http://localhost:8080/auth/linkedin/callback',
+  callbackURL: 'http://rickandmortystore.herokuapp.com/auth/linkedin/callback',
   state: true,
 };
 
