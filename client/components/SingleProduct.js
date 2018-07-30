@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { product as getProduct } from '../store/product';
+import { products } from '../store/products';
 import { addToCart } from '../store/cart';
 import { updateTotal } from '../store/total';
 import LoadingScreen from './LoadingScreen';
@@ -15,6 +16,7 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     await this.props.retrieveSingleProduct();
+    await this.props.retrieveProducts();
     this.setState({ loading: false });
   }
 
@@ -32,7 +34,17 @@ class SingleProduct extends Component {
     if (this.state.loading) {
       return <LoadingScreen />;
     } else {
-      const recommendedProducts = this.props.products;
+      const recommendedProducts = this.props.products.filter(product => {
+        console.log('PRODUCT: ', product); // DELETE THIS
+        for (let i = 0; i < product.tags.length; i++) {
+          for (let j = 0; j < this.product.tags.length; j++) {
+            if (product.tags[i].tagName === this.product.tags[j].tagName) {
+              return true;
+            }
+          }
+        }
+        return false;
+      });
       return (
         <div className="container-fluid single-product-bg">
           <div className="row">
@@ -60,6 +72,7 @@ class SingleProduct extends Component {
                 Added to Cart!
               </div>
             </div>
+            <h3>Recommended Products</h3>
             <Recommendations recommendedProducts={recommendedProducts} />
           </div>
         </div>
@@ -77,6 +90,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   retrieveSingleProduct: () => dispatch(getProduct(ownProps.match.params.id)),
+  retrieveProducts: () => dispatch(products()),
   addToCart: product => dispatch(addToCart(product.id)),
   updateTotal: amount => dispatch(updateTotal(amount)),
 });

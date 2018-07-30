@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * COMPONENT
  */
 
-const testProps = [];
+// WHAT IF THERE ARE NO SIMILAR TAGS?
 
 const Recommendations = props => (
   <div
@@ -21,24 +22,39 @@ const Recommendations = props => (
       <li data-target="#carouselExampleIndicators" data-slide-to="1" />
     </ol>
     <div className="carousel-inner">
-      <div className="carousel-item active">
-        <img
-          className="d-block"
-          src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/user-male-icon.png"
-          alt="First slide"
-          width="100"
-          height="100"
-        />
-      </div>
-      <div className="carousel-item">
-        <img
-          className="d-block"
-          src="https://cdn0.iconfinder.com/data/icons/PRACTIKA/256/user.png"
-          alt="Second slide"
-          width="100"
-          height="100"
-        />
-      </div>
+      {props.recommendedProducts.map((recommendedProduct, index) => {
+        if (index === 0) {
+          return (
+            <div
+              key={props.recommendedProduct.id}
+              className="carousel-item active"
+            >
+              <Link to={'/products/' + props.recommendedProduct.id}>
+                <img
+                  className="d-block"
+                  src={props.recommendedProduct.imageUrl}
+                  alt={'Image for ' + recommendedProduct.name}
+                  width="150"
+                  height="150"
+                />
+              </Link>
+            </div>
+          );
+        }
+        return (
+          <div key={props.recommendedProduct.id} className="carousel-item">
+            <Link to={'/products/' + props.recommendedProduct.id}>
+              <img
+                className="d-block"
+                src={props.recommendedProduct.imageUrl}
+                alt={'Image for ' + recommendedProduct.name}
+                width="150"
+                height="150"
+              />
+            </Link>
+          </div>
+        );
+      })}
     </div>
     <a
       className="carousel-control-prev"
