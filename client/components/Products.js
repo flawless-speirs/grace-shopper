@@ -35,7 +35,7 @@ class Products extends Component {
         <div className="container-fluid text-center all-products-bg">
           <h1>Products</h1>
           <input
-            className="form-control"
+            className="form-control search-bar"
             value={this.state.searchValue}
             onChange={this.handleChange}
             type="text"
