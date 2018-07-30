@@ -1,6 +1,6 @@
 # The Rick and Morty Store
 
-*By: Kevin Ho, Michael Lin, Andrew Miller, Rick Terry*
+**By: Kevin Ho, Michael Lin, Andrew Miller, Rick Terry**
 
 _Wubba lubba dub dub!_
 
