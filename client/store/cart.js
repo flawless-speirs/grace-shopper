@@ -58,8 +58,9 @@ export const updateSession = () => async (dispatch, getState) => {
 
 export const retrieveSession = () => async dispatch => {
   const cart = await axios.get('/api/carts/session');
-  console.log(cart);
-  dispatch(getSession(cart.data));
+  if (cart.data) {
+    dispatch(getSession(cart.data));
+  }
 };
 
 export const saveMyCart = () => async (dispatch, getState) => {
