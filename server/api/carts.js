@@ -5,9 +5,11 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     if (req.session.cart && req.session.cart.length) {
-      res.json(req.session.cart);
-    } else if (req.user) {
+      // res.json(req.session.cart);
+    }
+    if (req.user) {
       const cart = await Cart.findAll({ where: { userId: req.user.id } });
+      console.log('SESSION:', req.session.cart, 'DB:', cart);
       req.session.cart = cart.data;
       res.json(cart);
     } else {
