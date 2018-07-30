@@ -7,6 +7,7 @@ import { sendToDB as sendCartToDB, getFromDB as getCartFromDB } from './cart';
  */
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
+const UPDATE_PASS = 'UPDATE_PASS';
 
 /**
  * INITIAL STATE
@@ -18,10 +19,39 @@ const defaultUser = {};
  */
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
+const updatePass = () => ({ type: UPDATE_PASS, user });
 
 /**
  * THUNK CREATORS
  */
+// export const newPassword = (email, newPass, currentPass) => async dispatch => {
+//   try {
+//     const res = await axios.post(`/auth/update`, {
+//       email,
+//       newPass,
+//       currentPass,
+//     });
+//     console.log(res.data);
+//     dispatch(me());
+//   } catch (err) {
+//     console.err;
+//   }
+// };
+
+export const newPassword = () => async dispatch => {
+  try {
+    const res = await axios.post(`/auth/update`, {
+      email,
+      newPass,
+      currentPass,
+    });
+    console.log(res.data);
+    dispatch(me());
+  } catch (err) {
+    console.err;
+  }
+};
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
@@ -68,6 +98,8 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return action.user;
     case REMOVE_USER:
+      return defaultUser;
+    case UPDATE_PASS:
       return defaultUser;
     default:
       return state;

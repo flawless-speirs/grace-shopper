@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const compression = require('compression');
 const session = require('express-session');
 const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
+const Strategy = require('passport-http').BasicStrategy;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
@@ -42,23 +42,52 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// Passport Strategy Configuration
+/**
+ * PASSPORT AREA
+ */
+
+/**
+ * Boilerplate code
+ */
+/**
+ * End of Bilerplate
+ */
 passport.use(
-  new Strategy(function(username, password, done) {
-    db.models.User.findOne({ where: { email: username } }, function(err, user) {
-      if (err) {
-        return done(err);
+  new Strategy(async function(username, password, cb) {
+    try {
+      const user = await db.models.user.findOne({
+        where: {
+          email: username,
+        },
+      });
+      if (!user.correctPassword(password)) {
+        return cb(null, false);
       }
       if (!user) {
-        return done(null, false);
+        return cb(null, false);
       }
-      if (user.password != password) {
-        return done(null, false);
-      }
-      return done(null, user);
-    });
+      return cb(null, user);
+    } catch (err) {
+      return cb(err);
+    }
+    // db.models.user.findById(username, function(err, user) {
+    //   if (err) {
+    //     return cb(err);
+    //   }
+    //   if (!user) {
+    //     return cb(null, false);
+    //   }
+    //   if (user.password != password) {
+    //     return cb(null, false);
+    //   }
+    //   return cb(null, user);
+    // });
   })
 );
+
+/**
+ * END OF PASSPOING AREA
+ */
 
 const createApp = () => {
   // logging middleware

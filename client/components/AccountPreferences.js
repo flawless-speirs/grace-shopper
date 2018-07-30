@@ -1,22 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { newPassword, auth } from '../store';
 
-const AccountPreferences = props => {
-  return (
-    <div>
-      <form>
-        <label name="email">email address:</label>
-        <input type="text" name="email" />
-        <br />
+class AccountPreferences extends Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-        <label name="password">password:</label>
-        <input type="text" name="password" />
-        <br />
-      </form>
-      <button type='submit', onClick={}>Submit</button>
-    </div>
-  );
-};
+  handleChange(event) {
+    event.preventDefault();
+    console.log('test here!!!');
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+    console.log(this.state);
+  }
+
+  async handleSubmit(event) {
+    'inside handle submit!';
+    event.preventDefault();
+    await this.props.updateUser();
+  }
+
+  render() {
+    return (
+      <div>
+        <form name="test">
+          <label htmlFor="email">email address:</label>
+          <input onChange={this.handleChange} type="text" name="email" />
+          <br />
+
+          <label htmlFor="currentPassword">current password:</label>
+          <input
+            onChange={this.handleChange}
+            type="text"
+            name="currentPassword"
+          />
+          <br />
+
+          <label htmlFor="newPassword">new password:</label>
+          <input onChange={this.handleChange} type="text" name="new-password" />
+          <br />
+        </form>
+        <button onClick={this.handleSubmit} type="submit">
+          Submit
+        </button>
+      </div>
+    );
+  }
+}
 
 const mapState = state => {
   return {
@@ -24,13 +59,12 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(AccountPreferences);
+const mapDispatch = dispatch => {
+  return {
+    updateUser: (email, newPassword, currentPassword) => {
+      dispatch(newPassword(email, newPassword, currentPassword));
+    },
+  };
+};
 
-// <div>
-//   <div>
-//     <form>
-//       email address:
-//       <input type="text" name="email" /><br>
-//       </form>
-//   </div>
-// </div>
+export default connect(mapState, mapDispatch)(AccountPreferences);

@@ -1,22 +1,25 @@
 const router = require('express').Router();
 const connectEnsureLogin = require('connect-ensure-login');
+const passport = require('passport');
 
 module.exports = router;
 
 router.use(
   '/',
-  // () => {
-  //   connectEnsureLogin.ensureLoggedIn();
-  // },
+  // passport.authenticate('basic', { session: false }),
   (req, res, next) => {
-    console.log('REQUEST: ', req);
-    console.log('HEADERS: ', req.headers);
-    // console.log('PASSPORT STRATEGIES: ',req.);
+    if (!req.headers['referer']) {
+      res.status(500).send('Unauthorized Access');
+    }
     next();
   }
 );
 
-router.use('/users', require('./users'));
+router.use(
+  '/users',
+  passport.authenticate('basic', { session: false }),
+  require('./users')
+);
 
 router.use('/products', require('./products'));
 
