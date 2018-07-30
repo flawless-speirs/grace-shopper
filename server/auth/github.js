@@ -7,7 +7,7 @@ module.exports = router;
 const githubConfig = {
   clientID: 'e813c76855eb3b13732b',
   clientSecret: '469f0aff8ef7cf9d9f587cf69616b15fb005b0f5',
-  callbackURL: 'http://localhost:8080/auth/github/callback',
+  callbackURL: 'https://rickandmortystore.herokuapp.com/auth/github/callback',
 };
 
 const strategy = new GitHubStrategy(
@@ -15,10 +15,7 @@ const strategy = new GitHubStrategy(
   (token, refreshToken, profile, done) => {
     const githubId = profile.id;
     const name = profile.username;
-    console.log('PROFILE!', profile);
-    // const email = profile.emails[0].value || '';
-    const email = 'fdterr@email.com';
-    console.log('CREATE', name, email);
+    const email = 'contact@github.com';
 
     User.findOrCreate({
       where: { githubId },
