@@ -9,11 +9,14 @@ const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
 const GET_ORDERS = 'GET_ORDERS';
 const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+const PASSWORD_ERROR = 'PASSWORD_ERROR';
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {};
+const defaultUser = {
+  passwordError: false,
+};
 
 /**
  * ACTION CREATORS
@@ -22,6 +25,7 @@ const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
 const getOrders = user => ({ type: GET_ORDERS, user });
 const changedPassword = user => ({ type: CHANGE_PASSWORD, user });
+const passwordError = () => ({ type: PASSWORD_ERROR });
 
 /**
  * THUNK CREATORS
@@ -72,11 +76,21 @@ export const getPastOrders = id => async dispatch => {
   }
 };
 
-export const changePassword = (user, password) => async dispatch => {
+export const changePassword = (
+  user,
+  currentPassword,
+  newPassword
+) => async dispatch => {
   try {
-    await axios.put(`/api/users/${user.id}`, { password });
+    console.log('entered send function');
+    let response = await axios.put(`/api/users/${user.id}`, {
+      currentPassword,
+      newPassword,
+    });
+    console.log('RESPONSE:', response);
     dispatch(changedPassword(user));
   } catch (err) {
+    dispatch(passwordError());
     console.error(err);
   }
 };
@@ -94,6 +108,9 @@ export default function(state = defaultUser, action) {
       return action.user;
     case CHANGE_PASSWORD:
       return action.user;
+
+    case PASSWORD_ERROR:
+      return { ...state, passwordError: true };
     default:
       return state;
   }
