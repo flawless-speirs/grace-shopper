@@ -52,7 +52,7 @@ form div {
 
 .fa {
   margin: 1vw;
-  font-size: 3em;
+  font-size: 2em;
 }
 
 .fa:hover {
@@ -113,16 +113,16 @@ form div {
 }
 
 .profile-card {
-  margin: 3vw auto;
-  padding: 5vw 2vw;
+  margin: 0vw auto;
+  padding: 1vw 2vw;
   width: 30vw;
 }
 
 .profile-bg {
   background-color: rgb(234, 241, 255, 0.95);
-  margin: 5vw 5vw;
+  margin: 5vw 13vw;
   padding: 1vw 1vw;
-  width: 90vw;
+  width: 75vw;
   border-radius: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
