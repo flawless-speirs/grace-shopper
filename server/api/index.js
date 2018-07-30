@@ -4,16 +4,12 @@ const passport = require('passport');
 
 module.exports = router;
 
-router.use(
-  '/',
-  // passport.authenticate('basic', { session: false }),
-  (req, res, next) => {
-    if (!req.headers['referer']) {
-      res.status(500).send('Unauthorized Access');
-    }
-    next();
+router.use('/', (req, res, next) => {
+  if (!req.headers['referer']) {
+    res.status(500).send('Unauthorized Access');
   }
-);
+  next();
+});
 
 router.use(
   '/users',
