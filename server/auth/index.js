@@ -64,3 +64,4 @@ router.get('/me', (req, res) => {
 });
 
 router.use('/google', require('./google'));
+router.use('/github', require('./github'));
