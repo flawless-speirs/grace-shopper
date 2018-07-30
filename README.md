@@ -1,4 +1,4 @@
-# Boilermaker
+# The Rick and Morty Store
 
 _Good things come in pairs_
 
