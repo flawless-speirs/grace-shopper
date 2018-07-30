@@ -1,4 +1,4 @@
-import React, { Component, Modal } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changePassword } from '../store/user';
 import Popup from 'reactjs-popup';
