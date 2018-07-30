@@ -49,7 +49,7 @@ class AccountPreferences extends Component {
         {this.props.passwordError ? (
           <div>Error: Your current password is incorrect. Please try again</div>
         ) : (
-          <div />
+          <div>window.confirm('Your password is incorrect'</div>
         )}
         <form>
           <label name="current-password">Current password:</label>

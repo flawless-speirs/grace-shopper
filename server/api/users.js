@@ -33,7 +33,9 @@ router.put('/:id', async (req, res, next) => {
     console.log('request body', req.body);
     const user = await User.findById(req.params.id);
     if (user.correctPassword(req.body.currentPassword)) {
-      await user.update(req.body);
+      await user.update({
+        password: req.body.newPassword,
+      });
       res.status(204);
       res.send('Change made');
     } else if (!user.correctPassword(req.body.currentPassword)) {
