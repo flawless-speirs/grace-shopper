@@ -25,29 +25,29 @@ router.put('/', async (req, res, next) => {
     if (req.user && req.body.length) {
       const userId = req.user.id;
       const newCart = req.body;
-      await newCart.forEach(async product => {
+      await newCart.forEach(product => {
         if (product.quantity) {
           // if item has no quantity, don't add to db
-          await Cart.findOne({
+          Cart.findOne({
             where: { userId, productId: product.productId, orderId: null },
           }).then(response => {
             if (response) {
               // if instance already exists
               if (product.orderId) {
                 // if submitting an order
-                response.update({
+                return response.update({
                   quantity: product.quantity,
                   orderId: product.orderId,
                 });
               } else {
                 // if saving a pending cart
-                response.update({ quantity: product.quantity });
+                return response.update({ quantity: product.quantity });
               }
             } else {
               // if no instance exists
               if (product.orderId) {
                 // if submitting an order
-                Cart.create({
+                return Cart.create({
                   userId,
                   productId: product.productId,
                   quantity: product.quantity,
@@ -55,7 +55,7 @@ router.put('/', async (req, res, next) => {
                 });
               } else {
                 // if saving a pending cart
-                Cart.create({
+                return Cart.create({
                   userId,
                   productId: product.productId,
                   quantity: product.quantity,
@@ -67,8 +67,6 @@ router.put('/', async (req, res, next) => {
         res.status(200).end();
       });
     } else {
-      // if no user is logged on, add cart to session
-      req.session.cart = req.body;
       res.sendStatus(200);
     }
   } catch (err) {

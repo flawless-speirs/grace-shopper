@@ -14,6 +14,7 @@ router.post('/', async (req, res, next) => {
       userId,
       amount: req.body.amount,
     });
+    req.session.cart = [];
     res.send(created);
   } catch (err) {
     next(err);
