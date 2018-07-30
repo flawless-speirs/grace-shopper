@@ -18,8 +18,6 @@ const strategy = new LinkedInStrategy(
     const name = profile.displayName;
     const email = 'contact@linkedin.com';
 
-    console.log('EMAILS', profile, profile.emails);
-
     User.findOrCreate({
       where: { linkedinId },
       defaults: { name, email },
