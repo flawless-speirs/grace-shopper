@@ -101,7 +101,8 @@ form div {
 
 .footer-btns {
   float: right;
-  margin: 2vw 2vw;
+  margin: 3vw 3vw;
+  font-size: 4em
 }
 
 .sticky {

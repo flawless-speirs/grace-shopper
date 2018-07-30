@@ -39,7 +39,7 @@ export const newPassword = () => async dispatch => {
     });
     dispatch(me());
   } catch (err) {
-    console.err;
+    console.error(err);
   }
 };
 
