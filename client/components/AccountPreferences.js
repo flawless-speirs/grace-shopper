@@ -12,24 +12,29 @@ class AccountPreferences extends Component {
       currentPassword: '',
       newPassword: '',
       confirmPassword: '',
+      passwordMatch: true,
     };
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.changePassword(
-      this.props.user,
-      this.state.currentPassword,
-      this.state.newPassword
-    );
+    if (this.state.newPassword === this.state.confirmPassword) {
+      this.props.changePassword(
+        this.props.user,
+        this.state.currentPassword,
+        this.state.newPassword
+      );
+    } else {
+      this.setState({ passwordMatch: false });
+    }
   }
 
   handleChange(evt) {
     if (evt.target.name === 'current-password') {
       this.setState({ currentPassword: evt.target.value });
     }
-    // if (evt.target.name === 'current-password') {
-    //   this.setState({ currentPassword: evt.target.value });
-    // }
+    if (evt.target.name === 'confirm-password') {
+      this.setState({ confirmPassword: evt.target.value });
+    }
     if (evt.target.name === 'new-password') {
       this.setState({ newPassword: evt.target.value });
     }
@@ -41,18 +46,12 @@ class AccountPreferences extends Component {
         {this.props.passwordError ? (
           <div>ERROR! Current Password is Incorrect!</div>
         ) : (
-          // <ModalMessageBox />
-          // <Popup trigger={<button>Trigger</button>} position="center">
-          //   <div>Popup Content Here!</div>
-          // </Popup>
-          // <div
-          //   className="delete-button"
-          //   onClick={() => {
-          //     if (window.confirm('Are you sure you wish to delete this item?'))
-          //       this.onCancel(item);
-          //   }}
-          // />
           <div />
+        )}
+        {this.state.passwordMatch ? (
+          <div />
+        ) : (
+          <div>Please make sure your new passwords match</div>
         )}
         <form>
           <label name="current-password">Current password:</label>

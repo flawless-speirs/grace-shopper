@@ -107,8 +107,7 @@ export default function(state = defaultUser, action) {
     case GET_ORDERS:
       return action.user;
     case CHANGE_PASSWORD:
-      return action.user;
-
+      return { ...action.user, passwordError: false };
     case PASSWORD_ERROR:
       return { ...state, passwordError: true };
     default:
