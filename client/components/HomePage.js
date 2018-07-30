@@ -31,7 +31,7 @@ const creators = [
     name: 'Kevin Ho',
     title: 'Fullstack Software Engineer',
     description: 'Computer Science, Fordham, 🏀.',
-    imagePath: 'Kevin.jpg',
+    imagePath: './Kevin.jpg',
     urlArray: [],
   },
 ];
