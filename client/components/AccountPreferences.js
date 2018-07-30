@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Modal } from 'react';
 import { connect } from 'react-redux';
 import { changePassword } from '../store/user';
+import Popup from 'reactjs-popup';
 
 class AccountPreferences extends Component {
   constructor({ user, passwordError }) {
@@ -47,9 +48,20 @@ class AccountPreferences extends Component {
     return (
       <div>
         {this.props.passwordError ? (
-          <div>Error: Your current password is incorrect. Please try again</div>
+          <div>ERROR! Current Password is Incorrect!</div>
         ) : (
-          <div>window.confirm('Your password is incorrect'</div>
+          // <ModalMessageBox />
+          // <Popup trigger={<button>Trigger</button>} position="center">
+          //   <div>Popup Content Here!</div>
+          // </Popup>
+          // <div
+          //   className="delete-button"
+          //   onClick={() => {
+          //     if (window.confirm('Are you sure you wish to delete this item?'))
+          //       this.onCancel(item);
+          //   }}
+          // />
+          <div />
         )}
         <form>
           <label name="current-password">Current password:</label>
@@ -83,7 +95,7 @@ class AccountPreferences extends Component {
 
 const mapStateToProps = state => {
   // console.log('STATE!', state);
-  // console.log('STATE!', state.user.passwordError);
+  console.log('STATE!', state.user.passwordError);
   return {
     user: state.user,
     passwordError: state.user.passwordError,
