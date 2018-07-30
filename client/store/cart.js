@@ -5,7 +5,7 @@ import axios from 'axios';
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const UPDATE_SESSION = 'UPDATE_SESSION';
-const CLEAR_CART = 'CLEART_CART';
+const CLEAR_CART = 'CLEAR_CART';
 const GET_CART = 'GET_CART';
 const CREATED_ORDER = 'CREATED_ORDER';
 
