@@ -4,13 +4,13 @@ export default function Creator(props) {
   const name = props.creator.name;
   const title = props.creator.title;
   const description = props.creator.description;
-  const imageUrl = props.creator.imageUrl;
+  const imagePath = props.creator.imagePath;
   const urlArray = props.creator.urlArray;
   return (
     <div>
       <div className="profile profile-card">
         <div className="headshot">
-          <img className="profile-picture" src={imageUrl} />
+          <img className="profile-picture" src={imagePath} />
         </div>
         <div className="profileRight">
           <div className="profileName">{name}</div>
