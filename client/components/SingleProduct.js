@@ -4,6 +4,7 @@ import { product as getProduct } from '../store/product';
 import { addToCart } from '../store/cart';
 import { updateTotal } from '../store/total';
 import LoadingScreen from './LoadingScreen';
+import Recommendations from './Recommendations';
 
 class SingleProduct extends Component {
   constructor() {
@@ -31,6 +32,7 @@ class SingleProduct extends Component {
     if (this.state.loading) {
       return <LoadingScreen />;
     } else {
+      const recommendedProducts = this.props.products;
       return (
         <div className="container-fluid single-product-bg">
           <div className="row">
@@ -58,6 +60,7 @@ class SingleProduct extends Component {
                 Added to Cart!
               </div>
             </div>
+            <Recommendations recommendedProducts={recommendedProducts} />
           </div>
         </div>
       );
@@ -67,6 +70,7 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
+  products: state.products,
   cart: state.cart,
   total: state.total,
 });
