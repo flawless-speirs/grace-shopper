@@ -40,7 +40,6 @@ router.put('/:id', async (req, res, next) => {
     } else if (!user.correctPassword(req.body.currentPassword)) {
       res.statusMessage = 'Current password does not match';
       res.status(490).end();
-      // res.json('ERROR, INCORRECT PASSWORD!');
     }
   } catch (err) {
     next(err);
