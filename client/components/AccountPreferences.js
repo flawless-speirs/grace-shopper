@@ -16,14 +16,6 @@ class AccountPreferences extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    // console.log(
-    //   'USER!',
-    //   this.props.user,
-    //   'CURRENT',
-    //   this.state.currentPassword,
-    //   'NEW',
-    //   this.state.newPassword
-    // );
     this.props.changePassword(
       this.props.user,
       this.state.currentPassword,
@@ -32,7 +24,6 @@ class AccountPreferences extends Component {
   }
 
   handleChange(evt) {
-    console.log(evt.target.value);
     if (evt.target.name === 'current-password') {
       this.setState({ currentPassword: evt.target.value });
     }
@@ -94,8 +85,6 @@ class AccountPreferences extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log('STATE!', state);
-  console.log('STATE!', state.user.passwordError);
   return {
     user: state.user,
     passwordError: state.user.passwordError,

@@ -30,7 +30,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    console.log('request body', req.body);
     const user = await User.findById(req.params.id);
     if (user.correctPassword(req.body.currentPassword)) {
       await user.update({
