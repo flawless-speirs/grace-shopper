@@ -21,7 +21,7 @@ const createdOrder = () => ({ type: CREATED_ORDER });
 // THUNKS
 
 export const addToCart = id => (dispatch, getState) => {
-  const cart = getState().cart;
+  let cart = getState().cart.slice();
   const item = cart.find(el => el.productId === id);
   if (!item) {
     cart.push({ productId: id, quantity: 1 });
@@ -33,7 +33,7 @@ export const addToCart = id => (dispatch, getState) => {
 };
 
 export const removeFromCart = id => (dispatch, getState) => {
-  const cart = getState().cart;
+  const cart = getState().cart.slice();
   const item = cart.find(el => el.productId === id);
   let currentQuantity = item.quantity;
   if (currentQuantity > 0) {
@@ -48,7 +48,7 @@ export const getMyCart = () => async dispatch => {
 };
 
 export const updateSession = () => async (dispatch, getState) => {
-  const cart = getState().cart;
+  const cart = getState().cart.slice();
   const total = getState().total;
   await axios.put('/api/carts/session', { cart, total });
   dispatch(updatedSession(cart));
