@@ -21,7 +21,7 @@ const createdOrder = () => ({ type: CREATED_ORDER });
 // THUNKS
 
 export const addToCart = id => (dispatch, getState) => {
-  let cart = getState().cart.slice();
+  const cart = getState().cart.slice();
   const item = cart.find(el => el.productId === id);
   if (!item) {
     cart.push({ productId: id, quantity: 1 });
