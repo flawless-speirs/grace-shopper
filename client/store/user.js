@@ -49,7 +49,6 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data));
-    // dispatch(getCartFromDB());
     history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
@@ -82,12 +81,10 @@ export const changePassword = (
   newPassword
 ) => async dispatch => {
   try {
-    console.log('entered send function');
     let response = await axios.put(`/api/users/${user.id}`, {
       currentPassword,
       newPassword,
     });
-    console.log('RESPONSE:', response);
     dispatch(changedPassword(user));
   } catch (err) {
     dispatch(passwordError());
