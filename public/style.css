@@ -2,14 +2,29 @@
   font-family: 'Lato', sans-serif;
 }
 
-body {
+/* body {
   background: #b1ddcb;
   background-size: cover;
+} */
+
+@media (max-width: 769px) {
+  body {
+    background-image: url('./background2.jpg');
+    background-size: cover;
+  }
 }
 
-.background-for-body {
-  background-image: url('./background.png');
+@media (min-width: 769px) {
+  body {
+    background-image: url('./background3.jpg');
+    background-size: cover;
+  }
 }
+
+
+/* .background-for-body {
+  background-image: url('./background3.jpg');
+} */
 
 nav {
   float: right;
@@ -38,16 +53,24 @@ form div {
 }
 
 .profile-picture {
-  height: 21vw;
-  width: 21vw;
+  height: 15vw;
+  width: 15vw;
   border-radius: 10%;
-  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: 3px 4px 8px 0 rgb(25, 106, 123);
   margin: 10px auto;
 }
 
 .logo {
   width: 13vw;
   margin-left: 4vw;
+}
+
+.media-logo {
+  width: 5vw;
+}
+
+.text-adjustment {
+  margin-top: 0.1vw;
 }
 
 .fa {
@@ -86,7 +109,7 @@ form div {
 }
 
 .cart-btn {
-  margin-right: 4vw;
+  margin-right: 3vw;
 }
 
 .navbar-btns {
@@ -116,14 +139,14 @@ form div {
 .profile-card {
   margin: 0vw auto;
   padding: 1vw 2vw;
-  width: 30vw;
+  width: 24vw;
 }
 
 .profile-bg {
   background-color: rgb(234, 241, 255, 0.95);
-  margin: 5vw 13vw;
+  margin: 5vw 25vw;
   padding: 1vw 1vw;
-  width: 75vw;
+  width: 50vw;
   border-radius: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -157,6 +180,15 @@ form div {
 
 .form-control {
   text-align: center;
+}
+
+.misc-bg {
+  background-color: #c0c6d1;
+  margin: 5vw -6vw;
+  padding: 1vw 1vw 1vw 1vw;
+  width: 45vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1vw;
 }
 
 .search-bar {
