@@ -42,7 +42,7 @@ class Cart extends Component {
         const toAdd = this.props.products.find(
           product => item.productId === product.id
         );
-        if (toAdd) {
+        if (toAdd && item.quantity) {
           productsInCart.push({
             id: toAdd.id,
             name: toAdd.name,
@@ -77,14 +77,16 @@ class Cart extends Component {
               <div className="col-1"> Quantity </div>
             </div>
             {products.map(product => {
-              return (
-                <div key={product.id}>
-                  <ProductRow
-                    product={product}
-                    updateTotal={this.props.updateTotal}
-                  />
-                </div>
-              );
+              if (product.quantity) {
+                return (
+                  <div key={product.id}>
+                    <ProductRow
+                      product={product}
+                      updateTotal={this.props.updateTotal}
+                    />
+                  </div>
+                );
+              }
             })}
             <div> Total: ${this.props.total.toFixed(2)} </div>
             <Link to="/cart/checkout" className="btn btn-warning">
@@ -93,7 +95,7 @@ class Cart extends Component {
           </div>
         </div>
       ) : (
-        <div className="text-center">There is nothing in your cart yet</div>
+        <div className="text-center form-card">There is nothing in your cart yet</div>
       );
     }
   }

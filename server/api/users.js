@@ -31,9 +31,16 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
-    console.log(req.body);
-    await user.update(req.body);
-    res.status(204).end();
+    if (user.correctPassword(req.body.currentPassword)) {
+      await user.update({
+        password: req.body.newPassword,
+      });
+      res.status(204);
+      res.send('Change made');
+    } else if (!user.correctPassword(req.body.currentPassword)) {
+      res.statusMessage = 'Current password does not match';
+      res.status(490).end();
+    }
   } catch (err) {
     next(err);
   }

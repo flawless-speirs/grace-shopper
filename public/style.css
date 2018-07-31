@@ -46,8 +46,17 @@ form div {
 }
 
 .logo {
-  width: 25vw;
+  width: 13vw;
   margin-left: 4vw;
+}
+
+.fa {
+  margin: 1vw;
+  font-size: 2em;
+}
+
+.fa:hover {
+  opacity: 0.7;
 }
 
 .btn {
@@ -68,12 +77,7 @@ form div {
 }
 
 .nav-btn {
-  background-image: linear-gradient(
-    to right,
-    #f6d365 0%,
-    #fda085 51%,
-    #f6d365 100%
-  );
+  background-image: linear-gradient( to right, #4b99ca 0%, #71ca6f 51%, #42aeb3 100% );
 }
 
 .home-btn {
@@ -88,7 +92,17 @@ form div {
 .navbar-btns {
   position: relative;
   top: 50%;
-  transform: translateY(4vw);
+  transform: translateY(1.5vw);
+}
+
+.footer {
+  background-color:red;
+}
+
+.footer-btns {
+  float: right;
+  margin: 3vw 3vw;
+  font-size: 4em
 }
 
 .sticky {
@@ -100,16 +114,16 @@ form div {
 }
 
 .profile-card {
-  margin: 3vw auto;
-  padding: 5vw 2vw;
+  margin: 0vw auto;
+  padding: 1vw 2vw;
   width: 30vw;
 }
 
 .profile-bg {
   background-color: rgb(234, 241, 255, 0.95);
-  margin: 5vw 5vw;
+  margin: 5vw 13vw;
   padding: 1vw 1vw;
-  width: 90vw;
+  width: 75vw;
   border-radius: 1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -135,7 +149,7 @@ form div {
 .form-card {
   background-color: #c0c6d1;
   margin: 5vw auto;
-  padding: 1vw 1vw 5vw 1vw;
+  padding: 1vw 1vw 1vw 1vw;
   width: 45vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 1vw;
@@ -143,6 +157,11 @@ form div {
 
 .form-control {
   text-align: center;
+}
+
+.search-bar {
+  width: 35vw;
+  margin: 2vw 26vw;
 }
 
 .product-img {
@@ -184,6 +203,19 @@ form div {
   text-shadow: 0 0 5px #000000, 0 0 10px #4be62a, 0 0 20px #a5f1ff,
     0 0 30px #346d35, 0 0 40px #000000;
   margin: 4vw 0vw;
+}
+
+.error-message {
+  display: block;
+  color: #ff0000;
+  text-shadow: 0 0 5px #000000, 0 0 10px #ff0011, 0 0 20px #a5f1ff, 0 0 30px #000000, 0 0 40px #000000;
+  font-size: 2em;
+}
+
+.welcome-message {
+  float: left;
+  margin: 3.5vw -25vw;
+  color: white;
 }
 
 .all-products-margin {

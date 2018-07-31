@@ -43,10 +43,24 @@ const AuthForm = props => {
             </button>
           </div>
         </div>
-        <a className="btn btn-success" href="/auth/google">
-        {displayName} with Google
-      </a>
-        {error && error.response && <div> {error.response.data} </div>}
+        <div>
+          <a className="btn btn-success" href="/auth/google">
+            {displayName} with Google
+          </a>
+        </div>
+        <div>
+          <a className="btn btn-success" href="/auth/github">
+            {displayName} with Github
+          </a>
+        </div>
+        <div>
+          <a className="btn btn-success" href="/auth/linkedin">
+            {displayName} with LinkedIn
+          </a>
+        </div>
+        <div className="error-message">
+          {error && error.response && <div> {error.response.data} </div>}
+        </div>
       </form>
       {/* <a className="btn btn-success" href="/auth/google">
         {displayName} with Google

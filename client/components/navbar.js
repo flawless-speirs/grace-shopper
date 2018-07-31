@@ -6,31 +6,29 @@ import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
   <div className="sticky">
-    {/* <Link to="/" className="btn home-btn">The Rick and Morty Store</Link> */}
     <Link to="/">
       <img src={window.location.origin + '/logo.png'} className="logo" />
     </Link>
     <nav>
       {isLoggedIn ? (
-        <div className="navbar-btns">
-          Logged in as {userEmail}
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home" className="btn nav-btn">
-            Home
-          </Link>
-          <Link to="/products" className="btn nav-btn">
-            All Products
-          </Link>
-          <Link to="/account" className="btn nav-btn">
-            Account
-          </Link>
-          <a href="#" onClick={handleClick} className="btn nav-btn">
-            Logout
-          </a>
-          <Link to="/cart" className="btn nav-btn cart-btn">
-            Cart ({itemsInCart()})
-          </Link>
-        </div>
+        <React.Fragment>
+          <div className="welcome-message">Logged in as {userEmail}</div>
+          <div className="navbar-btns">
+            {/* The navbar will show these links after you log in */}
+            <Link to="/products" className="btn nav-btn">
+              All Products
+            </Link>
+            <Link to="/account" className="btn nav-btn">
+              Account
+            </Link>
+            <a href="#" onClick={handleClick} className="btn nav-btn">
+              Logout
+            </a>
+            <Link to="/cart" className="btn nav-btn cart-btn">
+              Cart ({itemsInCart()})
+            </Link>
+          </div>
+        </React.Fragment>
       ) : (
         <div className="navbar-btns">
           {/* The navbar will show these links before you log in */}
@@ -58,15 +56,16 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
  */
 const mapState = state => {
   return {
+    cart: state.cart,
     isLoggedIn: !!state.user.id,
     userEmail: state.user.email,
     itemsInCart: () => {
       let numItems = 0;
       if (state.cart.length) {
         state.cart.forEach(element => {
-        numItems += element.quantity;
-        });  
-      };
+          numItems += element.quantity;
+        });
+      }
       return numItems;
     },
   };
