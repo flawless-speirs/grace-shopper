@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { product as getProduct } from '../store/product';
+import { products } from '../store/products';
 import { addToCart } from '../store/cart';
 import { updateTotal } from '../store/total';
 import LoadingScreen from './LoadingScreen';
+import Recommendations from './Recommendations';
 
 class SingleProduct extends Component {
   constructor() {
     super();
     this.state = { loading: true };
     this.handleClick = this.handleClick.bind(this);
+    this.clickCarousel = this.clickCarousel.bind(this);
   }
 
   async componentDidMount() {
     await this.props.retrieveSingleProduct();
+    await this.props.retrieveProducts();
     this.setState({ loading: false });
   }
 
@@ -27,10 +31,30 @@ class SingleProduct extends Component {
     }, 1500);
   }
 
+  async clickCarousel(id) {
+    await this.props.retrieveSingleProductById(id);
+    this.props.history.push('/products/' + id);
+  }
+
   render() {
     if (this.state.loading) {
       return <LoadingScreen />;
     } else {
+      const recommendedProducts = this.props.products.filter(product => {
+        for (let i = 0; i < product.tags.length; i++) {
+          for (let j = 0; j < this.props.product.tags.length; j++) {
+            if (product.id === this.props.product.id) {
+              return false;
+            }
+            if (
+              product.tags[i].tagName === this.props.product.tags[j].tagName
+            ) {
+              return true;
+            }
+          }
+        }
+        return false;
+      });
       return (
         <div className="container-fluid single-product-bg">
           <div className="row">
@@ -43,6 +67,9 @@ class SingleProduct extends Component {
               <div className="product-description">
                 {this.props.product.description}
               </div>
+              {this.props.product.tags.map(tag => (
+                <div key={tag.id}>{tag.tagName}</div>
+              ))}
               <button
                 className="btn btn-warning"
                 type="button"
@@ -58,6 +85,14 @@ class SingleProduct extends Component {
                 Added to Cart!
               </div>
             </div>
+            <div>
+              <h3>Recommended Products</h3>
+              <Recommendations
+                key={this.props.match.params.id}
+                clickCarousel={this.clickCarousel}
+                recommendedProducts={recommendedProducts}
+              />
+            </div>
           </div>
         </div>
       );
@@ -67,12 +102,15 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => ({
   product: state.product,
+  products: state.products,
   cart: state.cart,
   total: state.total,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   retrieveSingleProduct: () => dispatch(getProduct(ownProps.match.params.id)),
+  retrieveSingleProductById: id => dispatch(getProduct(id)),
+  retrieveProducts: () => dispatch(products()),
   addToCart: product => dispatch(addToCart(product.id)),
   updateTotal: amount => dispatch(updateTotal(amount)),
 });

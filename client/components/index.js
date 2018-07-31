@@ -5,6 +5,7 @@
  */
 
 export { default as Navbar } from './navbar';
+export { default as Footer } from './Footer'
 export { Login, Signup } from './auth-form';
 export { HomePage } from './HomePage';
 export { default as Products } from './Products';
@@ -15,4 +16,4 @@ export { default as CheckoutPage } from './CheckoutPage';
 export { default as Account } from './Account';
 export { default as OrderHistory } from './OrderHistory';
 export { default as LoadingScreen } from './LoadingScreen';
-export { default as Footer } from './Footer';
+export { default as Recommendations } from './Recommendations';
