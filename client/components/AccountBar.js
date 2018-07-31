@@ -8,7 +8,7 @@ import OrderHistory from './OrderHistory';
 const AccountBar = props => {
   return (
     <div>
-      <div>Welcome {props.name}</div>
+      <div>Welcome {props.name || props.email}</div>
       <div>
         <Link to="/profile">Change Password</Link>
         <br />
@@ -20,7 +20,8 @@ const AccountBar = props => {
 
 const mapState = state => {
   return {
-    name: state.user.email,
+    email: state.user.email,
+    name: state.user.name,
   };
 };
 
