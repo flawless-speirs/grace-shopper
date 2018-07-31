@@ -8,14 +8,14 @@ class OrderHistory extends Component {
   }
 
   render() {
-    const dateParse = (str) => {
-      const arr = str.split('-')
-      const year = arr[0]
-      const month = arr[1]
-      const day = arr[2].slice(0,2)
-      return `${month}-${day}-${year}`
-    }
-    return this.props.user.orders ? (
+    const dateParse = str => {
+      const arr = str.split('-');
+      const year = arr[0];
+      const month = arr[1];
+      const day = arr[2].slice(0, 2);
+      return `${month}-${day}-${year}`;
+    };
+    return this.props.user.orders && this.props.user.orders.length ? (
       <div>
         {this.props.user.orders.map(order => {
           return (
@@ -31,7 +31,7 @@ class OrderHistory extends Component {
         })}
       </div>
     ) : (
-      <div>loading...</div>
+      <div>No orders to display</div>
     );
   }
 }
