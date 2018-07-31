@@ -37,7 +37,7 @@ if (!process.env.LINKEDIN_CLIENT_ID || !process.env.LINKEDIN_CLIENT_SECRET) {
   router.get(
     '/callback',
     passport.authenticate('linkedin', {
-      successRedirect: '/home',
+      successRedirect: '/account',
       failureRedirect: '/login',
     })
   );
