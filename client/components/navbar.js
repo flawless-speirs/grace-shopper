@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
-import { updateSession, getMyCart } from '../store/cart';
+import { updateSession, retrieveSession } from '../store/cart';
 
 class Navbar extends Component {
   constructor() {
@@ -16,7 +16,7 @@ class Navbar extends Component {
   }
   async componentDidMount() {
     if (!this.props.cart.length) {
-      await this.props.getCart();
+      await this.props.getSession();
     }
     window.addEventListener('beforeunload', this.onRefresh);
   }
@@ -110,8 +110,8 @@ const mapDispatch = dispatch => {
     updateSession() {
       dispatch(updateSession());
     },
-    getCart() {
-      dispatch(getMyCart());
+    getSession() {
+      dispatch(retrieveSession());
     },
   };
 };
