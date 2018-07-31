@@ -14,12 +14,27 @@ class Products extends Component {
     this.state = {
       loading: true,
       searchValue: '',
+      sort: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   handleChange(event) {
     this.setState({ searchValue: event.target.value });
+  }
+
+  handleSort(event) {
+    if (event.target.value === 'sortByPrice') {
+      this.setState({ sort: 'sortByPrice' });
+    }
+    if (event.target.value === 'sortByName') {
+      this.setState({ sort: 'sortByName' });
+    }
+  }
+
+  sortHelper(obj1, obj2) {
+    return obj1.price - obj2.price;
   }
 
   async componentDidMount() {
@@ -41,6 +56,13 @@ class Products extends Component {
             type="text"
             placeholder="Search"
           />
+
+          <select defaultValue="unsorted" onChange={this.handleSort}>
+            <option value="unsorted">Unsorted</option>
+            <option value="sortByPrice">Sort by Price</option>
+            <option value="sortByName">Sort by Name</option>
+          </select>
+
           <div className="row all-products-margin">
             {this.state.searchValue === ''
               ? this.props.products.map(product => {
