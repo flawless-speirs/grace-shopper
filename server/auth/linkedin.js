@@ -17,6 +17,7 @@ if (!process.env.LINKEDIN_CLIENT_ID || !process.env.LINKEDIN_CLIENT_SECRET) {
   const strategy = new LinkedInStrategy(
     LinkedInConfig,
     (token, refreshToken, profile, done) => {
+      console.log('PROFILE: ', profile.displayName);
       const linkedinId = profile.id;
       const name = profile.displayName;
       const email = 'contact@linkedin.com';
