@@ -12,11 +12,6 @@ import { computeTotal, updateTotal } from '../store/total';
  */
 
 class Cart extends Component {
-  constructor() {
-    super();
-    this.state = { productsInCart: [], loading: true };
-  }
-
   async componentDidMount() {
     if (this.props.products.length < 2) {
       await this.props.retrieveProducts();
@@ -27,33 +22,29 @@ class Cart extends Component {
     if (this.props.cart.length && !this.props.total) {
       await this.props.computeTotal();
     }
+  }
 
-    let productsInCart = [];
-    if (this.props.cart.length) {
-      this.props.cart.forEach(item => {
-        const toAdd = this.props.products.find(
-          product => item.productId === product.id
-        );
-        if (toAdd && item.quantity) {
-          productsInCart.push({
-            id: toAdd.id,
-            name: toAdd.name,
-            price: toAdd.price,
-            imageUrl: toAdd.imageUrl,
-            quantity: item.quantity,
-          });
-        }
-      });
-    }
-    this.setState({ productsInCart, loading: false });
+  findProductFromState(cartProduct) {
+    const productData = this.props.products.find(
+      item => item.id === cartProduct.productId
+    );
+    return (
+      <div key={cartProduct.id}>
+        <ProductRow
+          cartProduct={cartProduct}
+          productData={productData}
+          updateTotal={this.props.updateTotal}
+        />
+      </div>
+    );
   }
 
   render() {
-    if (this.state.loading) {
+    if (this.props.products.length < 2) {
       return <LoadingScreen />;
     } else {
-      const products = this.state.productsInCart;
-      return products.length ? (
+      const cart = this.props.cart;
+      return cart.length ? (
         <div>
           <div className="container-fluid text-center product-table-head">
             <div className="row text-center">
@@ -62,16 +53,9 @@ class Cart extends Component {
               <div className="col-2"> Price </div>
               <div className="col-1"> Quantity </div>
             </div>
-            {products.map(product => {
+            {this.props.cart.map(product => {
               if (product.quantity) {
-                return (
-                  <div key={product.id}>
-                    <ProductRow
-                      product={product}
-                      updateTotal={this.props.updateTotal}
-                    />
-                  </div>
-                );
+                return this.findProductFromState(product);
               }
             })}
             <div> Total: ${this.props.total.toFixed(2)} </div>
@@ -82,7 +66,7 @@ class Cart extends Component {
         </div>
       ) : (
         <div className="text-center form-card">
-          There is nothing in your cart yet
+          There's nothing in your cart.
         </div>
       );
     }
