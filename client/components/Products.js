@@ -23,7 +23,9 @@ class Products extends Component {
   }
 
   async componentDidMount() {
-    await this.props.retrieveProducts();
+    if (this.props.products.length < 2) {
+      await this.props.retrieveProducts();
+    }
     this.setState({ loading: false });
   }
 
