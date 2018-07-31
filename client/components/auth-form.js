@@ -38,7 +38,7 @@ const AuthForm = props => {
 
         <div className="form-group row justify-content-center">
           <div className="col-4">
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary signup-btn" type="submit">
               {displayName}
             </button>
           </div>

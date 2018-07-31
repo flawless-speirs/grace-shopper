@@ -81,6 +81,7 @@ class Products extends Component {
           <h1>Products</h1>
           <input
             className="form-control search-bar"
+            id="search-form"
             value={this.state.searchValue}
             onChange={this.handleChange}
             type="text"
