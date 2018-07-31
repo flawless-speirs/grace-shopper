@@ -2,6 +2,8 @@ import axios from 'axios';
 import history from '../history';
 import { getMyCart, saveMyCart, updateSession } from './cart';
 import { updateTotal, clearTotal } from './total';
+import { saveMyCart, getMyCart } from './cart';
+
 
 /**
  * ACTION TYPES
@@ -67,7 +69,8 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    dispatch(getUser(res.data));
+    await dispatch(getUser(res.data));
+    await dispatch(getMyCart());
     history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);

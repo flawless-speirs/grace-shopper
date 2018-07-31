@@ -28,6 +28,10 @@ class Routes extends Component {
   render() {
     const { isLoggedIn } = this.props;
 
+    // const SingleProductWithKey = ({ match }) => {
+    //   return <SingleProduct key={match.params.id} />;
+    // };
+
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}

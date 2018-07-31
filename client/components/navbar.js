@@ -1,55 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import { updateSession, getMyCart } from '../store/cart';
 
-const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
-  <div className="sticky">
-    <Link to="/">
-      <img src={window.location.origin + '/logo.png'} className="logo" />
-    </Link>
-    <nav>
-      {isLoggedIn ? (
-        <React.Fragment>
-          <div className="welcome-message">Logged in as {userEmail}</div>
-          <div className="navbar-btns">
-            {/* The navbar will show these links after you log in */}
-            <Link to="/products" className="btn nav-btn">
-              All Products
-            </Link>
-            <Link to="/account" className="btn nav-btn">
-              Account
-            </Link>
-            <a href="#" onClick={handleClick} className="btn nav-btn">
-              Logout
-            </a>
-            <Link to="/cart" className="btn nav-btn cart-btn">
-              Cart ({itemsInCart()})
-            </Link>
-          </div>
-        </React.Fragment>
-      ) : (
-        <div className="navbar-btns">
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login" className="btn nav-btn">
-            Login
-          </Link>
-          <Link to="/signup" className="btn nav-btn">
-            Sign Up
-          </Link>
-          <Link to="/products" className="btn nav-btn">
-            All Products
-          </Link>
-          <Link to="/cart" className="btn nav-btn cart-btn">
-            Cart ({itemsInCart()})
-          </Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-);
+class Navbar extends Component {
+  constructor() {
+    super();
+    this.onRefresh = this.onRefresh.bind(this);
+  }
+
+  onRefresh() {
+    this.props.updateSession();
+  }
+  async componentDidMount() {
+    if (!this.props.cart.length) {
+      await this.props.getCart();
+    }
+    window.addEventListener('beforeunload', this.onRefresh);
+  }
+
+  async componentWillUnmount() {
+    await this.props.updateSession();
+    window.removeEventListener('beforeunload', this.onRefresh);
+  }
+
+  render() {
+    return (
+      <div className="sticky">
+        <Link to="/">
+          <img src={window.location.origin + '/logo.png'} className="logo" />
+        </Link>
+        <nav>
+          {this.props.isLoggedIn ? (
+            <React.Fragment>
+              <div className="welcome-message">
+                Logged in as {this.props.userEmail}
+              </div>
+              <div className="navbar-btns">
+                {/* The navbar will show these links after you log in */}
+                <Link to="/products" className="btn nav-btn">
+                  All Products
+                </Link>
+                <Link to="/account" className="btn nav-btn">
+                  Account
+                </Link>
+                <a
+                  href="#"
+                  onClick={this.props.handleClick}
+                  className="btn nav-btn"
+                >
+                  Logout
+                </a>
+                <Link to="/cart" className="btn nav-btn cart-btn">
+                  Cart ({this.props.itemsInCart()})
+                </Link>
+              </div>
+            </React.Fragment>
+          ) : (
+            <div className="navbar-btns">
+              {/* The navbar will show these links before you log in */}
+              <Link to="/login" className="btn nav-btn">
+                Login
+              </Link>
+              <Link to="/signup" className="btn nav-btn">
+                Sign Up
+              </Link>
+              <Link to="/products" className="btn nav-btn">
+                All Products
+              </Link>
+              <Link to="/cart" className="btn nav-btn cart-btn">
+                Cart ({this.props.itemsInCart()})
+              </Link>
+            </div>
+          )}
+        </nav>
+        <hr />
+      </div>
+    );
+  }
+}
 
 /**
  * CONTAINER
@@ -75,6 +106,12 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
+    },
+    updateSession() {
+      dispatch(updateSession());
+    },
+    getCart() {
+      dispatch(getMyCart());
     },
   };
 };
