@@ -28,7 +28,8 @@ class Navbar extends Component {
 
   render() {
     const defaultEmails = ['contact@linkedin.com', 'contact@github.com'];
-    // console.log('TEST', defaultEmails.find(this.props.user.email));
+    if (this.props.userEmail) {
+    }
     return (
       <div className="sticky">
         <Link to="/">
@@ -38,12 +39,10 @@ class Navbar extends Component {
           {this.props.isLoggedIn ? (
             <React.Fragment>
               <div className="welcome-message">
-                Logged in as
-                {defaultEmails.find(this.props.userEmail) > -1
+                Logged in as{' '}
+                {defaultEmails.indexOf(this.props.userEmail) === -1
                   ? this.props.userEmail
-                  : this.getState().user.googleId ||
-                    this.getState().user.githubId ||
-                    this.getState().user.linkedinId}
+                  : this.props.user.name}
               </div>
               <div className="navbar-btns">
                 {/* The navbar will show these links after you log in */}
@@ -93,10 +92,10 @@ class Navbar extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('STATE!', state.user);
   return {
     cart: state.cart,
     isLoggedIn: !!state.user.id,
+    user: state.user,
     userEmail: state.user.email,
     itemsInCart: () => {
       let numItems = 0;
