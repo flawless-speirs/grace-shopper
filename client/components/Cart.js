@@ -45,14 +45,8 @@ class Cart extends Component {
         }
       });
     }
-    // window.addEventListener('beforeunload', this.onRefresh);
     this.setState({ productsInCart, loading: false });
   }
-
-  // async componentWillUnmount() {
-  //   await this.props.updateSession();
-  //   window.removeEventListener('beforeunload', this.onRefresh);
-  // }
 
   render() {
     if (this.state.loading) {
