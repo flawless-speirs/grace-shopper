@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+const ERASE_PRODUCT = 'ERASE_PRODUCT';
 const UPDATE_SESSION = 'UPDATE_SESSION';
 const GET_SESSION = 'GET_SESSION';
 const CLEAR_CART = 'CLEAR_CART';
@@ -14,6 +15,7 @@ const CREATED_ORDER = 'CREATED_ORDER';
 
 const addProduct = cart => ({ type: ADD_PRODUCT, cart });
 const removeProduct = cart => ({ type: REMOVE_PRODUCT, cart });
+const eraseProduct = cart => ({ type: ERASE_PRODUCT, cart });
 const updatedSession = cart => ({ type: UPDATE_SESSION, cart });
 const getSession = cart => ({ type: GET_SESSION, cart });
 const clearCart = () => ({ type: CLEAR_CART });
@@ -46,6 +48,14 @@ export const removeFromCart = id => (dispatch, getState) => {
     item.quantity = currentQuantity - 1;
     dispatch(removeProduct(cart));
   }
+};
+
+export const eraseFromCart = id => (dispatch, getState) => {
+  const cart = getState().cart.slice();
+  const item = cart.find(el => el.productId === id);
+  const index = cart.indexOf(item);
+  cart.splice(index, 1);
+  dispatch(removeProduct(cart));
 };
 
 export const getMyCart = () => async dispatch => {
