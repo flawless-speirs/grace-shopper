@@ -1,7 +1,7 @@
 import axios from 'axios';
 import history from '../history';
 import { getMyCart, saveMyCart, updateSession } from './cart';
-import { updateTotal, clearTotal, saveMyCart, getMyCart } from './total';
+import { updateTotal, clearTotal } from './total';
 
 /**
  * ACTION TYPES
