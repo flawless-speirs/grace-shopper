@@ -5,9 +5,9 @@ const { User } = require('../db/models');
 module.exports = router;
 
 const githubConfig = {
-  clientID: 'e813c76855eb3b13732b',
-  clientSecret: '469f0aff8ef7cf9d9f587cf69616b15fb005b0f5',
-  callbackURL: 'https://rickandmortystore.herokuapp.com/auth/github/callback',
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK,
 };
 
 const strategy = new GitHubStrategy(

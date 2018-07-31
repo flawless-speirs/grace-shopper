@@ -2,14 +2,29 @@
   font-family: 'Lato', sans-serif;
 }
 
-body {
+/* body {
   background: #b1ddcb;
   background-size: cover;
+} */
+
+@media (max-width: 769px) {
+  body {
+    background-image: url('./background2.jpg');
+    background-size: cover;
+  }
 }
 
-.background-for-body {
-  background-image: url('./background3.jpg');
+@media (min-width: 769px) {
+  body {
+    background-image: url('./background3.jpg');
+    background-size: cover;
+  }
 }
+
+
+/* .background-for-body {
+  background-image: url('./background3.jpg');
+} */
 
 nav {
   float: right;

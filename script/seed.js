@@ -1,19 +1,7 @@
 'use strict';
 
 const db = require('../server/db');
-const { User, Product } = require('../server/db/models');
-
-/**
- * Welcome to the seed file! This seed file uses a newer language feature called...
- *
- *                  -=-= ASYNC...AWAIT -=-=
- *
- * Async-await is a joy to use! Read more about it in the MDN docs:
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
- *
- * Now that you've got the main idea, check it out in practice below!
- */
+const { User, Product, Tag } = require('../server/db/models');
 
 async function seed() {
   await db.sync({ force: true });
@@ -26,6 +14,12 @@ async function seed() {
     User.create({ email: 'michael@email.com', password: '123' }),
     User.create({ email: 'rick@email.com', password: '123' }),
     User.create({ email: 'server@server.com', password: '123' }),
+  ]);
+
+  const tags = await Promise.all([
+    Tag.create({ tagName: 'smith' }),
+    Tag.create({ tagName: 'rick' }),
+    Tag.create({ tagName: 'morty' }),
   ]);
 
   const characters = await Promise.all([
@@ -128,10 +122,25 @@ async function seed() {
       price: 2.0,
     }),
   ]);
+
+  await Promise.all([
+    characters[0].addTags([tags[0], tags[1]]),
+    characters[1].addTags([tags[0], tags[2]]),
+    characters[2].addTags(tags[0]),
+    characters[3].addTags(tags[0]),
+    characters[4].addTags(tags[0]),
+    characters[6].addTags(tags[1]),
+    characters[7].addTags(tags[2]),
+    characters[10].addTags(tags[2]),
+    characters[13].addTags(tags[1]),
+  ]);
+
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
+  console.log('CHARACTER:', characters[0]);
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${characters.length} characters`);
+  console.log(`seeded ${tags.length} tags`);
   console.log(`seeded successfully`);
 }
 

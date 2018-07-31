@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
 import LoadingScreen from './LoadingScreen';
 import { products as getProducts } from '../store/products';
-import { getMyCart, updateSession } from '../store/cart';
+import { retrieveSession, updateSession } from '../store/cart';
 import { computeTotal, updateTotal } from '../store/total';
 
 /**
@@ -15,22 +15,14 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = { productsInCart: [], loading: true };
-    this.updateTotal = this.updateTotal.bind(this);
-    this.onRefresh = this.onRefresh.bind(this);
-  }
-
-  onRefresh() {
-    this.props.updateSession();
-  }
-
-  updateTotal(amount) {
-    this.props.updateTotal(amount);
   }
 
   async componentDidMount() {
-    await this.props.retrieveProducts();
+    if (this.props.products.length < 2) {
+      await this.props.retrieveProducts();
+    }
     if (!this.props.cart.length) {
-      await this.props.getCart();
+      await this.props.getSession();
     }
     if (this.props.cart.length && !this.props.total) {
       await this.props.computeTotal();
@@ -53,13 +45,7 @@ class Cart extends Component {
         }
       });
     }
-    window.addEventListener('beforeunload', this.onRefresh);
     this.setState({ productsInCart, loading: false });
-  }
-
-  async componentWillUnmount() {
-    await this.props.updateSession();
-    window.removeEventListener('beforeunload', this.onRefresh);
   }
 
   render() {
@@ -95,7 +81,9 @@ class Cart extends Component {
           </div>
         </div>
       ) : (
-        <div className="text-center form-card">There is nothing in your cart yet</div>
+        <div className="text-center form-card">
+          There is nothing in your cart yet
+        </div>
       );
     }
   }
@@ -113,7 +101,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(getProducts()),
-  getCart: () => dispatch(getMyCart()),
+  getSession: () => dispatch(retrieveSession()),
   computeTotal: () => dispatch(computeTotal()),
   updateTotal: amount => dispatch(updateTotal(amount)),
   updateSession: () => dispatch(updateSession()),

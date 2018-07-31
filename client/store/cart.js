@@ -5,6 +5,7 @@ import axios from 'axios';
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const UPDATE_SESSION = 'UPDATE_SESSION';
+const GET_SESSION = 'GET_SESSION';
 const CLEAR_CART = 'CLEAR_CART';
 const GET_CART = 'GET_CART';
 const CREATED_ORDER = 'CREATED_ORDER';
@@ -14,6 +15,7 @@ const CREATED_ORDER = 'CREATED_ORDER';
 const addProduct = cart => ({ type: ADD_PRODUCT, cart });
 const removeProduct = cart => ({ type: REMOVE_PRODUCT, cart });
 const updatedSession = cart => ({ type: UPDATE_SESSION, cart });
+const getSession = cart => ({ type: GET_SESSION, cart });
 const clearCart = () => ({ type: CLEAR_CART });
 const getCart = cart => ({ type: GET_CART, cart });
 const createdOrder = () => ({ type: CREATED_ORDER });
@@ -54,9 +56,17 @@ export const updateSession = () => async (dispatch, getState) => {
   dispatch(updatedSession(cart));
 };
 
+export const retrieveSession = () => async dispatch => {
+  const cart = await axios.get('/api/carts/session');
+  if (cart.data) {
+    dispatch(getSession(cart.data));
+  }
+};
+
 export const saveMyCart = () => async (dispatch, getState) => {
   const cart = getState().cart;
   await axios.put('/api/carts', cart);
+  await axios.put('/api/carts/session', { cart: [], total: 0 });
   dispatch(clearCart());
 };
 
@@ -82,6 +92,8 @@ export default function(state = [], action) {
     case GET_CART:
       return action.cart;
     case UPDATE_SESSION:
+      return action.cart;
+    case GET_SESSION:
       return action.cart;
     case CLEAR_CART:
       return [];
