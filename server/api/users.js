@@ -3,6 +3,7 @@ const { User, Product, Order } = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
+  console.log('HITTING GET ROUTE');
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -17,6 +18,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
+  console.log('HITTING GET ROUTE');
   try {
     const user = await User.findById(req.params.id, {
       include: [Order],
@@ -30,6 +32,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    console.log('HITTING PUT ROUTE');
     const user = await User.findById(req.params.id);
     if (user.correctPassword(req.body.currentPassword)) {
       await user.update({
@@ -39,7 +42,7 @@ router.put('/:id', async (req, res, next) => {
       res.send('Change made');
     } else if (!user.correctPassword(req.body.currentPassword)) {
       res.statusMessage = 'Current password does not match';
-      res.status(490).end();
+      res.status(490);
     }
   } catch (err) {
     next(err);
