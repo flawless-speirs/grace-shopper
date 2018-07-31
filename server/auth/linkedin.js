@@ -5,9 +5,9 @@ const { User } = require('../db/models');
 module.exports = router;
 
 const LinkedInConfig = {
-  clientID: '77s5n75yjk4f4z',
-  clientSecret: 'hCY7zZhf2Hd9UdrX',
-  callbackURL: 'http://rickandmortystore.herokuapp.com/auth/linkedin/callback',
+  clientID: process.env.LINKEDIN_CLIENT_ID,
+  clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+  callbackURL: process.env.LINKEDIN_CALLBACK,
   state: true,
 };
 
