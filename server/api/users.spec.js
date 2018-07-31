@@ -28,7 +28,7 @@ describe('User routes', () => {
     it('GET /api/users when requesting with a header', async () => {
       const res = await request(app)
         .get('/api/users')
-        .set('referer', 'http://locahost:8080')
+        .set('referer', 'http://localhost:8080')
         .expect(200);
 
       expect(res.body).to.be.an('array');
