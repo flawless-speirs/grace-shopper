@@ -8,13 +8,13 @@ class OrderHistory extends Component {
   }
 
   render() {
-    const dateParse = (str) => {
-      const arr = str.split('-')
-      const year = arr[0]
-      const month = arr[1]
-      const day = arr[2].slice(0,2)
-      return `${month}-${day}-${year}`
-    }
+    const dateParse = str => {
+      const arr = str.split('-');
+      const year = arr[0];
+      const month = arr[1];
+      const day = arr[2].slice(0, 2);
+      return `${month}-${day}-${year}`;
+    };
     return this.props.user.orders ? (
       <div>
         {this.props.user.orders.map(order => {
@@ -37,7 +37,6 @@ class OrderHistory extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('entered state');
   return {
     user: state.user,
   };
