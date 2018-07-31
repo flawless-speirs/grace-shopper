@@ -3,8 +3,11 @@ const router = require('express').Router();
 module.exports = router;
 
 router.use('/', (req, res, next) => {
+  if (!req.headers) {
+    res.status(500);
+  }
   if (!req.headers['referer']) {
-    res.status(500).send('Unauthorized Access');
+    res.status(500);
   }
   next();
 });

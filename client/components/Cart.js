@@ -29,7 +29,7 @@ class Cart extends Component {
       item => item.id === cartProduct.productId
     );
     return (
-      <div key={cartProduct.id}>
+      <div key={cartProduct.productId}>
         <ProductRow
           cartProduct={cartProduct}
           productData={productData}

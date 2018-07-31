@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { products } from '../store/products';
 import { Link } from 'react-router-dom';
 import LoadingScreen from './LoadingScreen';
+import { updateTotal } from '../store/total';
+import { addToCart } from '../store/cart';
 
 /**
  * COMPONENT
@@ -16,8 +18,15 @@ class Products extends Component {
       searchValue: '',
       sort: '',
     };
+    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSort = this.handleSort.bind(this);
+  }
+
+  async handleClick(evt, product) {
+    evt.preventDefault();
+    await this.props.updateTotal(product.price);
+    await this.props.addToCart(product);
   }
 
   handleChange(event) {
@@ -53,7 +62,13 @@ class Products extends Component {
           <img className="product-img" src={product.imageUrl} />
         </Link>
         <div>${product.price}</div>
-        <br />
+        <button
+          className="btn btn-warning"
+          type="button"
+          onClick={evt => this.handleClick(evt, product)}
+        >
+          Add to Cart
+        </button>
       </div>
     );
 
@@ -125,6 +140,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(products()),
+  updateTotal: amount => dispatch(updateTotal(amount)),
+  addToCart: product => dispatch(addToCart(product.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

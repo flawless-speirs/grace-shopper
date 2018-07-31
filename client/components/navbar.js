@@ -29,10 +29,6 @@ class Navbar extends Component {
 
   render() {
     const defaultEmails = ['contact@linkedin.com', 'contact@github.com'];
-    if (this.props.userEmail) {
-      console.log('TEST', defaultEmails.indexOf(this.props.userEmail));
-      console.log('display name', this.props.user.displayName);
-    }
     return (
       <React.Fragment>
         <div className="dropdown"><MenuContainer isLoggedIn={this.props.isLoggedIn} handleClick={this.props.handleClick} /></div>
@@ -98,7 +94,6 @@ class Navbar extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('STATE!', state.user);
   return {
     cart: state.cart,
     isLoggedIn: !!state.user.id,

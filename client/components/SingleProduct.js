@@ -27,9 +27,13 @@ class SingleProduct extends Component {
     evt.preventDefault();
     await this.props.updateTotal(this.props.product.price);
     await this.props.addToCart(this.props.product);
-    document.getElementById('addedToCartAlert').classList.remove('d-none');
+    if (document.getElementById(`addedToCartAlert`)) {
+      document.getElementById('addedToCartAlert').classList.remove('d-none');
+    }
     setTimeout(() => {
-      document.getElementById('addedToCartAlert').classList.add('d-none');
+      if (document.getElementById('addedToCartAlert')) {
+        document.getElementById('addedToCartAlert').classList.add('d-none');
+      }
     }, 1500);
   }
 
