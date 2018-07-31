@@ -25,27 +25,28 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
               Logout
             </a>
             <Link to="/cart" className="btn nav-btn cart-btn">
-              Cart ({itemsInCart()})
+              <img src={window.location.origin + '/cart-logo.png'} className="media-logo" id="cart-logo" />
+              🛒 ({itemsInCart()})
             </Link>
           </div>
         </React.Fragment>
       ) : (
-        <div className="navbar-btns">
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login" className="btn nav-btn">
-            Login
+          <div className="navbar-btns">
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login" className="btn nav-btn">
+              Login
           </Link>
-          <Link to="/signup" className="btn nav-btn">
-            Sign Up
+            <Link to="/signup" className="btn nav-btn">
+              Sign Up
           </Link>
-          <Link to="/products" className="btn nav-btn">
-            All Products
+            <Link to="/products" className="btn nav-btn">
+              All Products
           </Link>
-          <Link to="/cart" className="btn nav-btn cart-btn">
-            Cart ({itemsInCart()})
+            <Link to="/cart" className="btn nav-btn cart-btn">
+              🛒 ({itemsInCart()})
           </Link>
-        </div>
-      )}
+          </div>
+        )}
     </nav>
     <hr />
   </div>
