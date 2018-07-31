@@ -37,7 +37,6 @@ class OrderHistory extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('entered state');
   return {
     user: state.user,
   };

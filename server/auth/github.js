@@ -5,35 +5,39 @@ const { User } = require('../db/models');
 module.exports = router;
 
 const githubConfig = {
-  clientID: 'e813c76855eb3b13732b',
-  clientSecret: '469f0aff8ef7cf9d9f587cf69616b15fb005b0f5',
-  callbackURL: 'https://rickandmortystore.herokuapp.com/auth/github/callback',
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK,
 };
 
-const strategy = new GitHubStrategy(
-  githubConfig,
-  (token, refreshToken, profile, done) => {
-    const githubId = profile.id;
-    const name = profile.username;
-    const email = 'contact@github.com';
+if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
+  console.log('Github client ID / secret not found. Skipping Google OAuth.');
+} else {
+  const strategy = new GitHubStrategy(
+    githubConfig,
+    (token, refreshToken, profile, done) => {
+      const githubId = profile.id;
+      const name = profile.username;
+      const email = 'contact@github.com';
 
-    User.findOrCreate({
-      where: { githubId },
-      defaults: { name, email },
+      User.findOrCreate({
+        where: { githubId },
+        defaults: { name, email },
+      })
+        .then(([user]) => done(null, user))
+        .catch(done);
+    }
+  );
+
+  passport.use(strategy);
+
+  router.get('/', passport.authenticate('github', { scope: 'email' }));
+
+  router.get(
+    '/callback',
+    passport.authenticate('github', {
+      successRedirect: '/account',
+      failureRedirect: '/login',
     })
-      .then(([user]) => done(null, user))
-      .catch(done);
-  }
-);
-
-passport.use(strategy);
-
-router.get('/', passport.authenticate('github', { scope: 'email' }));
-
-router.get(
-  '/callback',
-  passport.authenticate('github', {
-    successRedirect: '/home',
-    failureRedirect: '/login',
-  })
-);
+  );
+}
