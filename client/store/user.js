@@ -59,6 +59,7 @@ export const auth = (email, password, method) => async dispatch => {
     res = await axios.post(`/auth/${method}`, { email, password });
     if (res) {
       await dispatch(updateSession());
+      await dispatch(getUser(res.data));
       await dispatch(getMyCart());
       await dispatch(updateTotal());
     }
@@ -67,8 +68,6 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    await dispatch(getUser(res.data));
-    await dispatch(getMyCart());
     history.push('/account');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
@@ -80,6 +79,7 @@ export const logout = () => async dispatch => {
     await dispatch(saveMyCart());
     await dispatch(clearTotal());
     await axios.post('/auth/logout');
+    await axios.put('/api/carts/session', { cart: [], total: 0 });
     dispatch(removeUser());
     history.push('/login');
   } catch (err) {
