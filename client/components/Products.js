@@ -33,19 +33,38 @@ class Products extends Component {
     }
   }
 
-  sortHelper(obj1, obj2) {
-    return obj1.price - obj2.price;
-  }
-
   async componentDidMount() {
     await this.props.retrieveProducts();
     this.setState({ loading: false });
   }
 
   render() {
+    let sort; // DECLARE THE SORT HERE
+
+    const productCard = product => (
+      <div className="col-3 product-card" key={product.id}>
+        <div>{product.name}</div>
+        <Link to={`/products/${product.id}`}>
+          <img className="product-img" src={product.imageUrl} />
+        </Link>
+        <div>${product.price}</div>
+        <br />
+      </div>
+    );
+
     if (this.state.loading) {
       return <LoadingScreen />;
     } else {
+      if (this.state.sort === 'sortByPrice') {
+        sort = this.props.products.slice().sort((obj1, obj2) => {
+          return obj1.price - obj2.price;
+        });
+      } else if (this.state.sort === 'sortByName') {
+        sort = this.props.products.slice().sort();
+      } else {
+        // unsorted!!!
+      }
+
       return (
         <div className="container-fluid text-center all-products-bg">
           <h1>Products</h1>
@@ -58,7 +77,7 @@ class Products extends Component {
           />
 
           <select defaultValue="unsorted" onChange={this.handleSort}>
-            <option value="unsorted">Unsorted</option>
+            <option value="unsorted">Sort</option>
             <option value="sortByPrice">Sort by Price</option>
             <option value="sortByName">Sort by Name</option>
           </select>
@@ -66,16 +85,7 @@ class Products extends Component {
           <div className="row all-products-margin">
             {this.state.searchValue === ''
               ? this.props.products.map(product => {
-                  return (
-                    <div className="col-3 product-card" key={product.id}>
-                      <div>{product.name}</div>
-                      <Link to={`/products/${product.id}`}>
-                        <img className="product-img" src={product.imageUrl} />
-                      </Link>
-                      <div>${product.price}</div>
-                      <br />
-                    </div>
-                  );
+                  return ProductCard(product);
                 })
               : this.props.products
                   .filter(product => {
@@ -84,16 +94,7 @@ class Products extends Component {
                       .includes(this.state.searchValue.toLowerCase());
                   })
                   .map(product => {
-                    return (
-                      <div className="col-3 product-card" key={product.id}>
-                        <div>{product.name}</div>
-                        <Link to={`/products/${product.id}`}>
-                          <img className="product-img" src={product.imageUrl} />
-                        </Link>
-                        <div>${product.price}</div>
-                        <br />
-                      </div>
-                    );
+                    return ProductCard(product);
                   })}
           </div>
         </div>
