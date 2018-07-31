@@ -1,8 +1,10 @@
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
 const COMPUTE_TOTAL = 'COMPUTE_TOTAL';
+const CLEAR_TOTAL = 'CLEAR_TOTAL';
 
 const changeTotal = total => ({ type: UPDATE_TOTAL, total });
 const setTotal = total => ({ type: COMPUTE_TOTAL, total });
+export const clearTotal = () => ({ type: CLEAR_TOTAL });
 
 export const updateTotal = amount => (dispatch, getState) => {
   const total = getState().total;
@@ -28,6 +30,8 @@ export default function(state = 0, action) {
       return action.total;
     case COMPUTE_TOTAL:
       return action.total;
+    case CLEAR_TOTAL:
+      return 0;
     default:
       return state;
   }
