@@ -3,8 +3,13 @@ const router = require('express').Router();
 module.exports = router;
 
 router.use('/', (req, res, next) => {
+  console.log('REQUEST HEADERS: ', req.headers);
+  const error = new Error('Unauthorized Access');
+  error.status = 404;
   if (!req.headers['referer']) {
-    res.status(500).send('Unauthorized Access');
+    next(error);
+  } else if (req.headers.host !== 'localhost:8080') {
+    next(error);
   }
   next();
 });
