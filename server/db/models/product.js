@@ -19,7 +19,6 @@ const Product = db.define('product', {
   },
   price: {
     type: Sequelize.DECIMAL(10, 2),
-    unique: true,
     allowNull: false,
   },
 });
