@@ -27,18 +27,6 @@ class Products extends Component {
     evt.preventDefault();
     await this.props.updateTotal(product.price);
     await this.props.addToCart(product);
-    if (document.getElementById(`addedToCartAlert${product.id}`)) {
-      document
-        .getElementById(`addedToCartAlert${product.id}`)
-        .classList.remove('d-none');
-    }
-    setTimeout(() => {
-      if (document.getElementById(`addedToCartAlert${product.id}`)) {
-        document
-          .getElementById(`addedToCartAlert${product.id}`)
-          .classList.add('d-none');
-      }
-    }, 1500);
   }
 
   handleChange(event) {
@@ -81,14 +69,6 @@ class Products extends Component {
         >
           Add to Cart
         </button>
-        {/* <div
-          id={`addedToCartAlert${product.id}`}
-          className="alert alert-success d-none"
-          role="alert"
-        >
-          Added to Cart!
-        </div> */}
-        <br />
       </div>
     );
 
