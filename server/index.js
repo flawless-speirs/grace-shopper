@@ -86,7 +86,7 @@ const createApp = () => {
 
       res.json({ status });
     } catch (err) {
-      res.status(500).end();
+      res.status(500);
     }
   });
 
