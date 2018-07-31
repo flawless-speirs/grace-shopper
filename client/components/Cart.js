@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ProductRow from './ProductRow';
 import LoadingScreen from './LoadingScreen';
 import { products as getProducts } from '../store/products';
-import { getMyCart, updateSession } from '../store/cart';
+import { retrieveSession, updateSession } from '../store/cart';
 import { computeTotal, updateTotal } from '../store/total';
 
 /**
@@ -30,7 +30,7 @@ class Cart extends Component {
   async componentDidMount() {
     await this.props.retrieveProducts();
     if (!this.props.cart.length) {
-      await this.props.getCart();
+      await this.props.getSession();
     }
     if (this.props.cart.length && !this.props.total) {
       await this.props.computeTotal();
@@ -113,7 +113,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveProducts: () => dispatch(getProducts()),
-  getCart: () => dispatch(getMyCart()),
+  getSession: () => dispatch(retrieveSession()),
   computeTotal: () => dispatch(computeTotal()),
   updateTotal: amount => dispatch(updateTotal(amount)),
   updateSession: () => dispatch(updateSession()),
