@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToCart, removeFromCart } from '../store/cart';
+import { addToCart, removeFromCart, eraseFromCart } from '../store/cart';
 import { Link } from 'react-router-dom';
 
 /**
@@ -13,6 +13,7 @@ class ProductRow extends Component {
     this.state = {};
     this.handleAdd = this.handleAdd.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleErase = this.handleErase.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +38,14 @@ class ProductRow extends Component {
         return { ...prevState, quantity: prevState.quantity - 1 };
       });
     }
+  }
+
+  async handleErase(evt) {
+    evt.preventDefault();
+    await this.props.eraseFromCart(this.props.product.id);
+    await this.props.updateTotal(
+      -1 * this.props.product.price * this.props.product.quantity
+    );
   }
 
   render() {
@@ -67,6 +76,13 @@ class ProductRow extends Component {
           >
             -
           </button>
+          <button
+            className="btn btn-info"
+            type="button"
+            onClick={this.handleErase}
+          >
+            Delete
+          </button>
         </div>
       </div>
     );
@@ -80,6 +96,7 @@ class ProductRow extends Component {
 const mapDispatchToProps = dispatch => ({
   addToCart: id => dispatch(addToCart(id)),
   removeFromCart: id => dispatch(removeFromCart(id)),
+  eraseFromCart: id => dispatch(eraseFromCart(id)),
 });
 
 export default connect(null, mapDispatchToProps)(ProductRow);
