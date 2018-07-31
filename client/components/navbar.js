@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import { updateSession, retrieveSession } from '../store/cart';
 
 const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
   <div className="sticky">
@@ -76,6 +77,12 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
+    },
+    updateSession() {
+      dispatch(updateSession());
+    },
+    getSession() {
+      dispatch(retrieveSession());
     },
   };
 };
