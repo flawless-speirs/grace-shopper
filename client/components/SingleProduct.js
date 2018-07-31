@@ -12,6 +12,7 @@ class SingleProduct extends Component {
     super();
     this.state = { loading: true };
     this.handleClick = this.handleClick.bind(this);
+    this.clickCarousel = this.clickCarousel.bind(this);
   }
 
   async componentDidMount() {
@@ -30,15 +31,24 @@ class SingleProduct extends Component {
     }, 1500);
   }
 
+  async clickCarousel(id) {
+    await this.props.retrieveSingleProductById(id);
+    this.props.history.push('/products/' + id);
+  }
+
   render() {
     if (this.state.loading) {
       return <LoadingScreen />;
     } else {
       const recommendedProducts = this.props.products.filter(product => {
-        console.log('PRODUCT: ', product); // DELETE THIS
         for (let i = 0; i < product.tags.length; i++) {
-          for (let j = 0; j < this.product.tags.length; j++) {
-            if (product.tags[i].tagName === this.product.tags[j].tagName) {
+          for (let j = 0; j < this.props.product.tags.length; j++) {
+            if (product.id === this.props.product.id) {
+              return false;
+            }
+            if (
+              product.tags[i].tagName === this.props.product.tags[j].tagName
+            ) {
               return true;
             }
           }
@@ -75,8 +85,14 @@ class SingleProduct extends Component {
                 Added to Cart!
               </div>
             </div>
-            <h3>Recommended Products</h3>
-            <Recommendations recommendedProducts={recommendedProducts} />
+            <div>
+              <h3>Recommended Products</h3>
+              <Recommendations
+                key={this.props.match.params.id}
+                clickCarousel={this.clickCarousel}
+                recommendedProducts={recommendedProducts}
+              />
+            </div>
           </div>
         </div>
       );
@@ -93,6 +109,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   retrieveSingleProduct: () => dispatch(getProduct(ownProps.match.params.id)),
+  retrieveSingleProductById: id => dispatch(getProduct(id)),
   retrieveProducts: () => dispatch(products()),
   addToCart: product => dispatch(addToCart(product.id)),
   updateTotal: amount => dispatch(updateTotal(amount)),
