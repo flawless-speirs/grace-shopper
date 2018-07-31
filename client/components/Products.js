@@ -31,6 +31,9 @@ class Products extends Component {
     if (event.target.value === 'sortByName') {
       this.setState({ sort: 'sortByName' });
     }
+    if (event.target.value === 'sortById') {
+      this.setState({ sort: 'sortById' });
+    }
   }
 
   async componentDidMount() {
@@ -39,7 +42,7 @@ class Products extends Component {
   }
 
   render() {
-    let sort; // DECLARE THE SORT HERE
+    let sortedArray;
 
     const productCard = product => (
       <div className="col-3 product-card" key={product.id}>
@@ -56,13 +59,19 @@ class Products extends Component {
       return <LoadingScreen />;
     } else {
       if (this.state.sort === 'sortByPrice') {
-        sort = this.props.products.slice().sort((obj1, obj2) => {
+        sortedArray = this.props.products.slice().sort((obj1, obj2) => {
           return obj1.price - obj2.price;
         });
       } else if (this.state.sort === 'sortByName') {
-        sort = this.props.products.slice().sort();
+        sortedArray = this.props.products.slice().sort((obj1, obj2) => {
+          if (obj1.name < obj2.name) return -1;
+          if (obj1.name > obj2.name) return 1;
+          return 0;
+        });
       } else {
-        // unsorted!!!
+        sortedArray = this.props.products.sort((obj1, obj2) => {
+          return obj1.id - obj2.id;
+        });
       }
 
       return (
@@ -76,25 +85,25 @@ class Products extends Component {
             placeholder="Search"
           />
 
-          <select defaultValue="unsorted" onChange={this.handleSort}>
-            <option value="unsorted">Sort</option>
+          <select defaultValue="sortById" onChange={this.handleSort}>
+            <option value="sortById">Sort</option>
             <option value="sortByPrice">Sort by Price</option>
             <option value="sortByName">Sort by Name</option>
           </select>
 
           <div className="row all-products-margin">
             {this.state.searchValue === ''
-              ? this.props.products.map(product => {
-                  return ProductCard(product);
+              ? sortedArray.map(product => {
+                  return productCard(product);
                 })
-              : this.props.products
+              : sortedArray
                   .filter(product => {
                     return product.name
                       .toLowerCase()
                       .includes(this.state.searchValue.toLowerCase());
                   })
                   .map(product => {
-                    return ProductCard(product);
+                    return productCard(product);
                   })}
           </div>
         </div>
