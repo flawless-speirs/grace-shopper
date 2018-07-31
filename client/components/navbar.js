@@ -28,8 +28,6 @@ class Navbar extends Component {
 
   render() {
     const defaultEmails = ['contact@linkedin.com', 'contact@github.com'];
-    if (this.props.userEmail) {
-    }
     return (
       <div className="sticky">
         <Link to="/">

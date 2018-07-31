@@ -12,22 +12,35 @@ describe('User routes', () => {
   });
 
   describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com';
-
     beforeEach(() => {
       return User.create({
-        email: codysEmail,
+        email: 'rick@email.com',
+        password: '123',
       });
     });
 
-    it('GET /api/users', async () => {
+    it('will be unable to request API routes', async () => {
+      return await request(app)
+        .get('/api/users')
+        .expect(500);
+    });
+
+    it('GET /api/users when requesting with a header', async () => {
       const res = await request(app)
         .get('/api/users')
         .set('referer', 'http://locahost:8080')
         .expect(200);
 
       expect(res.body).to.be.an('array');
-      expect(res.body[0].email).to.be.equal(codysEmail);
+    });
+
+    it('will login with the correct username/password combo', async () => {
+      const loginRes = await request(app)
+        .post('/auth/login')
+        .send({ email: 'rick@email.com', password: '123' });
+
+      expect(loginRes.body.id).to.not.be.null;
+      expect(loginRes.body.id).to.be.equal(1);
     });
   }); // end describe('/api/users')
 }); // end describe('User routes')
