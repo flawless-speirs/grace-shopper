@@ -12,22 +12,22 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
     <nav>
       {isLoggedIn ? (
         <React.Fragment>
-        <div className="welcome-message">Logged in as {userEmail}</div>
-        <div className="navbar-btns">
-          {/* The navbar will show these links after you log in */}
-          <Link to="/products" className="btn nav-btn">
-            All Products
-          </Link>
-          <Link to="/account" className="btn nav-btn">
-            Account
-          </Link>
-          <a href="#" onClick={handleClick} className="btn nav-btn">
-            Logout
-          </a>
-          <Link to="/cart" className="btn nav-btn cart-btn">
-            Cart ({itemsInCart()})
-          </Link>
-        </div>
+          <div className="welcome-message">Logged in as {userEmail}</div>
+          <div className="navbar-btns">
+            {/* The navbar will show these links after you log in */}
+            <Link to="/products" className="btn nav-btn">
+              All Products
+            </Link>
+            <Link to="/account" className="btn nav-btn">
+              Account
+            </Link>
+            <a href="#" onClick={handleClick} className="btn nav-btn">
+              Logout
+            </a>
+            <Link to="/cart" className="btn nav-btn cart-btn">
+              Cart ({itemsInCart()})
+            </Link>
+          </div>
         </React.Fragment>
       ) : (
         <div className="navbar-btns">
@@ -56,15 +56,16 @@ const Navbar = ({ handleClick, isLoggedIn, userEmail, itemsInCart }) => (
  */
 const mapState = state => {
   return {
+    cart: state.cart,
     isLoggedIn: !!state.user.id,
     userEmail: state.user.email,
     itemsInCart: () => {
       let numItems = 0;
       if (state.cart.length) {
         state.cart.forEach(element => {
-        numItems += element.quantity;
+          numItems += element.quantity;
         });
-      };
+      }
       return numItems;
     },
   };

@@ -27,6 +27,12 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING,
   },
+  githubId: {
+    type: Sequelize.STRING,
+  },
+  linkedinId: {
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = User;
