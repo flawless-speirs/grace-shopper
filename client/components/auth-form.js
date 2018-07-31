@@ -44,18 +44,21 @@ const AuthForm = props => {
           </div>
         </div>
         <div>
-          <a className="btn btn-success" href="/auth/google">
-            {displayName} with Google
+          <a className="" href="/auth/google">
+            <img src={window.location.origin + '/google-logo.png'} className="media-logo" />
+
           </a>
         </div>
         <div>
-          <a className="btn btn-success" href="/auth/github">
-            {displayName} with Github
+          <a className="" href="/auth/github">
+            <img src={window.location.origin + '/github-logo.png'} className="media-logo" />
+
           </a>
         </div>
         <div>
-          <a className="btn btn-success" href="/auth/linkedin">
-            {displayName} with LinkedIn
+          <a className="" href="/auth/linkedin">
+            <img src={window.location.origin + '/linkedin-logo.png'} className="media-logo" />
+
           </a>
         </div>
         <div className="error-message">
