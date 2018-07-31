@@ -15,20 +15,12 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = { productsInCart: [], loading: true };
-    this.updateTotal = this.updateTotal.bind(this);
-    this.onRefresh = this.onRefresh.bind(this);
-  }
-
-  onRefresh() {
-    this.props.updateSession();
-  }
-
-  updateTotal(amount) {
-    this.props.updateTotal(amount);
   }
 
   async componentDidMount() {
-    await this.props.retrieveProducts();
+    if (this.props.products.length < 2) {
+      await this.props.retrieveProducts();
+    }
     if (!this.props.cart.length) {
       await this.props.getCart();
     }
@@ -53,14 +45,14 @@ class Cart extends Component {
         }
       });
     }
-    window.addEventListener('beforeunload', this.onRefresh);
+    // window.addEventListener('beforeunload', this.onRefresh);
     this.setState({ productsInCart, loading: false });
   }
 
-  async componentWillUnmount() {
-    await this.props.updateSession();
-    window.removeEventListener('beforeunload', this.onRefresh);
-  }
+  // async componentWillUnmount() {
+  //   await this.props.updateSession();
+  //   window.removeEventListener('beforeunload', this.onRefresh);
+  // }
 
   render() {
     if (this.state.loading) {
@@ -95,7 +87,9 @@ class Cart extends Component {
           </div>
         </div>
       ) : (
-        <div className="text-center form-card">There is nothing in your cart yet</div>
+        <div className="text-center form-card">
+          There is nothing in your cart yet
+        </div>
       );
     }
   }
