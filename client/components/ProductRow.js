@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToCart, removeFromCart } from '../store/cart';
+import { Link } from 'react-router-dom';
 
 /**
  * COMPONENT
@@ -45,7 +46,9 @@ class ProductRow extends Component {
         <div className="row text-center">
           <div className="col-4">
             {' '}
-            <img height="150" width="150" src={product.imageUrl} />{' '}
+            <Link to={`/products/${product.id}`}>
+              <img height="150" width="150" src={product.imageUrl} />
+            </Link>{' '}
           </div>
           <div className="col-2">{product.name}</div>
           <div className="col-2">${product.price}</div>
