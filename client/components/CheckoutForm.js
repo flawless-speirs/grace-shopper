@@ -23,7 +23,9 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    if (this.state.complete) return <h1>Thank you for your purchase!</h1>;
+    if (this.state.complete) return (
+      <h1 className="misc-bg" >Thank you for your purchase!</h1>
+    );
 
     return (
       <div className="checkout">
