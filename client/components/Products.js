@@ -27,13 +27,17 @@ class Products extends Component {
     evt.preventDefault();
     await this.props.updateTotal(product.price);
     await this.props.addToCart(product);
-    document
-      .getElementById(`addedToCartAlert${product.id}`)
-      .classList.remove('d-none');
-    setTimeout(() => {
+    if (document.getElementById(`addedToCartAlert${product.id}`)) {
       document
         .getElementById(`addedToCartAlert${product.id}`)
-        .classList.add('d-none');
+        .classList.remove('d-none');
+    }
+    setTimeout(() => {
+      if (document.getElementById(`addedToCartAlert${product.id}`)) {
+        document
+          .getElementById(`addedToCartAlert${product.id}`)
+          .classList.add('d-none');
+      }
     }, 1500);
   }
 

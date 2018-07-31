@@ -16,12 +16,6 @@ async function seed() {
     User.create({ email: 'server@server.com', password: '123' }),
   ]);
 
-  const tags = await Promise.all([
-    Tag.create({ tagName: 'smith' }),
-    Tag.create({ tagName: 'rick' }),
-    Tag.create({ tagName: 'morty' }),
-  ]);
-
   const characters = await Promise.all([
     Product.create({
       name: 'Rick Sanchez',
@@ -121,6 +115,99 @@ async function seed() {
       description: `Squanchy is a cat-like anthropomorphic creature that was invited to Rick and Summer's party in "Ricksy Business". He is a recurring character in Rick and Morty, and very good friends with Rick, sharing his love for alcohol.`,
       price: 2.0,
     }),
+    Product.create({
+      name: 'Pizza Person',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/424.jpeg',
+      description: `An anthropomorphized slice of pizza with arms, legs, eyes, and a mouth.`,
+      price: 99.99,
+    }),
+    Product.create({
+      name: 'Phone Person',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/428.jpeg',
+      description: `An anthropomorphized phone with arms, legs, eyes, and a mouth.`,
+      price: 99.99,
+    }),
+    Product.create({
+      name: 'Diane Sanchez',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/94.jpeg',
+      description: `Diane Sanchez is a hypothetical version of the ex-wife of Rick Sanchez, the mother of Beth Smith, the mother-in-law of Jerry Smith, and the maternal grandmother of Summer Smith and Morty Smith, who appeared in a memory projection in "The Rickshank Rickdemption". She and her daughter Beth are both killed by a bomb sent by another Rick.`,
+      price: 50000.0,
+    }),
+    Product.create({
+      name: 'Birdperson',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/47.jpeg',
+      description: `Birdperson, currently known as Phoenixperson, is a recurring character in Rick and Morty. He is an old friend of Rick's and has seemingly known Morty since he was a baby. He attends Rick's party looking for a new mate after ending his soul-bond with his previous spirit-partner. At the end of the episode, he gets back in the saddle with one of Summer's high school friends, Tammy.`,
+      price: 20000.0,
+    }),
+    Product.create({
+      name: 'Ants in my Eyes Johnson',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/20.jpeg',
+      description: `Ants in my Eyes Johnson is a store owner who appears in a commercial in Rixty Minutes for his electronics store.`,
+      price: 34.99,
+    }),
+    Product.create({
+      name: 'Unity',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/372.jpeg',
+      description: `Unity is a collective hivemind and Rick Sanchez's former lover. It is a powerful entity that can control minds, and form alliances. It takes the forms of multiple genders, races, and likely species, but uses both male and female avatars, including around Rick. Unity first appeared in "Auto Erotic Assimilation", where it briefly gets back together with Rick, only for them to separate again at the end of the episode.`,
+      price: 60000.0,
+    }),
+    Product.create({
+      name: 'Gear Cop',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/448.jpeg',
+      description: `A bio-mechanical alien whose biology, technology, and society is built largely on gears.`,
+      price: 2000.0,
+    }),
+    Product.create({
+      name: 'King Jellybean',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/193.jpeg',
+      description: `King Jellybean (also referred to as Mr. Jellybean) was a character featured in the episode "Meeseeks and Destroy". King Jellybean was a giant anthropomorphic jelly bean. It was later revealed that he was the king of a poor village that Rick and Morty agreed to help.`,
+      price: 0.02,
+    }),
+    Product.create({
+      name: 'Sleepy Gary',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/324.jpeg',
+      description: `Sleepy Gary (possibly Gary Smith) was a false character created by the Alien Parasites who invaded the Smith house. He passes himself off as a member of the immediate family, as well as Jerry's lover.`,
+      price: 999.99,
+    }),
+    Product.create({
+      name: 'Fart',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/122.jpeg',
+      description: `Fart is a gaseous being who appeared in the episode "Mortynight Run". Although technically nameless, it took on the name "Fart" for convenience after Rick insulted it. It communicates through telepathy.`,
+      price: 894.99,
+    }),
+    Product.create({
+      name: 'Mr. Needful',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/243.jpeg',
+      description: `Mr. Lucius Needful, (also known as the Devil), is the main antagonist of "Something Ricked This Way Comes". Lucius is an eccentric gentleman who runs a vintage antique shop called Needful Things. He hires Summer to help work around the shop, which sells merchandise that curses people.`,
+      price: 666.66,
+    }),
+    Product.create({
+      name: 'Abradolf Lincler',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/7.jpeg',
+      description: `Abradolf Lincler is a humanoid experiment debuting in Ricksy Business. He was created when Rick combined the DNA of Abraham Lincoln and Adolf Hitler, in an attempt to create a morally neutral super leader. He failed and the end result was a cognitively dissonant and morally-confused emotional trainwreck.`,
+      price: 9.99,
+    }),
+    Product.create({
+      name: 'Shrimply Pibbles',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/321.jpeg',
+      description: `Shrimply Pibbles is the galaxy's most influential civil rights leader.`,
+      price: 5000.0,
+    }),
+    Product.create({
+      name: 'Scary Terry',
+      imageUrl: 'https://rickandmortyapi.com/api/character/avatar/306.jpeg',
+      description: `Scary Terry is a character that appeared as the secondary antagonist in the episode "Lawnmower Dog" and the comic story Morty and Rick in: Mortballs. After a failed attempt at killing them, Scary Terry retreats and heads home. While he is asleep, Rick and Morty incept his dreams and befriend him, he is also the husband of Melissa, and the father of Scary Brandon.`,
+      price: 9000.0,
+    }),
+  ]);
+
+  const tags = await Promise.all([
+    Tag.create({ tagName: 'smith' }),
+    Tag.create({ tagName: 'rick' }),
+    Tag.create({ tagName: 'morty' }),
+    Tag.create({ tagName: 'alien' }),
+    Tag.create({ tagName: 'ricks_friend' }),
+    Tag.create({ tagName: 'miscellaneous' }),
   ]);
 
   await Promise.all([
@@ -129,10 +216,31 @@ async function seed() {
     characters[2].addTags(tags[0]),
     characters[3].addTags(tags[0]),
     characters[4].addTags(tags[0]),
+    characters[5].addTags(tags[3]),
     characters[6].addTags(tags[1]),
     characters[7].addTags(tags[2]),
+    characters[8].addTags(tags[3]),
+    characters[9].addTags(tags[3]),
     characters[10].addTags(tags[2]),
+    characters[11].addTags(tags[3]),
+    characters[12].addTags(tags[3]),
     characters[13].addTags(tags[1]),
+    characters[14].addTags(tags[4]),
+    characters[15].addTags(tags[4]),
+    characters[16].addTags(tags[5]),
+    characters[17].addTags(tags[5]),
+    characters[18].addTags(tags[0]),
+    characters[19].addTags(tags[4]),
+    characters[20].addTags(tags[5]),
+    characters[21].addTags(tags[4]),
+    characters[22].addTags(tags[3]),
+    characters[23].addTags(tags[3]),
+    characters[24].addTags(tags[3]),
+    characters[25].addTags(tags[3]),
+    characters[26].addTags(tags[3]),
+    characters[27].addTags(tags[4]),
+    characters[28].addTags(tags[3]),
+    characters[29].addTags(tags[4]),
   ]);
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator

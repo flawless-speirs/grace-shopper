@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToCart, removeFromCart, eraseFromCart } from '../store/cart';
 import { Link } from 'react-router-dom';
+import LoadingScreen from './LoadingScreen';
 
 /**
  * COMPONENT
@@ -16,52 +17,48 @@ class ProductRow extends Component {
     this.handleErase = this.handleErase.bind(this);
   }
 
-  componentDidMount() {
-    this.setState(this.props.product);
-  }
-
   async handleAdd(evt) {
     evt.preventDefault();
-    await this.props.addToCart(this.props.product.id);
-    await this.props.updateTotal(this.props.product.price);
-    this.setState(prevState => {
-      return { ...prevState, quantity: prevState.quantity + 1 };
-    });
+    await this.props.addToCart(this.props.productData.id);
+    await this.props.updateTotal(this.props.productData.price);
   }
 
   async handleRemove(evt) {
     evt.preventDefault();
-    if (this.state.quantity > 0) {
-      await this.props.removeFromCart(this.props.product.id);
-      await this.props.updateTotal(-1 * this.props.product.price);
-      this.setState(prevState => {
-        return { ...prevState, quantity: prevState.quantity - 1 };
-      });
+    if (this.props.cartProduct.quantity > 0) {
+      await this.props.removeFromCart(this.props.productData.id);
+      await this.props.updateTotal(-1 * this.props.productData.price);
     }
   }
 
   async handleErase(evt) {
     evt.preventDefault();
-    await this.props.eraseFromCart(this.props.product.id);
+    await this.props.eraseFromCart(this.props.productData.id);
     await this.props.updateTotal(
-      -1 * this.props.product.price * this.props.product.quantity
+      -1 * this.props.productData.price * this.props.cartProduct.quantity
     );
   }
 
   render() {
-    const product = this.state;
+    if (!this.props.productData) {
+      return <LoadingScreen />;
+    }
     return (
       <div className="container-fluid text-center product-row-card">
         <div className="row text-center">
           <div className="col-4">
             {' '}
-            <Link to={`/products/${product.id}`}>
-              <img height="150" width="150" src={product.imageUrl} />
+            <Link to={`/products/${this.props.productData.id}`}>
+              <img
+                height="150"
+                width="150"
+                src={this.props.productData.imageUrl}
+              />
             </Link>{' '}
           </div>
-          <div className="col-2">{product.name}</div>
-          <div className="col-2">${product.price}</div>
-          <div className="col-1">{product.quantity}</div>
+          <div className="col-2">{this.props.productData.name}</div>
+          <div className="col-2">${this.props.productData.price}</div>
+          <div className="col-1">{this.props.cartProduct.quantity}</div>
           <button
             className="btn btn-info"
             type="button"
@@ -93,10 +90,15 @@ class ProductRow extends Component {
  * CONTAINER
  */
 
+const mapStateToProps = state => ({
+  products: state.products,
+  cart: state.cart,
+});
+
 const mapDispatchToProps = dispatch => ({
   addToCart: id => dispatch(addToCart(id)),
   removeFromCart: id => dispatch(removeFromCart(id)),
   eraseFromCart: id => dispatch(eraseFromCart(id)),
 });
 
-export default connect(null, mapDispatchToProps)(ProductRow);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductRow);
