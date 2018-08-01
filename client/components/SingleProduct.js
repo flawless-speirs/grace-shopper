@@ -73,9 +73,6 @@ class SingleProduct extends Component {
               <div className="product-description">
                 {this.props.product.description}
               </div>
-              {this.props.product.tags.map(tag => (
-                <div key={tag.id}>{tag.tagName}</div>
-              ))}
               <button
                 className="btn btn-warning"
                 type="button"
