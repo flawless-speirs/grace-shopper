@@ -40,11 +40,7 @@ export const removeFromCart = id => (dispatch, getState) => {
   const cart = getState().cart.slice();
   const item = cart.find(el => el.productId === id);
   let currentQuantity = item.quantity;
-  if (currentQuantity === 1) {
-    const index = cart.indexOf(item);
-    cart.splice(index, 1);
-    dispatch(removeProduct(cart));
-  } else if (currentQuantity > 0) {
+  if (currentQuantity > 0) {
     item.quantity = currentQuantity - 1;
     dispatch(removeProduct(cart));
   }
@@ -53,8 +49,7 @@ export const removeFromCart = id => (dispatch, getState) => {
 export const eraseFromCart = id => (dispatch, getState) => {
   const cart = getState().cart.slice();
   const item = cart.find(el => el.productId === id);
-  const index = cart.indexOf(item);
-  cart.splice(index, 1);
+  item.quantity = 0;
   dispatch(eraseProduct(cart));
 };
 

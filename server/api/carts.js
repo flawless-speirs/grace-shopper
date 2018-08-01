@@ -51,6 +51,9 @@ router.put('/', async (req, res, next) => {
         }).then(response => {
           if (response) {
             // if instance already exists
+            if (!product.quantity) {
+              return response.destroy();
+            }
             if (product.orderId) {
               // if submitting an order
               return response.update({
