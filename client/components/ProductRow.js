@@ -46,7 +46,7 @@ class ProductRow extends Component {
     return (
       <div className="container-fluid text-center product-row-card">
         <div className="row text-center">
-          <div className="col-4">
+          <div className="col-3">
             {' '}
             <Link to={`/products/${this.props.productData.id}`}>
               <img
@@ -56,30 +56,38 @@ class ProductRow extends Component {
               />
             </Link>{' '}
           </div>
-          <div className="col-2">{this.props.productData.name}</div>
-          <div className="col-2">${this.props.productData.price}</div>
-          <div className="col-1">{this.props.cartProduct.quantity}</div>
-          <button
-            className="btn btn-info"
-            type="button"
-            onClick={this.handleAdd}
-          >
-            +
-          </button>
-          <button
-            className="btn btn-info"
-            type="button"
-            onClick={this.handleRemove}
-          >
-            -
-          </button>
-          <button
-            className="btn btn-info"
-            type="button"
-            onClick={this.handleErase}
-          >
-            Delete
-          </button>
+          <div className="col-2 vertical-align">
+            {this.props.productData.name}
+          </div>
+          <div className="col-2 vertical-align">
+            ${this.props.productData.price}
+          </div>
+          <div className="col-1 vertical-align">
+            {this.props.cartProduct.quantity}
+          </div>
+          <div className="col-3 vertical-align">
+            <button
+              className="btn btn-info cart-button"
+              type="button"
+              onClick={this.handleAdd}
+            >
+              +
+            </button>
+            <button
+              className="btn btn-info cart-button"
+              type="button"
+              onClick={this.handleRemove}
+            >
+              -
+            </button>
+            <button
+              className="btn btn-info"
+              type="button"
+              onClick={this.handleErase}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     );

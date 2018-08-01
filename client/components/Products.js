@@ -101,13 +101,11 @@ class Products extends Component {
             type="text"
             placeholder="Search"
           />
-
           <select defaultValue="sortById" onChange={this.handleSort}>
             <option value="sortById">Sort</option>
             <option value="sortByPrice">Sort by Price</option>
             <option value="sortByName">Sort by Name</option>
           </select>
-
           <div className="row all-products-margin">
             {this.state.searchValue === ''
               ? sortedArray.map(product => {

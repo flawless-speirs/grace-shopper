@@ -12,6 +12,7 @@ import {
   HomePage,
   Products,
   SingleProduct,
+  SingleProductError,
   Cart,
   CheckoutPage,
 } from './components';
@@ -39,6 +40,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
+        <Route exact path="/products/error" component={SingleProductError} />
         <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/cart/checkout" component={CheckoutPage} />
