@@ -3,11 +3,32 @@ const router = require('express').Router();
 module.exports = router;
 
 router.use('/', (req, res, next) => {
-  if (!req.headers) {
-    res.status(500);
-  }
+  console.log('REQUEST HEADERS: ', req.headers);
+  const error = new Error('Unauthorized Access');
+  error.status = 405;
   if (!req.headers['referer']) {
-    res.status(500);
+    next(error);
+  } else {
+    if (
+      // req.headers['referer'].indexOf('127.0.0.1') < 0 &&
+      req.headers['referer'].indexOf('localhost:8080') < 0 &&
+      req.headers['referer'].indexOf('rickandmortystore.herokuapp.com') < 0
+    ) {
+      console.log('referer error');
+      next(error);
+    }
+  }
+  if (!req.headers.host) {
+    next(error);
+  } else {
+    if (
+      req.headers.host.indexOf('127.0.0.1') < 0 &&
+      req.headers.host.indexOf('localhost:8080') < 0 &&
+      req.headers.host.indexOf('rickandmortystore.herokuapp.com') < 0
+    ) {
+      console.log('host error');
+      next(error);
+    }
   }
   next();
 });
