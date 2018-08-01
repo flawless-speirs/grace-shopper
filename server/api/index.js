@@ -5,7 +5,7 @@ module.exports = router;
 router.use('/', (req, res, next) => {
   console.log('REQUEST HEADERS: ', req.headers);
   const error = new Error('Unauthorized Access');
-  error.status = 500;
+  error.status = 405;
   if (!req.headers['referer']) {
     next(error);
   } else {

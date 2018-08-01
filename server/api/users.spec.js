@@ -22,7 +22,7 @@ describe('User routes', () => {
     it('will be unable to request API routes', async () => {
       return await request(app)
         .get('/api/users')
-        .expect(500);
+        .expect(405);
     });
 
     it('GET /api/users when requesting with a header', async () => {
