@@ -17,10 +17,14 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     await this.props.retrieveSingleProduct();
-    if (this.props.products.length < 2) {
-      await this.props.retrieveProducts();
+    if (this.props.product === null) {
+      this.props.history.push('/products/error');
+    } else {
+      if (this.props.products.length < 2) {
+        await this.props.retrieveProducts();
+      }
+      this.setState({ loading: false });
     }
-    this.setState({ loading: false });
   }
 
   async handleClick(evt) {
@@ -64,15 +68,19 @@ class SingleProduct extends Component {
       return (
         <div className="container-fluid single-product-bg">
           <div className="row">
-            <div className="product-image text-center">
+            <div className="product-image text-center col-3">
               <img src={this.props.product.imageUrl} />
             </div>
-            <div>
+            <div className="col-1" />
+            <div className="col-8">
               <div className="product-name">{this.props.product.name}</div>
+              <br />
               <div className="product-price">${this.props.product.price}</div>
+              <br />
               <div className="product-description">
                 {this.props.product.description}
               </div>
+              <br />
               <button
                 className="btn btn-warning"
                 type="button"
@@ -88,14 +96,15 @@ class SingleProduct extends Component {
                 Added to Cart!
               </div>
             </div>
-            <div>
-              <h3>Recommended Products</h3>
-              <Recommendations
-                key={this.props.match.params.id}
-                clickCarousel={this.clickCarousel}
-                recommendedProducts={recommendedProducts}
-              />
-            </div>
+          </div>
+          <div>
+            <br />
+            <h3 className="row">Recommended Products</h3>
+            <Recommendations
+              key={this.props.match.params.id}
+              clickCarousel={this.clickCarousel}
+              recommendedProducts={recommendedProducts}
+            />
           </div>
         </div>
       );

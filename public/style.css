@@ -109,7 +109,12 @@ form div {
 }
 
 .nav-btn {
-  background-image: linear-gradient( to right, #4b99ca 0%, #71ca6f 51%, #42aeb3 100% );
+  background-image: linear-gradient(
+    to right,
+    #4b99ca 0%,
+    #71ca6f 51%,
+    #42aeb3 100%
+  );
 }
 
 .home-btn {
@@ -128,13 +133,13 @@ form div {
 }
 
 .footer {
-  background-color:red;
+  background-color: red;
 }
 
 .footer-btns {
   float: right;
   margin: 3vw 3vw;
-  font-size: 4em
+  font-size: 4em;
 }
 
 .sticky {
@@ -235,6 +240,17 @@ form div {
   border-radius: 1vw;
 }
 
+.cart-button {
+  height: 4vw;
+  width: 4vw;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* .profile-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 } */
@@ -249,7 +265,8 @@ form div {
 .error-message {
   display: block;
   color: #ff0000;
-  text-shadow: 0 0 5px #000000, 0 0 10px #ff0011, 0 0 20px #a5f1ff, 0 0 30px #000000, 0 0 40px #000000;
+  text-shadow: 0 0 5px #000000, 0 0 10px #ff0011, 0 0 20px #a5f1ff,
+    0 0 30px #000000, 0 0 40px #000000;
   font-size: 2em;
 }
 

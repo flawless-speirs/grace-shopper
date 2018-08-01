@@ -5,11 +5,12 @@
  */
 
 export { default as Navbar } from './navbar';
-export { default as Footer } from './Footer'
+export { default as Footer } from './Footer';
 export { Login, Signup } from './auth-form';
 export { HomePage } from './HomePage';
 export { default as Products } from './Products';
 export { default as SingleProduct } from './SingleProduct';
+export { default as SingleProductError } from './SingleProductError';
 export { default as Cart } from './Cart';
 export { default as CheckoutForm } from './CheckoutForm';
 export { default as CheckoutPage } from './CheckoutPage';

@@ -7,8 +7,11 @@ const creators = [
     name: 'Andrew Miller',
     title: 'Fullstack Software Engineer',
     description: 'Math, Amherst	⚽',
-    imagePath: './Andrew.jpg'	,
-    urlArray: ['https://www.linkedin.com/in/admiller9/','https://github.com/andrwmillr'],
+    imagePath: './Andrew.jpg',
+    urlArray: [
+      'https://www.linkedin.com/in/admiller9/',
+      'https://github.com/andrwmillr',
+    ],
   },
   {
     id: 2,
@@ -16,7 +19,10 @@ const creators = [
     title: 'Fullstack Software Engineer',
     description: 'Computer Science, Amherst ⚾',
     imagePath: './Rick.jpg',
-    urlArray: ['https://www.linkedin.com/in/rick-terry-64aa8b17/','https://github.com/fdterr'],
+    urlArray: [
+      'https://www.linkedin.com/in/rick-terry-64aa8b17/',
+      'https://github.com/fdterr',
+    ],
   },
   {
     id: 3,
@@ -24,7 +30,10 @@ const creators = [
     title: 'Fullstack Software Engineer',
     description: 'Math, Binghamton 🎾',
     imagePath: './Michael.jpg',
-    urlArray: ['https://www.linkedin.com/in/michaellindev/','https://github.com/mmichaellin'],
+    urlArray: [
+      'https://www.linkedin.com/in/michaellindev/',
+      'https://github.com/mmichaellin',
+    ],
   },
   {
     id: 4,
@@ -32,7 +41,10 @@ const creators = [
     title: 'Fullstack Software Engineer',
     description: 'Computer Science, Fordham 🏀',
     imagePath: './Kevin.jpg',
-    urlArray: ['https://www.linkedin.com/in/kevinho6/','https://github.com/kevinho6'],
+    urlArray: [
+      'https://www.linkedin.com/in/kevinho6/',
+      'https://github.com/kevinho6',
+    ],
   },
 ];
 

@@ -48,8 +48,7 @@ class Cart extends Component {
         <div>
           <div className="container-fluid text-center product-table-head">
             <div className="row text-center">
-              <div className="col-4" />
-              <div className="col-2"> Product </div>
+              <div className="col-5"> Product </div>
               <div className="col-2"> Price </div>
               <div className="col-1"> Quantity </div>
             </div>
