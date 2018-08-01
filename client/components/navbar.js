@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import { updateSession, retrieveSession } from '../store/cart';
+import MenuContainer from './MenuContainer'
 
 class Navbar extends Component {
   constructor() {
@@ -29,59 +30,62 @@ class Navbar extends Component {
   render() {
     const defaultEmails = ['contact@linkedin.com', 'contact@github.com'];
     return (
-      <div className="sticky">
-        <Link to="/">
-          <img src={window.location.origin + '/logo.png'} className="logo" />
-        </Link>
-        <nav>
-          {this.props.isLoggedIn ? (
-            <React.Fragment>
-              <div className="welcome-message">
-                Logged in as{' '}
-                {defaultEmails.indexOf(this.props.userEmail) === -1
-                  ? this.props.userEmail
-                  : this.props.user.name}
-              </div>
-              <div className="navbar-btns">
-                {/* The navbar will show these links after you log in */}
-                <Link to="/products" className="btn nav-btn">
-                  All Products
+      <React.Fragment>
+        <div className="dropdown"><MenuContainer isLoggedIn={this.props.isLoggedIn} handleClick={this.props.handleClick} /></div>
+        <div className="sticky">
+          <Link to="/">
+            <img src={window.location.origin + '/logo.png'} className="logo" />
+          </Link>
+          <nav>
+            {this.props.isLoggedIn ? (
+              <React.Fragment>
+                <div className="welcome-message">
+                  Logged in as{' '}
+                  {defaultEmails.indexOf(this.props.userEmail) === -1
+                    ? this.props.userEmail
+                    : this.props.user.name}
+                </div>
+                <div className="navbar-btns">
+                  {/* The navbar will show these links after you log in */}
+                  <Link to="/products" className="btn nav-btn">
+                    All Products
                 </Link>
-                <Link to="/account" className="btn nav-btn">
-                  Account
+                  <Link to="/account" className="btn nav-btn">
+                    Account
                 </Link>
-                <a
-                  href="#"
-                  onClick={this.props.handleClick}
-                  className="btn nav-btn"
-                >
-                  Logout
+                  <a
+                    href="#"
+                    onClick={this.props.handleClick}
+                    className="btn nav-btn"
+                  >
+                    Logout
                 </a>
-                <Link to="/cart" className="btn nav-btn cart-btn">
-                  Cart ({this.props.itemsInCart()})
+                  <Link to="/cart" className="btn nav-btn cart-btn">
+                    Cart ({this.props.itemsInCart()})
                 </Link>
-              </div>
-            </React.Fragment>
-          ) : (
-            <div className="navbar-btns">
-              {/* The navbar will show these links before you log in */}
-              <Link to="/login" className="btn nav-btn">
-                Login
+                </div>
+              </React.Fragment>
+            ) : (
+                <div className="navbar-btns">
+                  {/* The navbar will show these links before you log in */}
+                  <Link to="/login" className="btn nav-btn">
+                    Login
               </Link>
-              <Link to="/signup" className="btn nav-btn">
-                Sign Up
+                  <Link to="/signup" className="btn nav-btn">
+                    Sign Up
               </Link>
-              <Link to="/products" className="btn nav-btn">
-                All Products
+                  <Link to="/products" className="btn nav-btn">
+                    All Products
               </Link>
-              <Link to="/cart" className="btn nav-btn cart-btn">
-                Cart ({this.props.itemsInCart()})
+                  <Link to="/cart" className="btn nav-btn cart-btn">
+                    Cart ({this.props.itemsInCart()})
               </Link>
-            </div>
-          )}
-        </nav>
-        <hr />
-      </div>
+                </div>
+              )}
+          </nav>
+          <hr />
+        </div>
+      </React.Fragment>
     );
   }
 }
