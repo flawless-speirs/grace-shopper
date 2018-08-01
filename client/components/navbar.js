@@ -54,7 +54,7 @@ class Navbar extends Component {
                     Account
                 </Link>
                   <a
-                    href="/"
+                    href="#"
                     onClick={this.props.handleClick}
                     className="btn nav-btn"
                   >

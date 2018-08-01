@@ -82,7 +82,7 @@ router.put('/', async (req, res, next) => {
             }
           }
         });
-        res.status(200);
+        res.status(200).end();
       });
     } else {
       res.sendStatus(200);
