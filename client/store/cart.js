@@ -55,7 +55,7 @@ export const eraseFromCart = id => (dispatch, getState) => {
   const item = cart.find(el => el.productId === id);
   const index = cart.indexOf(item);
   cart.splice(index, 1);
-  dispatch(removeProduct(cart));
+  dispatch(eraseProduct(cart));
 };
 
 export const getMyCart = () => async dispatch => {
@@ -102,6 +102,8 @@ export default function(state = [], action) {
     case ADD_PRODUCT:
       return action.cart;
     case REMOVE_PRODUCT:
+      return action.cart;
+    case ERASE_PRODUCT:
       return action.cart;
     case GET_CART:
       return action.cart;

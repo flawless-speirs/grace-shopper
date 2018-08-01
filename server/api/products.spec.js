@@ -22,7 +22,7 @@ describe('Order routes', () => {
     it('responds with an array via JSON', async () => {
       const res = await request(app)
         .get('/api/products')
-        .set('referer', 'http://locahost:8080')
+        .set('referer', 'http://localhost:8080')
         .expect('Content-Type', /json/)
         .expect(200);
 
