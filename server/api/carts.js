@@ -9,7 +9,9 @@ router.get('/', async (req, res, next) => {
       cart = req.session.cart;
     }
     if (req.user) {
-      const userCart = await Cart.findAll({ where: { userId: req.user.id } });
+      const userCart = await Cart.findAll({
+        where: { userId: req.user.id, orderId: null },
+      });
       userCart.forEach(item => {
         const existing = cart.find(thing => thing.productId === item.productId);
         if (existing) {
