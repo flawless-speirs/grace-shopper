@@ -35,7 +35,7 @@ class ProductRow extends Component {
     evt.preventDefault();
     await this.props.eraseFromCart(this.props.productData.id);
     await this.props.updateTotal(
-      -1 * this.props.productData.price * this.props.cartProduct.quantity
+      -1 * this.props.productData.price * this.props.quantity
     );
   }
 

@@ -32,6 +32,7 @@ class Cart extends Component {
       <div key={cartProduct.productId}>
         <ProductRow
           cartProduct={cartProduct}
+          quantity={cartProduct.quantity}
           productData={productData}
           updateTotal={this.props.updateTotal}
         />
